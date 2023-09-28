@@ -9,77 +9,77 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Plogistics
 build_property.RootNamespace = Plogistics
-build_property.ProjectDir = C:\Users\Admin\Desktop\Documentos\Plogistics\
+build_property.ProjectDir = C:\Users\sebas\Documents\GitHub\Proyecto3\Plogistics\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Admin\Desktop\Documentos\Plogistics
+build_property.MSBuildProjectDirectory = C:\Users\sebas\Documents\GitHub\Proyecto3\Plogistics
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Admin/Desktop/Documentos/Plogistics/App.xaml]
+[C:/Users/sebas/Documents/GitHub/Proyecto3/Plogistics/App.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Plogistics.App.xaml
 build_metadata.AdditionalFiles.TargetPath = App.xaml
 build_metadata.AdditionalFiles.RelativePath = App.xaml
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Desktop/Documentos/Plogistics/MainPage.xaml]
+[C:/Users/sebas/Documents/GitHub/Proyecto3/Plogistics/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Plogistics.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Desktop/Documentos/Plogistics/Main.razor]
+[C:/Users/sebas/Documents/GitHub/Proyecto3/Plogistics/Main.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = TWFpbi5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Desktop/Documentos/Plogistics/Pages/Counter.razor]
+[C:/Users/sebas/Documents/GitHub/Proyecto3/Plogistics/Pages/Counter.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Desktop/Documentos/Plogistics/Pages/FetchData.razor]
+[C:/Users/sebas/Documents/GitHub/Proyecto3/Plogistics/Pages/FetchData.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Desktop/Documentos/Plogistics/Pages/Index.razor]
+[C:/Users/sebas/Documents/GitHub/Proyecto3/Plogistics/Pages/Index.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Desktop/Documentos/Plogistics/Shared/SurveyPrompt.razor]
+[C:/Users/sebas/Documents/GitHub/Proyecto3/Plogistics/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Desktop/Documentos/Plogistics/_Imports.razor]
+[C:/Users/sebas/Documents/GitHub/Proyecto3/Plogistics/_Imports.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Desktop/Documentos/Plogistics/Shared/MainLayout.razor]
+[C:/Users/sebas/Documents/GitHub/Proyecto3/Plogistics/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.RelativePath = 
 build_metadata.AdditionalFiles.CssScope = b-3h9ph1svbf
 
-[C:/Users/Admin/Desktop/Documentos/Plogistics/Shared/NavMenu.razor]
+[C:/Users/sebas/Documents/GitHub/Proyecto3/Plogistics/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
