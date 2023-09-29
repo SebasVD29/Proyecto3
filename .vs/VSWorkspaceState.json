@@ -1,9 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Plogistics",
-    "\\Plogistics\\wwwroot"
+    "\\Plogistics"
   ],
-  "SelectedNode": "\\Plogistics\\wwwroot\\index.html",
+  "SelectedNode": "\\Plogistics\\Plogistics.sln",
   "PreviewInSolutionExplorer": false
 }
