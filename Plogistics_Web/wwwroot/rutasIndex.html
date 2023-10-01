@@ -28,7 +28,7 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <!--DataTable-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 
 </head>
 
@@ -48,13 +48,80 @@
     </header>
 
     <div class="pantalla">
+        <div class="datos">
+            <form autocomplete="off" onsubmit="onFormSubmit()">
+                <div>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="nombre">
+                </div>
+                <div>
+                    <label for="fechaInicio">Fecha Inicial</label>
+                    <input type="date" name="fechaInicio" id="fechaInicio">
+                </div>
+                <div>
+                    <label for="fechaFinal">Fecha Final</label>
+                    <input type="date" name="fechaFinal" id="fechaFinal">
+                </div>
+                <div>
+                    <label for="idChoferRutas">Id del Chofer</label>
+                    <select id="idChoferRutas" name="idChoferRutas">
+                        
+                    </select>
+                </div>
+                <div>
+                    <label for="idClietesRutas">Id del Cliente</label>
+                    <select id="idClietesRutas" name="idClietesRutas">
+                        
+                    </select>
+                </div>
+                <div>
+                    <label for="idCamionRutas">Id del Camion</label>
+                    <select id="idCamionRutas" name="idCamionRutas">
+                        
+                    </select>
+                </div>
+                <div>
+                    <label for="idDestinoRutas">Id de la Ruta Destino</label>
+                    <select id="idDestinoRutas" name="idDestinoRutas">
+                       
+                    </select>
+                </div>
+                <div>
+                    <label for="descripcion">Descripcion</label>
+                    <input type="text" name="descripcion" id="descripcion">
+                </div>
+                <div>
+                    <label for="estadoRuta">Estado</label>
+                    <input type="text" name="estadoRuta" id="estadoRuta">
+                </div>
+
+                <div class="form_action--button">
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Reset">
+                </div>
+            </form>
+        </div>
         <div class="tabla">
+            <table class="table" id="datatable_rutas">
+                <thead>
+                    <tr>
+                        <th>Id de la Ruta</th>
+                        <th>Nombre</th>
+                        <th>Fecha Inicial</th>
+                        <th>Fecha Final</th>
+                        <th>Id del Chofer</th>
+                        <th>Id del Cliente</th>
+                        <th>Id del Camion</th>
+                        <th>Id de la Ruta Destino</th>
+                        <th>Descripcion</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="tablebody_rutas">
 
+                </tbody>
+            </table>
         </div>
-        <div class = "datos" >
-
-        </div>
-        
     </div>
 
 
@@ -73,3 +140,19 @@
 </body>
 
 </html>
+
+<!--
+<td class="datos">
+                    
+                </td>
+
+                 <table>
+            <tr>
+                <td >
+
+                    
+                </td>
+            </tr>
+        </table>
+
+-->
