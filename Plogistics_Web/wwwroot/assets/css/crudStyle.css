@@ -8,10 +8,12 @@ body{
 table{
     width: 80%;
     margin: 40px auto;
-    background-color: #4b99d4 ;
+    background-color: #89b5d7 ;
+    opacity: 0.7;
 }
 
 table.list{
+    align-content: center;
     text-align: center;
     width: 100%;
 }
@@ -36,7 +38,7 @@ input[type="text"],input[type="number"]{
 }
 
 input[type="submit"],input[type="reset"]{
-    background: #eee;
+    background: #eeeeeea1;
     padding:6px 12px;
     margin:15px 0 10px;
     display: inline-block;

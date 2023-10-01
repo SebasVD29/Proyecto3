@@ -4,11 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="assets/css/menuStyle.css">
-    <title></title>
+    <link type="text/css" rel="stylesheet" href="assets/css/crudStyle.css">
+    <title>  CRUD de gestión de choferes</title>
+
     <style>
         body {
             /* Ruta a tu imagen */
-            background-image: url('assets/css/images/repartidor2.jpg');
+            background-image: url('assets/css/images/camionero.jpg');
             /* Para cubrir toda la pantalla con la imagen */
             background-size: cover;
             /* Para que la imagen no se repita */
@@ -29,7 +31,7 @@
             <!-- Enlaces de navegación -->
             <a href="index.html">Inicio</a>
             <a href="adminIndex.html">Adminitradores</a>
-            <a href="clientesIndex.html">Clientes</a>
+            <a href="choferesIndex.html">Choferes</a>
             <a href="rutasIndex.html">Rutas</a>
             <a href="camionesIndex.html">Camiones</a>
             <!--<a href="#">Ruta</a>-->
@@ -37,6 +39,63 @@
 
         </nav>
     </header>
+    <table>
+        <tr>
+            <td>
+                <!-- Formulario para ingresar datos del cliente -->
+                <form autocomplete="off" onsubmit="onFormSubmit()">
+                    <div>
+                        <label for="fullName">Nombre completo</label>
+                        <input type="text" name="fullName" id="fullName">
+                    </div>
+                    <div>
+                        <label for="docType">Tipo de documento</label>
+                        <select name="docType" id="docType">
+                            <option value="DNI"></option>
+                            <option value="NIE">NIE</option>
+                            <!-- Puedes agregar más tipos de documentos según lo necesites -->
+                        </select>
+                    </div>
+                    <div>
+                        <label for="docNumber">Número de identificación</label>
+                        <input type="text" name="docNumber" id="docNumber">
+                    </div>
+                    <div>
+                        <label for="address">Dirección</label>
+                        <input type="text" name="address" id="address">
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email">
+                    </div>
+
+                    <div class="form_action--button">
+                        <input type="submit" value="Submit">
+                        <input type="reset" value="Reset">
+                    </div>
+                </form>
+
+            </td>
+            <td>
+                <!-- Tabla para mostrar los datos del cliente ingresados -->
+                <table class="list" id="clientList">
+                    <thead>
+                        <tr>
+                            <th>Nombre completo</th>
+                            <th>Tipo de documento</th>
+                            <th>Número de identificación</th>
+                            <th>Dirección</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Los datos ingresados se mostrarán aquí -->
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript" src="assets/javaScripts/crudClientes.js"></script>
 
 </body>
 </html>
