@@ -41,26 +41,31 @@
     <table>
         <tr>
             <td>
+                <!-- Formulario para ingresar datos del cliente -->
                 <form autocomplete="off" onsubmit="onFormSubmit()">
                     <div>
-                        <label for="nombrecompleto">Nombre Completo</label>
-                        <input type="text" name="nombrecompleto" id="nombrecompleto">
+                        <label for="fullName">Nombre completo</label>
+                        <input type="text" name="fullName" id="fullName">
                     </div>
                     <div>
-                        <label for="tipoD">tipo de Documento</label>
-                        <input type="text" name="tipoD" id="tipoD">
+                        <label for="docType">Tipo de documento</label>
+                        <select name="docType" id="docType">
+                            <option value="DNI">DNI</option>
+                            <option value="NIE">NIE</option>
+                            <!-- Puedes agregar más tipos de documentos según lo necesites -->
+                        </select>
                     </div>
                     <div>
-                        <label for="numID">Numero de ID</label>
-                        <input type="number" name="numID" id="numID">
+                        <label for="docNumber">Número de identificación</label>
+                        <input type="text" name="docNumber" id="docNumber">
                     </div>
                     <div>
-                        <label for="direccion">Direccion</label>
-                        <input type="text" name="direccion" id="direccion">
+                        <label for="address">Dirección</label>
+                        <input type="text" name="address" id="address">
                     </div>
                     <div>
-                        <label for="email">email</label>
-                        <input type="text" name="email" id="email">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email">
                     </div>
 
                     <div class="form_action--button">
@@ -69,25 +74,27 @@
                     </div>
                 </form>
 
+            </td>
             <td>
-                <table class="list" id="storeList">
+                <!-- Tabla para mostrar los datos del cliente ingresados -->
+                <table class="list" id="clientList">
                     <thead>
                         <tr>
-                            <th></th>
                             <th>Nombre completo</th>
-                            <th>tipo Documento</th>
-                            <th>Numero de documento</th>
-                            <th>Direccion</th>
-                            <th>email</th>
+                            <th>Tipo de documento</th>
+                            <th>Número de identificación</th>
+                            <th>Dirección</th>
+                            <th>Email</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- Los datos ingresados se mostrarán aquí -->
                     </tbody>
                 </table>
             </td>
-            </td>
         </tr>
     </table>
+
 
 </body>
 </html>
