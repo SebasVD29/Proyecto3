@@ -18,30 +18,36 @@ body {
 }
 
 header {
+    width: 100%;
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 100px;
+    background: rgba(251, 251, 253, .8);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 99;
+    justify-content: space-between; /* Alinea los elementos a los extremos */
+    align-items: center; /* Centra verticalmente los elementos */
+    padding: 10px 20px; /* Añade espacio alrededor del contenido */
 }
 
 .Plog {
     font-size: 2em;
-    color: #000000;
-    user-select: none;
+    color: #a3a3a300;
 }
 
+.navigation {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+
+
 .navigation a {
-    position: relative;
     font-size: 1.1em;
-    color: #000000;
+    color: #1d1d1f;
     text-decoration: none;
     font-weight: 500;
-    margin-left: 40px;
+    position: relative;
+    margin-right: 20px;
 }
 
 .navigation a::after {
@@ -62,5 +68,3 @@ header {
     transform-origin: left;
     transform: scaleX(1);
 }
-
-
