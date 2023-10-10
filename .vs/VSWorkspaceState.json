@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Plogistics"
+    "\\Proyecto3Web",
+    "\\Proyecto3Web\\carint-html",
+    "\\Proyecto3Web\\carint-html\\js"
   ],
-  "SelectedNode": "\\Plogistics\\Plogistics.sln",
+  "SelectedNode": "\\Proyecto3Web\\carint-html\\js\\logica.js",
   "PreviewInSolutionExplorer": false
 }
