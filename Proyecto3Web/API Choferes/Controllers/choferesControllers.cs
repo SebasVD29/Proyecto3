@@ -26,7 +26,7 @@ namespace API_Choferes.Controllers
         [HttpGet("{id}")]
         public string[] Get(int id)
         {
-            string sqlconn = $"Server=tcp:proyecto3-server.database.windows.net,1433;Initial Catalog=Plogistics;Persist Security Info=False;User ID=adminp;Password=Admin123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string sqlconn = $"Server=tcp:proyecto3ulatina.database.windows.net,1433;Initial Catalog=plogisticsdatabase;Persist Security Info=False;User ID=julihr;Password=Belfast0101.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             sqlConnection = new SqlConnection(sqlconn);
 
             try
@@ -58,7 +58,7 @@ namespace API_Choferes.Controllers
         [EnableCors(origins: "*", methods: "*", headers: "*")]
         public void Post(int identificacion, string nombre, string apellidos, string email, string contrasena, string fecha, string estado)
         {
-            string sqlconn = $"Server=tcp:proyecto3-server.database.windows.net,1433;Initial Catalog=Plogistics;Persist Security Info=False;User ID=adminp;Password=Admin123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string sqlconn = $"Server=tcp:proyecto3ulatina.database.windows.net,1433;Initial Catalog=plogisticsdatabase;Persist Security Info=False;User ID=julihr;Password=Belfast0101.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             sqlConnection = new SqlConnection(sqlconn);
 
             try
