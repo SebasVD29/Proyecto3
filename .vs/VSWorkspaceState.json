@@ -3,9 +3,7 @@
     "",
     "\\Proyecto3Web",
     "\\Proyecto3Web\\API Choferes",
-    "\\Proyecto3Web\\API Choferes\\Controllers",
-    "\\Proyecto3Web\\carint-html",
-    "\\Proyecto3Web\\carint-html\\js"
+    "\\Proyecto3Web\\API Choferes\\bin\\Debug"
   ],
   "SelectedNode": "\\Proyecto3Web\\API Choferes\\API Choferes.sln",
   "PreviewInSolutionExplorer": false
