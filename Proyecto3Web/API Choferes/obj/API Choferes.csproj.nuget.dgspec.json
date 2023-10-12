@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sebas\\Documents\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj": {}
+    "C:\\Users\\mtaylor\\OneDrive - Comtel Ingenieria S.A\\Documentos\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sebas\\Documents\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj": {
+    "C:\\Users\\mtaylor\\OneDrive - Comtel Ingenieria S.A\\Documentos\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sebas\\Documents\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj",
+        "projectUniqueName": "C:\\Users\\mtaylor\\OneDrive - Comtel Ingenieria S.A\\Documentos\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj",
         "projectName": "API Choferes",
-        "projectPath": "C:\\Users\\sebas\\Documents\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj",
-        "packagesPath": "C:\\Users\\sebas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sebas\\Documents\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\obj\\",
+        "projectPath": "C:\\Users\\mtaylor\\OneDrive - Comtel Ingenieria S.A\\Documentos\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj",
+        "packagesPath": "C:\\Users\\mtaylor\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mtaylor\\OneDrive - Comtel Ingenieria S.A\\Documentos\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "D:\\Apps\\apps\\Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\sebas\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\mtaylor\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -77,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
