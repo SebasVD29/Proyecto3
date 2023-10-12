@@ -6,8 +6,8 @@ using System.Web.Http.Cors;
 
 namespace API_Clientes.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     [EnableCors(origins: "*", methods: "*", headers: "*")]
     public class ClientesController : ControllerBase
     {
@@ -62,7 +62,7 @@ namespace API_Clientes.Controllers
        */
         // POST api/<ClientesController>
         [HttpPost]
-        public void Post(int identificadorCliente, string nombreCompleto, int telefono, string direccion, string email, string estado)
+        public void Post(int identificadorCliente, string nombreCompleto, int telefono, string direccion, string email, int estado)
         {
             sqlConnection = new SqlConnection(connectionString);
 

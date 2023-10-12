@@ -9,14 +9,12 @@ using System.Web.Http.Cors;
 
 namespace API_Camiones.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     [EnableCors(origins: "*", methods: "*", headers: "*")]
     public class camionesControllers : ControllerBase
     {
-        string stringEncriptada = "";
-        string stringDesencriptada = "";
-        private securityController securityController = new securityController();
+    
 
 
         int count = 0;
@@ -70,7 +68,7 @@ namespace API_Camiones.Controllers
         // POST api/<camionesControllers>
         [HttpPost]
         [EnableCors(origins: "*", methods: "*", headers: "*")]
-        public void Post(int numeroPlaca, string Marca, string Modelo, string AñoFabricacion,, string Estado)
+        public void Post(int numeroPlaca, string Marca, string Modelo, string AñoFabricacion, string Estado)
         {
             DateTime fecha = DateTime.Now;
            

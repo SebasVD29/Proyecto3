@@ -34,11 +34,11 @@ $("#crearCliente").click(function () {
     var direccion = $('#form-direccion ').val();
     var telefono = $('#form-telefono ').val();
     var correo = $('#form-email ').val();
-    var estado = $("#form-estado").children(":selected")[0].label;
+    var estado = $("#form-estado").val();
 
     jQuery.ajax({
         type: 'post',
-        url: "https://localhost:7088/api/clientesControllers?identificacion=" + identificacion + " &nombre=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono + "&email=" + correo + + "&estado=" + estado + "",
+        url: "https://localhost:7088/api/Clientes?identificadorCliente=" + identificacion + " &nombreCompleto=" + nombre + "&telefono=" + telefono + "&direccion=" + direccion + "&email=" + correo + + "&estado=" + estado + "",
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'jsonp',
@@ -53,6 +53,8 @@ $("#crearCliente").click(function () {
     });
 
 });
+
+
 
 /*
 $("#editarChofer").click(function(){

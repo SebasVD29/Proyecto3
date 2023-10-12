@@ -8,8 +8,9 @@ using System.Web.Http.Cors;
 
 namespace API_Choferes.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    
     [EnableCors(origins: "*", methods: "*", headers: "*")]
     public class choferesControllers : ControllerBase
     {
