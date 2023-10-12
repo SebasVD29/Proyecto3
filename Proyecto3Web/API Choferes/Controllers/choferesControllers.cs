@@ -69,9 +69,9 @@ namespace API_Choferes.Controllers
         // POST api/<choferesControllers>
         [HttpPost]
         [EnableCors(origins: "*", methods: "*", headers: "*")]
-        public void Post(int identificacion, string nombre, string apellidos, string email, string contrasena, DateTime fecha, string estado)
+        public void Post(int identificacion, string nombre, string apellidos, string email, string contrasena, string estado)
         {
-            fecha = new DateTime();
+            DateTime fecha = DateTime.Now;
             stringEncriptada = securityController.EncriptarBase64(contrasena);
             string sqlconn = $"Server=tcp:proyecto3ulatina.database.windows.net,1433;Initial Catalog=plogisticsdatabase;Persist Security Info=False;User ID=julihr;Password=Belfast0101.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             sqlConnection = new SqlConnection(sqlconn);
@@ -96,10 +96,10 @@ namespace API_Choferes.Controllers
                     comando.ExecuteNonQuery();
 
 
-                    SqlDataReader reader = comando.ExecuteReader();
+                    /*SqlDataReader reader = comando.ExecuteReader();
                     while (reader.Read())
                     { }
-                    reader.Close();
+                    reader.Close();*/
                 }
                 sqlConnection.Close();
             }
@@ -115,21 +115,21 @@ namespace API_Choferes.Controllers
         [HttpPut("{id}")]
         public void Put(int identificacion, string nombre, string apellidos, string email, string contrasena, string estado)
         {
-            stringEncriptada = securityController.EncriptarBase64(contrasena);
             string sqlconn = $"Server=tcp:proyecto3ulatina.database.windows.net,1433;Initial Catalog=plogisticsdatabase;Persist Security Info=False;User ID=julihr;Password=Belfast0101.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             sqlConnection = new SqlConnection(sqlconn);
 
             try
             {
+                stringEncriptada = securityController.EncriptarBase64(contrasena);
                 sqlConnection.Open();
                 string[] returnValues = new string[100];
                 string querySQL =
-                    "UPDATE dbo.Chofer SET  Nombre = @nombre, Apellido = @apellidos, Email = @email, Contraseña = @password, Estado = @estado) " +
+                    "UPDATE dbo.Chofer SET  Nombre = @nombre, Apellido = @apellidos, Email = @email, Contraseña = @password, Estado = @estado " +
                     "WHERE  IdentificadorChofer = " + identificacion;
 
                 using (SqlCommand comando = new SqlCommand(querySQL, sqlConnection))
                 {
-                    comando.Parameters.AddWithValue("idetificador", identificacion);
+                    
                     comando.Parameters.AddWithValue("nombre", nombre);
                     comando.Parameters.AddWithValue("apellidos", apellidos);
                     comando.Parameters.AddWithValue("email", email);
@@ -138,12 +138,14 @@ namespace API_Choferes.Controllers
                     comando.ExecuteNonQuery();
 
 
-                    SqlDataReader reader = comando.ExecuteReader();
-                    while (reader.Read())
-                    { }
-                    reader.Close();
+                   
                 }
                 sqlConnection.Close();
+
+                /*SqlDataReader reader = comando.ExecuteReader();
+                while (reader.Read())
+                { }
+                reader.Close();*/
             }
             catch (Exception ex)
             {
