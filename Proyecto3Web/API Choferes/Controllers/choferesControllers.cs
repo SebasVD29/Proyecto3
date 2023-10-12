@@ -86,7 +86,7 @@ namespace API_Choferes.Controllers
 
                 using (SqlCommand comando = new SqlCommand(querySQL, sqlConnection))
                 {
-                    comando.Parameters.AddWithValue("idetificador", identificacion);
+                    comando.Parameters.AddWithValue("identificador", identificacion);
                     comando.Parameters.AddWithValue("nombre", nombre);
                     comando.Parameters.AddWithValue("apellidos", apellidos);
                     comando.Parameters.AddWithValue("email", email);
