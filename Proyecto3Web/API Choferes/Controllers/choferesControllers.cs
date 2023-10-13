@@ -8,8 +8,9 @@ using System.Web.Http.Cors;
 
 namespace API_Choferes.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    
     [EnableCors(origins: "*", methods: "*", headers: "*")]
     public class choferesControllers : ControllerBase
     {
@@ -86,7 +87,7 @@ namespace API_Choferes.Controllers
 
                 using (SqlCommand comando = new SqlCommand(querySQL, sqlConnection))
                 {
-                    comando.Parameters.AddWithValue("idetificador", identificacion);
+                    comando.Parameters.AddWithValue("identificador", identificacion);
                     comando.Parameters.AddWithValue("nombre", nombre);
                     comando.Parameters.AddWithValue("apellidos", apellidos);
                     comando.Parameters.AddWithValue("email", email);

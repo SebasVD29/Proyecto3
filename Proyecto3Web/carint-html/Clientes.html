@@ -48,7 +48,7 @@
 </head>
 <!--background-image: url('images/truck5.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;-->
 <body class="sub_page"
-    style=" background-color:rgb(232, 247, 254); ">
+      style=" background-color:rgb(232, 247, 254); ">
     <!-- end header section -->
     <!-- contact section -->
 
@@ -65,42 +65,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="width: 250%;">
-                        <div class="col-lg-4 col-md-5 offset-md-1">
+                    <div class="" style="width: 100%;">
+                        <div class="offset-md-1">
                             <div class="form_container">
                                 <form action="">
                                     <div>
-                                        <input type="text" placeholder="Identificación"
+                                        <input id="form-identificacion" type="text" placeholder="Identificación"
                                                style="background-color: #ffffff52;" />
                                     </div>
                                     <div>
-                                        <input type="text" placeholder="Nombre Completo" style="background-color: #ffffff52;" />
-                                    </div>
-                                    <div>
-                                        <input type="text" placeholder="Tipo de Documento"
-                                               style="background-color: #ffffff52;" />
-                                    </div>
-                                    <div>
-                                        <input type="text" placeholder="Numero de Documento" style="background-color: #ffffff52;" />
-                                    </div>
-                                    <div>
-                                        <input type="text" placeholder="Direccion"
-                                               style=" background-color: #ffffff52;" />
+                                        <input id="form-nombreCompleto" type="text" placeholder="Nombre Completo" style="background-color: #ffffff52;" />
                                     </div>
 
                                     <div>
-                                        <input type="number" placeholder="telefono"
-                                               style=" background-color: #ffffff52;" />
+                                        <input id="form-direccion" type="text" placeholder="Direccion" style=" background-color: #ffffff52;" />
+                                    </div>
+
+                                    <div>
+                                        <input id="form-telefono" type="number" placeholder="telefono" style=" background-color: #ffffff52;" />
                                     </div>
                                     <div>
-                                        <input type="email" placeholder="Correo electronico"
-                                               style=" background-color: #ffffff52;" />
-                                    </div>
-                                    <div class="DropDown7" style="background-color: #ffffff52;text-align: center;">
-                                        <select style="background-color: #ffffff52;">
-                                            <option value=""> Pais 1</option>
-                                            <option value=""> Pais 2</option>
-                                        </select>
+                                        <input id="form-email" type="email" placeholder="Correo electronico" style=" background-color: #ffffff52;" />
                                     </div>
                                     <h4 style="
                                         font-size: small;
@@ -110,9 +95,9 @@
                                         Estado
                                     </h4>
                                     <div class="DropDown8" style="background-color: #ffffff52;text-align: center;">
-                                        <select style="background-color: #ffffff52;">
-                                            <option value=""> Activo</option>
-                                            <option value=""> Inactivo</option>
+                                        <select id="form-estado" style="background-color: #ffffff52;">
+                                            <option value="1"> Activo</option>
+                                            <option value="0"> Inactivo</option>
                                         </select>
                                     </div>
                                 </form>
@@ -125,18 +110,8 @@
             </section>
         </div>
         <div style="margin: auto;" class="column">
-           
-            <button type="submit" style="background-color: #ADD8E6; /* Green */
-  border: none;
-  color: black;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;">
-                Editar
-            </button>
-            <button type="submit" style="background-color: #ADD8E6; /* Green */
+
+            <button id="crearCliente" type="submit" style="background-color: #ADD8E6; /* Green */
   border: none;
   color: black;
   padding: 15px 32px;
@@ -146,13 +121,51 @@
   font-size: 16px;">
                 Agregar
             </button>
+            <button id="editarCliente" type="submit" style="background-color: #ADD8E6; /* Green */
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;">
+                Editar
+            </button>
         </div>
     </div>
+
+    <!-- Button trigger modal -->
+    <button style="visibility: hidden;" id="modalup" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cliente Agregado</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modalMensaje" class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/logicaClientes.js"></script>
     <!-- popper js -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-        </script>
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
     <!-- bootstrap js -->
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <!-- owl slider -->
