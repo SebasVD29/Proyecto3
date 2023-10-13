@@ -70,7 +70,7 @@ namespace API_Clientes.Controllers
             {
                 sqlConnection.Open();
                 string querySQL = "INSERT INTO dbo.Clientes(IdentificadorCliente, NombreCompleto, Direccion, Telefono, Email, Estado) " +
-                                  "VALUES (@identificacion, @nombreCompleto, @telefono, @direccion, @email, @estado)";
+                                  "VALUES (@identificacion, @nombreCompleto,@direccion, @telefono, @email, @estado)";
 
                 using (SqlCommand command = new SqlCommand(querySQL, sqlConnection))
                 {

@@ -44,7 +44,7 @@ $("#crearCliente").click(function () {
         datatype: 'jsonp',
         traditional: true,
         success: function (response) {
-            $('#modalMensaje').text("El cliente con identificacion " + identificacion + ", nombre " + nombre + ", direccion  " + direccion + ", telefono " + telefono  + " email " + email, + " en estado " + estado + " fue agregado.");
+            $('#modalMensaje').text("El cliente con identificacion " + identificacion + ", nombre " + nombre + ", direccion  " + direccion + ", telefono " + telefono  + " email " + correo + ", en estado " + estado + " fue agregado exitosamente.");
             $('#modalup').trigger('click');
         },
         failure: function (response) {
