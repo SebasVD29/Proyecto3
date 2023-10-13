@@ -1,10 +1,22 @@
-$("#crearChofer").click(function(){
+$("#crearChofer").click(function () {
+
+    $("#ConfirmarCrearChofer").css("visibility", "visible");
+    $("#editarChofer").css("visibility", "hidden");
+    $("#crearChofer").css("visibility", "hidden");
+    $("#form-identificacion").prop('disabled', false);
+    $("#form-nombre").prop('disabled', false);
+    $("#form-apellidos").prop('disabled', false);
+    $("#form-email").prop('disabled', false);
+    $("#form-contrasena").prop('disabled', false);
+});
+
+
+$("#ConfirmarCrearChofer").click(function () {
 
 var identificacion = $('#form-identificacion').val();
 var nombre = $('#form-nombre ').val();
 var apellidos = $('#form-apellidos ').val();
 var email = $('#form-email ').val();
-var fecha = dateTime;
 var contrasena = $('#form-contrasena ').val();
 var estado = $("#form-estado").children(":selected")[0].label;
 
@@ -28,7 +40,7 @@ var estado = $("#form-estado").children(":selected")[0].label;
 
 
 
-$("#editarChofer").click(function(){
+$("#ConfirmarEditarChofer").click(function(){
 
       var identificacion = $('#form-identificacion').val();
       var nombre = $('#form-nombre ').val();
@@ -55,4 +67,3 @@ $("#editarChofer").click(function(){
       
       });
 
-s
