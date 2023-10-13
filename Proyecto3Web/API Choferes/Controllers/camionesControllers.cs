@@ -81,15 +81,15 @@ namespace API_Camiones.Controllers
                 string[] returnValues = new string[100];
                 string querySQL =
                     "INSERT INTO dbo.Camiones(numeroPlaca, Marca, Modelo, AñoFabricacion, Estado) " +
-                    "VALUES (@numeroPlaca, @Marca, @Modelo, @AñoFabricacion, @password, @Estado)";
+                    "VALUES (@numeroPlaca, @Marca, @Modelo, @AnoFabricacion, @Estado)";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, sqlConnection))
                 {
              
-                    comando.Parameters.AddWithValue("numero de placa", numeroPlaca);
+                    comando.Parameters.AddWithValue("numeroPlaca", numeroPlaca);
                     comando.Parameters.AddWithValue("Marca", Marca);
                     comando.Parameters.AddWithValue("Modelo", Modelo);
-                    comando.Parameters.AddWithValue("Año de fabricacion", AñoFabricacion);
+                    comando.Parameters.AddWithValue("AnoFabricacion", AñoFabricacion);
                     comando.Parameters.AddWithValue("Estado", Estado);
                     comando.ExecuteNonQuery();
 
@@ -128,7 +128,7 @@ namespace API_Camiones.Controllers
                 using (SqlCommand comando = new SqlCommand(querySQL, sqlConnection))
                 {
                     
-                    comando.Parameters.AddWithValue("numero de Placa", numeroPlaca);
+                    comando.Parameters.AddWithValue("numeroPlaca", numeroPlaca);
                     comando.Parameters.AddWithValue("Marca", Marca);
                     comando.Parameters.AddWithValue("Modelo", Modelo);
                     comando.Parameters.AddWithValue("Estado", Estado);

@@ -83,7 +83,7 @@ namespace API_Choferes.Controllers
                 string[] returnValues = new string[100];
                 string querySQL =
                     "INSERT INTO dbo.Chofer(IdentificadorChofer, Nombre, Apellido, Email, Contraseña, FechaRegistro, Estado) " +
-                    "VALUES (@idetificador, @nombre, @apellidos, @email, @password, @fecha, @estado)";
+                    "VALUES (@identificador, @nombre, @apellidos, @email, @password, @fecha, @estado)";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, sqlConnection))
                 {
