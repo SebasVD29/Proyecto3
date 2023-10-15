@@ -14,12 +14,9 @@ namespace API_Camiones.Controllers
     [EnableCors(origins: "*", methods: "*", headers: "*")]
     public class camionesControllers : ControllerBase
     {
-    
-
-
+        DataBaseController dataBase = new DataBaseController();
         int count = 0;
-        SqlConnection? sqlConnection;
-
+        
         // GET: api/<camionesControllers>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -31,17 +28,15 @@ namespace API_Camiones.Controllers
         [HttpGet("{NumeroPlaca}")]
         public string[] Get(int numeroPlaca)
         {
-            string sqlconn = $"Server=tcp:proyecto3ulatina.database.windows.net,1433;Initial Catalog=plogisticsdatabase;Persist Security Info=False;User ID=julihr;Password=Belfast0101.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            sqlConnection = new SqlConnection(sqlconn);
-
+            
             try
             {
+                dataBase.StringConexion().Open();
                 string[] returnValues = new string[100];
                 //int counter = 0;
-                sqlConnection.Open();
                 string querySQL = "Select * from dbo.Camiones where numerPlaca = " + numeroPlaca;
 
-                using (SqlCommand comando = new SqlCommand(querySQL, sqlConnection))
+                using (SqlCommand comando = new SqlCommand(querySQL, dataBase.StringConexion()))
                 {
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
@@ -53,7 +48,7 @@ namespace API_Camiones.Controllers
 
                         lector.Close();
                     }
-                    sqlConnection.Close();
+                    dataBase.StringConexion().Close();
                 }
 
             }
@@ -72,18 +67,15 @@ namespace API_Camiones.Controllers
         {
             DateTime fecha = DateTime.Now;
            
-            string sqlconn = $"Server=tcp:proyecto3ulatina.database.windows.net,1433;Initial Catalog=plogisticsdatabase;Persist Security Info=False;User ID=julihr;Password=Belfast0101.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            sqlConnection = new SqlConnection(sqlconn);
-
             try
             {
-                sqlConnection.Open();
+                dataBase.StringConexion().Open();
                 string[] returnValues = new string[100];
                 string querySQL =
                     "INSERT INTO dbo.Camiones(numeroPlaca, Marca, Modelo, AñoFabricacion, Estado) " +
                     "VALUES (@numeroPlaca, @Marca, @Modelo, @AnoFabricacion, @Estado)";
 
-                using (SqlCommand comando = new SqlCommand(querySQL, sqlConnection))
+                using (SqlCommand comando = new SqlCommand(querySQL, dataBase.StringConexion()))
                 {
              
                     comando.Parameters.AddWithValue("numeroPlaca", numeroPlaca);
@@ -99,7 +91,7 @@ namespace API_Camiones.Controllers
                     { }
                     reader.Close();*/
                 }
-                sqlConnection.Close();
+                dataBase.StringConexion().Close();
             }
             catch (Exception ex)
             {
@@ -113,19 +105,17 @@ namespace API_Camiones.Controllers
         [HttpPut("{numeroPlaca}")]
         public void Put(int numeroPlaca, string Marca, string Modelo, string AñoFabricacion,  string Estado)
         {
-            string sqlconn = $"Server=tcp:proyecto3ulatina.database.windows.net,1433;Initial Catalog=plogisticsdatabase;Persist Security Info=False;User ID=julihr;Password=Belfast0101.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            sqlConnection = new SqlConnection(sqlconn);
-
+           
             try
             {
-               
-                sqlConnection.Open();
+
+                dataBase.StringConexion().Open();
                 string[] returnValues = new string[100];
                 string querySQL =
                     "UPDATE dbo.Camiones SET  Marca = @Marca, Modelo = @Modelo, Estado = @Estado " +
                     "WHERE  numeroPlaca = " + numeroPlaca;
 
-                using (SqlCommand comando = new SqlCommand(querySQL, sqlConnection))
+                using (SqlCommand comando = new SqlCommand(querySQL, dataBase.StringConexion()))
                 {
                     
                     comando.Parameters.AddWithValue("numeroPlaca", numeroPlaca);
@@ -137,7 +127,7 @@ namespace API_Camiones.Controllers
 
                    
                 }
-                sqlConnection.Close();
+                dataBase.StringConexion().Close();
 
                 /*SqlDataReader reader = comando.ExecuteReader();
                 while (reader.Read())

@@ -12,7 +12,7 @@ namespace API_Choferes.Controllers
     [Route("api/[controller]")]
     
     [EnableCors(origins: "*", methods: "*", headers: "*")]
-    public class choferesControllers : ControllerBase
+    public class adminsControllers : ControllerBase
     {
         string stringEncriptada = "";
         string stringDesencriptada = "";
@@ -40,16 +40,16 @@ namespace API_Choferes.Controllers
                 string[] returnValues = new string[100];
                 //int counter = 0;
                 dataBase.StringConexion().Open();
-                string querySQL = "Select * from dbo.Chofer where IdentificadorChofer = @id";
+                string querySQL = "Select * from dbo. where ";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, dataBase.StringConexion()))
                 {
-                    comando.Parameters.AddWithValue("@id", id);
+                   //comando.Parameters.AddWithValue("@id", id);
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
                         while (lector.Read())
                         {
-                            return new string[] { (string)lector["Nombre"], (string)lector["Email"] };
+                            //return ;
 
                         }
 
@@ -70,10 +70,10 @@ namespace API_Choferes.Controllers
         // POST api/<choferesControllers>
         [HttpPost]
         [EnableCors(origins: "*", methods: "*", headers: "*")]
-        public void Post(int identificacion, string nombre, string apellidos, string email, string contrasena, string estado)
+        public void Post()
         {
-            DateTime fecha = DateTime.Now;
-            stringEncriptada = securityController.EncriptarBase64(contrasena);
+    
+            //stringEncriptada = securityController.EncriptarBase64(contrasena);
             
 
             try
@@ -81,25 +81,16 @@ namespace API_Choferes.Controllers
                 dataBase.StringConexion().Open();
                 string[] returnValues = new string[100];
                 string querySQL =
-                    "INSERT INTO dbo.Chofer(IdentificadorChofer, Nombre, Apellido, Email, Contraseña, FechaRegistro, Estado) " +
-                    "VALUES (@identificador, @nombre, @apellidos, @email, @password, @fecha, @estado)";
+                    "INSERT INTO dbo.() " +
+                    "VALUES ()";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, dataBase.StringConexion()))
                 {
-                    comando.Parameters.AddWithValue("identificador", identificacion);
-                    comando.Parameters.AddWithValue("nombre", nombre);
-                    comando.Parameters.AddWithValue("apellidos", apellidos);
-                    comando.Parameters.AddWithValue("email", email);
-                    comando.Parameters.AddWithValue("password", stringEncriptada);
-                    comando.Parameters.AddWithValue("fecha", fecha);
-                    comando.Parameters.AddWithValue("estado", estado);
+                    
+
                     comando.ExecuteNonQuery();
 
 
-                    /*SqlDataReader reader = comando.ExecuteReader();
-                    while (reader.Read())
-                    { }
-                    reader.Close();*/
                 }
                 dataBase.StringConexion().Close();
             }
@@ -113,28 +104,23 @@ namespace API_Choferes.Controllers
 
         // PUT api/<choferesControllers>/5
         [HttpPut("{id}")]
-        public void Put(int identificacion, string nombre, string apellidos, string email, string contrasena, string estado)
+        public void Put()
         {
             
 
             try
             {
-                stringEncriptada = securityController.EncriptarBase64(contrasena);
+                //stringEncriptada = securityController.EncriptarBase64(contrasena);
                 dataBase.StringConexion().Open();
                 string[] returnValues = new string[100];
                 string querySQL =
-                    "UPDATE dbo.Chofer SET  Nombre = @nombre, Apellido = @apellidos, Email = @email, Contraseña = @password, Estado = @estado " +
-                    "WHERE  IdentificadorChofer = @id";
+                    "UPDATE dbo. SET   " +
+                    "WHERE  " ;
 
                 using (SqlCommand comando = new SqlCommand(querySQL, dataBase.StringConexion()))
                 {
-                    comando.Parameters.AddWithValue("@id", identificacion);
-
-                    comando.Parameters.AddWithValue("nombre", nombre);
-                    comando.Parameters.AddWithValue("apellidos", apellidos);
-                    comando.Parameters.AddWithValue("email", email);
-                    comando.Parameters.AddWithValue("password", stringEncriptada);
-                    comando.Parameters.AddWithValue("estado", estado);
+                    
+                    
                     comando.ExecuteNonQuery();
 
 
