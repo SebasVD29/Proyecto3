@@ -7,17 +7,16 @@ namespace API_Choferes.Controllers
     {
         
 
-        public SqlConnection StringConexion()
+        public string StringConexion()
         {
-            
-            
-            string sqlconn = $"Server=tcp:proyecto3ulatina.database.windows.net,1433;Initial Catalog=plogisticsdatabase;Persist Security Info=False;User ID=julihr;Password=Belfast0101.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            SqlConnection conexion = new SqlConnection(sqlconn);
 
+            string stringConn = $"Server=tcp:proyecto3ulatina.database.windows.net,1433;Initial Catalog=plogisticsdatabase;Persist Security Info=False;User ID=julihr;Password=Belfast0101.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            
 
-         
-            return conexion;
+            return stringConn;
             
         }
+
+      
     }
 }

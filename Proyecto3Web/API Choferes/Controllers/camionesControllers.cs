@@ -14,9 +14,18 @@ namespace API_Camiones.Controllers
     [EnableCors(origins: "*", methods: "*", headers: "*")]
     public class camionesControllers : ControllerBase
     {
-        DataBaseController dataBase = new DataBaseController();
+       
+        private DataBaseController dataBase;
+        private SqlConnection conexion;
+
+
         int count = 0;
-        
+
+        public camionesControllers()
+        {
+            this.dataBase = new DataBaseController();
+            this.conexion = new SqlConnection(this.dataBase.StringConexion());
+        }
         // GET: api/<camionesControllers>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -31,12 +40,12 @@ namespace API_Camiones.Controllers
             
             try
             {
-                dataBase.StringConexion().Open();
+                this.conexion.Open();
                 string[] returnValues = new string[100];
                 //int counter = 0;
                 string querySQL = "Select * from dbo.Camiones where numerPlaca = " + numeroPlaca;
 
-                using (SqlCommand comando = new SqlCommand(querySQL, dataBase.StringConexion()))
+                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
@@ -48,7 +57,7 @@ namespace API_Camiones.Controllers
 
                         lector.Close();
                     }
-                    dataBase.StringConexion().Close();
+                    this.conexion.Close();
                 }
 
             }
@@ -69,13 +78,13 @@ namespace API_Camiones.Controllers
            
             try
             {
-                dataBase.StringConexion().Open();
+                this.conexion.Open();
                 string[] returnValues = new string[100];
                 string querySQL =
                     "INSERT INTO dbo.Camiones(numeroPlaca, Marca, Modelo, AñoFabricacion, Estado) " +
                     "VALUES (@numeroPlaca, @Marca, @Modelo, @AnoFabricacion, @Estado)";
 
-                using (SqlCommand comando = new SqlCommand(querySQL, dataBase.StringConexion()))
+                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
              
                     comando.Parameters.AddWithValue("numeroPlaca", numeroPlaca);
@@ -91,7 +100,7 @@ namespace API_Camiones.Controllers
                     { }
                     reader.Close();*/
                 }
-                dataBase.StringConexion().Close();
+                this.conexion.Close();
             }
             catch (Exception ex)
             {
@@ -109,13 +118,13 @@ namespace API_Camiones.Controllers
             try
             {
 
-                dataBase.StringConexion().Open();
+                this.conexion.Open();
                 string[] returnValues = new string[100];
                 string querySQL =
                     "UPDATE dbo.Camiones SET  Marca = @Marca, Modelo = @Modelo, Estado = @Estado " +
                     "WHERE  numeroPlaca = " + numeroPlaca;
 
-                using (SqlCommand comando = new SqlCommand(querySQL, dataBase.StringConexion()))
+                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
                     
                     comando.Parameters.AddWithValue("numeroPlaca", numeroPlaca);
@@ -127,7 +136,7 @@ namespace API_Camiones.Controllers
 
                    
                 }
-                dataBase.StringConexion().Close();
+                this.conexion.Close();
 
                 /*SqlDataReader reader = comando.ExecuteReader();
                 while (reader.Read())

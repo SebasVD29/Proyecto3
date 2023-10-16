@@ -14,10 +14,20 @@ namespace API_Choferes.Controllers
     [EnableCors(origins: "*", methods: "*", headers: "*")]
     public class rutasControllers : ControllerBase
     {
-      
-        DataBaseController dataBase = new DataBaseController();
+
+        
+        private DataBaseController dataBase;
+        private SqlConnection conexion;
+
+
         int count = 0;
-       
+
+        public rutasControllers()
+        {
+            this.dataBase = new DataBaseController();
+           
+            this.conexion = new SqlConnection(this.dataBase.StringConexion());
+        }
         // GET: api/<choferesControllers>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -34,10 +44,10 @@ namespace API_Choferes.Controllers
             {
                 string[] returnValues = new string[100];
                 //int counter = 0;
-                dataBase.StringConexion().Open();
+                this.conexion.Open();
                 string querySQL = "";
 
-                using (SqlCommand comando = new SqlCommand(querySQL, dataBase.StringConexion()))
+                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
                     comando.Parameters.AddWithValue("@id", id);
                     using (SqlDataReader lector = comando.ExecuteReader())
@@ -50,7 +60,7 @@ namespace API_Choferes.Controllers
 
                         lector.Close();
                     }
-                    dataBase.StringConexion().Close();
+                    this.conexion.Close();
                 }
 
             }
@@ -72,13 +82,13 @@ namespace API_Choferes.Controllers
 
             try
             {
-                dataBase.StringConexion().Open();
+                this.conexion.Open();
                 string[] returnValues = new string[100];
                 string querySQL =
                     "INSERT INTO dbo.() " +
                     "VALUES ()";
 
-                using (SqlCommand comando = new SqlCommand(querySQL, dataBase.StringConexion()))
+                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
                     
                     comando.ExecuteNonQuery();
@@ -86,7 +96,7 @@ namespace API_Choferes.Controllers
 
                     
                 }
-                dataBase.StringConexion().Close();
+                this.conexion.Close();
             }
             catch (Exception ex)
             {
@@ -105,13 +115,13 @@ namespace API_Choferes.Controllers
             try
             {
                 
-                dataBase.StringConexion().Open();
+                this.conexion.Open();
                 string[] returnValues = new string[100];
                 string querySQL =
                     "UPDATE dbo. SET  " +
                     "WHERE  "  ;
 
-                using (SqlCommand comando = new SqlCommand(querySQL, dataBase.StringConexion()))
+                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
                     
                     
@@ -120,7 +130,7 @@ namespace API_Choferes.Controllers
 
                    
                 }
-                dataBase.StringConexion().Close();
+                this.conexion.Close();
 
                 /*SqlDataReader reader = comando.ExecuteReader();
                 while (reader.Read())

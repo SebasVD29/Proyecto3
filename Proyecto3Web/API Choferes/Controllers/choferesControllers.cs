@@ -16,12 +16,19 @@ namespace API_Choferes.Controllers
     {
         string stringEncriptada = "";
         string stringDesencriptada = "";
-        private securityController securityController = new securityController();
-        DataBaseController dataBase = new DataBaseController();
+        private securityController securityController;
+        private DataBaseController dataBase ;
+        private SqlConnection conexion;
 
 
         int count = 0;
-        
+
+        public choferesControllers()
+        { 
+            this.dataBase = new DataBaseController();
+            this.securityController = new securityController();
+            this.conexion = new SqlConnection(this.dataBase.StringConexion());
+        }
 
         // GET: api/<choferesControllers>
         [HttpGet]
@@ -34,18 +41,20 @@ namespace API_Choferes.Controllers
         [HttpGet("{id}")]
         public string[] Get(int id)
         {
-            
+
             try
             {
                 string[] returnValues = new string[100];
                 //int counter = 0;
-                dataBase.StringConexion().Open();
-                string querySQL = "Select * from dbo.Chofer where IdentificadorChofer = @id";
+           
+                this.conexion.Open();
 
-                using (SqlCommand comando = new SqlCommand(querySQL, dataBase.StringConexion()))
+                string querySQL = "Select * from dbo.Chofer where IdentificadorChofer = @id";
+                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
+
                     comando.Parameters.AddWithValue("@id", id);
-                    using (SqlDataReader lector = comando.ExecuteReader())
+                    using (SqlDataReader lector = comando.ExecuteReader()) 
                     {
                         while (lector.Read())
                         {
@@ -55,8 +64,10 @@ namespace API_Choferes.Controllers
 
                         lector.Close();
                     }
-                    dataBase.StringConexion().Close();
+
                 }
+
+                this.conexion.Close();
 
             }
             catch (Exception ex)
@@ -67,24 +78,29 @@ namespace API_Choferes.Controllers
             return new string[] { "error", "error" };
         }
 
+            
+            
+        
+        
+
         // POST api/<choferesControllers>
         [HttpPost]
         [EnableCors(origins: "*", methods: "*", headers: "*")]
         public void Post(int identificacion, string nombre, string apellidos, string email, string contrasena, string estado)
         {
             DateTime fecha = DateTime.Now;
-            stringEncriptada = securityController.EncriptarBase64(contrasena);
+            stringEncriptada = this.securityController.EncriptarBase64(contrasena);
             
 
             try
             {
-                dataBase.StringConexion().Open();
+                this.conexion.Open();
                 string[] returnValues = new string[100];
                 string querySQL =
                     "INSERT INTO dbo.Chofer(IdentificadorChofer, Nombre, Apellido, Email, Contraseña, FechaRegistro, Estado) " +
                     "VALUES (@identificador, @nombre, @apellidos, @email, @password, @fecha, @estado)";
 
-                using (SqlCommand comando = new SqlCommand(querySQL, dataBase.StringConexion()))
+                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
                     comando.Parameters.AddWithValue("identificador", identificacion);
                     comando.Parameters.AddWithValue("nombre", nombre);
@@ -96,12 +112,9 @@ namespace API_Choferes.Controllers
                     comando.ExecuteNonQuery();
 
 
-                    /*SqlDataReader reader = comando.ExecuteReader();
-                    while (reader.Read())
-                    { }
-                    reader.Close();*/
+                   
                 }
-                dataBase.StringConexion().Close();
+                this.conexion.Close();
             }
             catch (Exception ex)
             {
@@ -119,14 +132,14 @@ namespace API_Choferes.Controllers
 
             try
             {
-                stringEncriptada = securityController.EncriptarBase64(contrasena);
-                dataBase.StringConexion().Open();
+                stringEncriptada = this.securityController.EncriptarBase64(contrasena);
+                this.conexion.Open();
                 string[] returnValues = new string[100];
                 string querySQL =
                     "UPDATE dbo.Chofer SET  Nombre = @nombre, Apellido = @apellidos, Email = @email, Contraseña = @password, Estado = @estado " +
                     "WHERE  IdentificadorChofer = @id";
 
-                using (SqlCommand comando = new SqlCommand(querySQL, dataBase.StringConexion()))
+                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
                     comando.Parameters.AddWithValue("@id", identificacion);
 
@@ -140,7 +153,7 @@ namespace API_Choferes.Controllers
 
                    
                 }
-                dataBase.StringConexion().Close();
+                this.conexion.Close();
 
                 /*SqlDataReader reader = comando.ExecuteReader();
                 while (reader.Read())
@@ -164,3 +177,4 @@ namespace API_Choferes.Controllers
         }
     }
 }
+

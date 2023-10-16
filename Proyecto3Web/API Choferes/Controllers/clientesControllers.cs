@@ -12,8 +12,15 @@ namespace API_Clientes.Controllers
     [EnableCors(origins: "*", methods: "*", headers: "*")]
     public class clientesControllers : ControllerBase
     {
-        
-        DataBaseController dataBase = new DataBaseController();
+
+        private DataBaseController dataBase;
+        private SqlConnection conexion;
+
+        public clientesControllers()
+        {
+            this.dataBase = new DataBaseController();
+            this.conexion = new SqlConnection(this.dataBase.StringConexion());
+        }
 
         // GET: api/<ClientesController>
         [HttpGet]
@@ -29,10 +36,10 @@ namespace API_Clientes.Controllers
              
              try
              {
-                 dataBase.StringConexion().Open();
+                this.conexion.Open();
                  string querySQL = "SELECT * FROM dbo.Clientes WHERE IdentificadorCliente = @id";
 
-                 using (SqlCommand command = new SqlCommand(querySQL, dataBase.StringConexion()))
+                 using (SqlCommand command = new SqlCommand(querySQL, this.conexion))
                  {
                      command.Parameters.AddWithValue("@id", id);
                      using (SqlDataReader reader = command.ExecuteReader())
@@ -44,7 +51,7 @@ namespace API_Clientes.Controllers
                          reader.Close();
                      }
                  }
-                dataBase.StringConexion().Close();
+                this.conexion.Close();
                 
              }
              catch (Exception ex)
@@ -61,11 +68,11 @@ namespace API_Clientes.Controllers
             
             try
             {
-                dataBase.StringConexion().Open();
+                this.conexion.Open();
                 string querySQL = "INSERT INTO dbo.Clientes(IdentificadorCliente, NombreCompleto, Direccion, Telefono, Email, Estado) " +
                                   "VALUES (@identificacion, @nombreCompleto,@direccion, @telefono, @email, @estado)";
 
-                using (SqlCommand command = new SqlCommand(querySQL, dataBase.StringConexion()))
+                using (SqlCommand command = new SqlCommand(querySQL, this.conexion))
                 {
                     command.Parameters.AddWithValue("@identificacion", identificadorCliente);
                     command.Parameters.AddWithValue("@nombreCompleto", nombreCompleto);
@@ -75,7 +82,7 @@ namespace API_Clientes.Controllers
                     command.Parameters.AddWithValue("@estado", estado);
                     command.ExecuteNonQuery();
                 }
-                dataBase.StringConexion().Close();
+                this.conexion.Close();
             }
             catch (Exception ex)
             {
@@ -94,11 +101,11 @@ namespace API_Clientes.Controllers
 
             try
             {
-                dataBase.StringConexion().Open();
+                this.conexion.Open();
                 string querySQL = "UPDATE dbo.Clientes SET NombreCompleto = @nombreCompleto, Telefono = @telefono, Direccion = @direccion, Email = @email, Estado = @estado " +
                                   "WHERE Identificacion = @identificadorCliente";
 
-                using (SqlCommand command = new SqlCommand(querySQL, dataBase.StringConexion()))
+                using (SqlCommand command = new SqlCommand(querySQL, this.conexion))
                 {
                     command.Parameters.AddWithValue("@identificadorCliente",identificadorCliente);
                     command.Parameters.AddWithValue("@nombreCompleto", nombreCompleto);
@@ -108,7 +115,7 @@ namespace API_Clientes.Controllers
                     command.Parameters.AddWithValue("@estado", estado);
                     command.ExecuteNonQuery();
                 }
-                dataBase.StringConexion().Close();
+                this.conexion.Close();
 
             }
             catch (Exception ex)
