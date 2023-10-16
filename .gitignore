@@ -1,0 +1,5 @@
+
+*.vsidx
+*.sqlite
+*.cache
+*.editorconfig
