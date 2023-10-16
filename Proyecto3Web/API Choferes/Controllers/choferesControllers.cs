@@ -58,7 +58,7 @@ namespace API_Choferes.Controllers
                     {
                         while (lector.Read())
                         {
-                            return new string[] { (string)lector["Nombre"], (string)lector["Email"] };
+                            return new string[] { (string)lector["Nombre"], (string)lector["Apellido"], (string)lector["Email"], (string)lector["Estado"] };
 
                         }
 

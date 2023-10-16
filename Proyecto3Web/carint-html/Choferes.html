@@ -71,21 +71,21 @@
                                 <form action="">
                                     <div>
                                         <input id="form-identificacion" type="text" placeholder="Identificación"
-                                               style="background-color: #ffffff52;" disabled />
+                                               style="background-color: #f0f0f0;" disabled />
                                     </div>
                                     <div>
-                                        <input id="form-nombre" type="text" placeholder="Nombre" style="background-color: #ffffff52;" disabled />
+                                        <input id="form-nombre" type="text" placeholder="Nombre" style="background-color: #f0f0f0;" disabled />
                                     </div>
                                     <div>
                                         <input id="form-apellidos" type="text" placeholder="Apellidos"
-                                               style="background-color: #ffffff52;" disabled />
+                                               style="background-color: #f0f0f0;" disabled />
                                     </div>
                                     <div>
-                                        <input id="form-email" type="email" placeholder="Email" style="background-color: #ffffff52;" disabled />
+                                        <input id="form-email" type="email" placeholder="Email" style="background-color: #f0f0f0;" disabled />
                                     </div>
                                     <div>
                                         <input id="form-contrasena" type="password" placeholder="Contraseña"
-                                               style=" background-color: #ffffff52;" disabled />
+                                               style=" background-color: #f0f0f0;" disabled />
                                     </div>
                                     <h4 style="
                                         font-size: small;
@@ -94,10 +94,10 @@
 
                                         Estado
                                     </h4>
-                                    <div class="DropDown" style="background-color: #ffffff52;text-align: center;">
-                                        <select id="form-estado" style="background-color: #ffffff52;">
-                                            <option value=""> Activo</option>
-                                            <option value=""> Inactivo</option>
+                                    <div class="DropDown" style="background-color: #f0f0f0; text-align: center;">
+                                        <select id="form-estado" style="background-color: #f0f0f0;"disabled>
+                                            <option value="0"> Activo</option>
+                                            <option value="1"> Inactivo</option>
                                         </select>
                                     </div>
                                 </form>
@@ -119,20 +119,23 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;">
-                Agregar nuevo
+                Crear chofer
             </button>
-            <button id="editarChofer" type="submit" style="background-color: #ADD8E6; /* Green */
-  border: none;
-  color: black;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;">
+            <button id="buscarChofer" type="submit" style="background-color: #ADD8E6; /* Green */
+   border: none;
+   color: black;
+   padding: 15px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;">
                 Buscar
             </button>
+            <button id="editarChofer" type="submit" style="background-color: #ADD8E6;visibility : hidden; /* Green */ border: none; color: black; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;">
+                Editar
+            </button>
 
-            <button id="ConfirmarCrearChofer" type="submit" style="background-color: #ADD8E6; visibility: hidden; /* Green * /
+            <button id="ConfirmarCrearChofer" type="submit" style="background-color: #ADD8E6; visibility: hidden; 
                     border: none;
                     color: black;
                     padding: 15px 32px;
@@ -143,7 +146,14 @@
                 Agregar chofer
             </button>
 
-            <button id="ConfirmarEditarChofer" type="submit" style="background-color: #ADD8E6; visibility: hidden; /* Green */ border: none; color: black; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;">
+            <button id="ConfirmarBuscarChofer" type="submit" style="background-color: #ADD8E6; visibility: hidden; /* Green */
+                border: none;
+                color: black;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;">
                 Buscar chofer
             </button>
 
