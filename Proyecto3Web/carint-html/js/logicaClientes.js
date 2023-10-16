@@ -38,7 +38,7 @@ $("#crearCliente").click(function () {
 
     jQuery.ajax({
         type: 'post',
-        url: "https://localhost:7088/api/Clientes?identificadorCliente=" + identificacion + " &nombreCompleto=" + nombre + "&telefono=" + telefono + "&direccion=" + direccion + "&email=" + correo + + "&estado=" + estado + "",
+        url: "https://localhost:7088/api/clientesControllers?identificadorCliente=" + identificacion + " &nombreCompleto=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono  + "&email=" + correo + "&estado=" + estado + "",
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'jsonp',

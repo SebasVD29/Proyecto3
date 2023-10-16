@@ -76,8 +76,8 @@ namespace API_Clientes.Controllers
                 {
                     command.Parameters.AddWithValue("@identificacion", identificadorCliente);
                     command.Parameters.AddWithValue("@nombreCompleto", nombreCompleto);
-                    command.Parameters.AddWithValue("@telefono", telefono);
                     command.Parameters.AddWithValue("@direccion",direccion);
+                    command.Parameters.AddWithValue("@telefono", telefono);
                     command.Parameters.AddWithValue("@email", email);
                     command.Parameters.AddWithValue("@estado", estado);
                     command.ExecuteNonQuery();
@@ -102,15 +102,15 @@ namespace API_Clientes.Controllers
             try
             {
                 this.conexion.Open();
-                string querySQL = "UPDATE dbo.Clientes SET NombreCompleto = @nombreCompleto, Telefono = @telefono, Direccion = @direccion, Email = @email, Estado = @estado " +
+                string querySQL = "UPDATE dbo.Clientes SET NombreCompleto = @nombreCompleto, Direccion = @direccion, Telefono = @telefono, Email = @email, Estado = @estado " +
                                   "WHERE Identificacion = @identificadorCliente";
 
                 using (SqlCommand command = new SqlCommand(querySQL, this.conexion))
                 {
                     command.Parameters.AddWithValue("@identificadorCliente",identificadorCliente);
                     command.Parameters.AddWithValue("@nombreCompleto", nombreCompleto);
-                    command.Parameters.AddWithValue("@telefono", telefono);
                     command.Parameters.AddWithValue("@direccion", direccion);
+                    command.Parameters.AddWithValue("@telefono", telefono);
                     command.Parameters.AddWithValue("@email", email);
                     command.Parameters.AddWithValue("@estado", estado);
                     command.ExecuteNonQuery();
