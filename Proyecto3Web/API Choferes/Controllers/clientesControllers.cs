@@ -23,9 +23,7 @@ namespace API_Clientes.Controllers
 
         // GET api/<ClientesController>/5
         [HttpGet("{id}")]
-<<<<<<< Updated upstream
-       /* public void Get(int id)
-=======
+
          public string[] Get(int id)
          {
              
@@ -54,48 +52,10 @@ namespace API_Clientes.Controllers
                  Console.WriteLine(ex.Message);
                  throw;
              }
-         }
-        
-        // POST api/<ClientesController>
-        [HttpPost]
-        public void Post(int identificadorCliente, string nombreCompleto, string direccion, int telefono, string email, int estado)
->>>>>>> Stashed changes
-        {
-            sqlConnection = new SqlConnection(connectionString);
-            try
-            {
-                sqlConnection.Open();
-                string querySQL = "SELECT * FROM dbo.Clientes WHERE IdentificadorCliente = @id";
-
-                using (SqlCommand command = new SqlCommand(querySQL, sqlConnection))
-                {
-                    command.Parameters.AddWithValue("@id", id);
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            return Ok(new
-                            {
-                                identificacion = reader["IdentificadorCliente"],
-                                nombreCompleto = reader["NombreCompleto"],
-                                direccion = reader["Direccion"],
-                                telefono = reader["Telefono"],
-                                email = reader["Email"],
-                                estado = reader["Estado"]
-                            });
-                        }
-                        reader.Close();
-                    }
-                }
-                return NotFound("Cliente no encontrado.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw;
-            }
+            return new string[] { "error", "error" };
         }
-       */
+        
+   
         // POST api/<ClientesController>
         [HttpPost]
         public void Post(int identificadorCliente, string nombreCompleto, int telefono, string direccion, string email, string estado)
@@ -106,14 +66,14 @@ namespace API_Clientes.Controllers
             {
                 sqlConnection.Open();
                 string querySQL = "INSERT INTO dbo.Clientes(IdentificadorCliente, NombreCompleto, Direccion, Telefono, Email, Estado) " +
-                                  "VALUES (@identificacion, @nombreCompleto, @telefono, @direccion, @email, @estado)";
+                                  "VALUES (@identificacion, @nombreCompleto,@direccion,@telefono, @email, @estado)";
 
                 using (SqlCommand command = new SqlCommand(querySQL, sqlConnection))
                 {
                     command.Parameters.AddWithValue("@identificacion", identificadorCliente);
                     command.Parameters.AddWithValue("@nombreCompleto", nombreCompleto);
+                    command.Parameters.AddWithValue("@direccion", direccion);
                     command.Parameters.AddWithValue("@telefono", telefono);
-                    command.Parameters.AddWithValue("@direccion",direccion);
                     command.Parameters.AddWithValue("@email", email);
                     command.Parameters.AddWithValue("@estado", estado);
                     command.ExecuteNonQuery();
@@ -140,15 +100,15 @@ namespace API_Clientes.Controllers
             try
             {
                 sqlConnection.Open();
-                string querySQL = "UPDATE dbo.Clientes SET NombreCompleto = @nombreCompleto, Telefono = @telefono, Direccion = @direccion, Email = @email, Estado = @estado " +
+                string querySQL = "UPDATE dbo.Clientes SET NombreCompleto = @nombreCompleto, Direccion = @direccion, Telefono = @telefono, Email = @email, Estado = @estado " +
                                   "WHERE Identificacion = @identificadorCliente";
 
                 using (SqlCommand command = new SqlCommand(querySQL, sqlConnection))
                 {
                     command.Parameters.AddWithValue("@identificadorCliente",identificadorCliente);
                     command.Parameters.AddWithValue("@nombreCompleto", nombreCompleto);
-                    command.Parameters.AddWithValue("@telefono", telefono);
                     command.Parameters.AddWithValue("@direccion", direccion);
+                    command.Parameters.AddWithValue("@telefono", telefono);    
                     command.Parameters.AddWithValue("@email", email);
                     command.Parameters.AddWithValue("@estado", estado);
                     command.ExecuteNonQuery();
@@ -172,13 +132,5 @@ namespace API_Clientes.Controllers
         }
     }
 
-    public class Cliente
-    {
-        public int IdentificadorCliente { get; set; }
-        public string NombreCompleto { get; set; }
-        public string Telefono { get; set; }
-        public string Direccion { get; set; }
-        public string Email { get; set; }
-        public string Estado { get; set; }
-    }
+  
 }

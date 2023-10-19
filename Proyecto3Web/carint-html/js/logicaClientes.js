@@ -47,11 +47,6 @@ $("#ConfirmarCrearCliente").click(function () {
 
 });
 
-<<<<<<< Updated upstream
-/*
-$("#editarChofer").click(function(){
-=======
-
 $("#buscarCliente").click(function () {
 
     $("#ConfirmarCrearCliente").css("visibility", "hidden");
@@ -65,7 +60,6 @@ $("#buscarCliente").click(function () {
     $("#form-telefono").css('background-color', "#f0f0f0");
     $("#form-email").css('background-color', "#f0f0f0");
     $("#buscarCliente").css("visibility", "hidden");
->>>>>>> Stashed changes
 
 });
 
@@ -146,4 +140,3 @@ $("#editarCliente").click(function () {
     });
 
 });
-/**/
