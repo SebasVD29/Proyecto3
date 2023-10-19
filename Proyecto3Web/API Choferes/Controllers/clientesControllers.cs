@@ -23,7 +23,43 @@ namespace API_Clientes.Controllers
 
         // GET api/<ClientesController>/5
         [HttpGet("{id}")]
+<<<<<<< Updated upstream
        /* public void Get(int id)
+=======
+         public string[] Get(int id)
+         {
+             
+             try
+             {
+                this.conexion.Open();
+                 string querySQL = "SELECT * FROM dbo.Clientes WHERE IdentificadorCliente = @id";
+
+                 using (SqlCommand command = new SqlCommand(querySQL, this.conexion))
+                 {
+                     command.Parameters.AddWithValue("@id", id);
+                     using (SqlDataReader reader = command.ExecuteReader())
+                     {
+                         while(reader.Read())
+                         {
+                            return new string[] { (string)reader["NombreCompleto"], (string)reader["Direccion"], (string)reader["Telefono"], (string)reader["Email"], (string)reader["Estado"] };
+                        }
+                         reader.Close();
+                     }
+                 }
+                this.conexion.Close();
+                
+             }
+             catch (Exception ex)
+             {
+                 Console.WriteLine(ex.Message);
+                 throw;
+             }
+         }
+        
+        // POST api/<ClientesController>
+        [HttpPost]
+        public void Post(int identificadorCliente, string nombreCompleto, string direccion, int telefono, string email, int estado)
+>>>>>>> Stashed changes
         {
             sqlConnection = new SqlConnection(connectionString);
             try
@@ -92,7 +128,7 @@ namespace API_Clientes.Controllers
             return;
         }
 
-        // PUT api/<ClientesController>/5  (hacer)
+        // PUT api/<ClientesController>/5  
         [HttpPut("{id}")]
         public void Put(int identificadorCliente, string nombreCompleto, int telefono, string direccion, string email, string estado)
         {
