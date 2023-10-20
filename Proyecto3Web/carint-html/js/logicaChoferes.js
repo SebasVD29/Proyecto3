@@ -15,7 +15,7 @@ $("#crearChofer").click(function () {
     $("#form-apellidos").prop('disabled', false);
     $("#form-email").prop('disabled', false);
     $("#form-contrasena").prop('disabled', false);
-    $("#form-estado").prop('disabled', false);
+ 
 });
 
 $("#ConfirmarCrearChofer").click(function () {
@@ -26,45 +26,7 @@ $("#ConfirmarCrearChofer").click(function () {
     var email = $('#form-email ').val();
     var contrasena = $('#form-contrasena ').val();
     var estado = $("#form-estado").children(":selected")[0].label;
-    if (contrasena == "") {
-        alert("Ingrese una contrasena")
-        return;
-    }  
-    if (identificacion == "") {
-        alert("Ingrese una identificacion")
-        return;
-    }  
-    if (apellidos == "") {
-        alert("Ingrese apellidos")
-        return;
-    }
-    if (nombre == "") {
-            alert("Ingrese el nombre")
-            return;
-    } 
 
-    if (email == "") {
-        alert("Ingrese un email valido")
-        return;
-    } 
-    
-    if (!validateEmail(email)) {
-        alert("Correo Invalido")
-        return;
-    }
-    if (!validateId(identificacion)) {
-        alert("El numero de identificacion debe tener al menos 9 digitos")
-        return;
-    }
-    if (!validateLetras(nombre)) {
-        alert("El nombre debe contener solo letras")
-        return;
-    }
-    if (!validateLetras(apellidos)) {
-        alert("El apellido debe contener solo letras")
-        return;
-    } 
-    
     jQuery.ajax({
         type: 'post',
         url: "https://localhost:7088/api/choferesControllers?identificacion=" + identificacion + " &nombre=" + nombre + "&apellidos=" + apellidos + "&email=" + email + "&contrasena=" + contrasena + "&estado=" + estado + "",
@@ -158,35 +120,8 @@ $("#editarChofer").click(function(){
     if (!validateEmail(email)) {
         alert("Correo Invalido")
         return;
-    }  
-    if (!validateId(identificacion)) {
-        alert("El numero de identificacion debe tener al menos 9 digitos")
-        return;
-    }  
-    if (!validateLetras(nombre)) {
-        alert("Por favor ingrese un nombre valido")
-        return;
-    }  
-    if (!validateLetras(apellidos)) {
-        alert("Por favor ingrese un apellido valido")
-        return;
     } 
-    if (apellidos == "") {
-        alert("Ingrese apellidos")
-        return;
-    }
-    if (nombre == "") {
-        alert("Ingrese el nombre")
-        return;
-    }
 
-    if (email == "") {
-        alert("Ingrese un email valido")
-        return;
-    } 
-    if (contrasena == "") {
-        contrasena = "NoCambiarContrasena";
-    } 
        jQuery.ajax({
                   type: 'put',
            url: "https://localhost:7088/api/choferesControllers/" + identificacion + "?identificacion=" + identificacion + "&nombre=" + nombre + "&apellidos=" + apellidos +"&email=" +email +"&contrasena=" +contrasena+ "&estado=" + estado + "",
@@ -203,22 +138,10 @@ $("#editarChofer").click(function(){
                   }
               });
       
-      });
+});
 
 function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
 
-function validateId(Identificacion) {
-
-    var pattern = new RegExp("\\d{9}");
-    return pattern.test(Identificacion);
-
-}
-function validateLetras(Letras) {
-
-    var pattern = new RegExp("[a-zA-Z\s]+");
-    return pattern.test(Letras);
-
-}
