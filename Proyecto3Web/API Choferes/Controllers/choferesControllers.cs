@@ -132,12 +132,23 @@ namespace API_Choferes.Controllers
 
             try
             {
+
                 stringEncriptada = this.securityController.EncriptarBase64(contrasena);
                 this.conexion.Open();
                 string[] returnValues = new string[100];
-                string querySQL =
-                    "UPDATE dbo.Chofer SET  Nombre = @nombre, Apellido = @apellidos, Email = @email, Contraseña = @password, Estado = @estado " +
+                string querySQL;
+
+                if (contrasena == "NoCambiarContrasena")
+                {
+                    querySQL =
+                    "UPDATE dbo.Chofer SET  Nombre = @nombre, Apellido = @apellidos, Email = @email, Estado = @estado " +
                     "WHERE  IdentificadorChofer = @id";
+                }
+                else {
+                    querySQL =
+                       "UPDATE dbo.Chofer SET  Nombre = @nombre, Apellido = @apellidos, Email = @email, Contraseña = @password, Estado = @estado " +
+                       "WHERE  IdentificadorChofer = @id";
+                }
 
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
