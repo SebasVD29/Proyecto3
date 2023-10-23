@@ -58,7 +58,16 @@ namespace API_Choferes.Controllers
                     {
                         while (lector.Read())
                         {
-                            return new string[] { (string)lector["Nombre"], (string)lector["Apellido"], (string)lector["Email"], (string)lector["Estado"] };
+                            string estado = "";
+                            if ((int)lector["Estado"] == 1)
+                            {
+                                estado = "Activo";
+                            }
+                            else
+                            {
+                                estado = "Inactivo";
+                            }
+                            return new string[] { (string)lector["Nombre"], (string)lector["Apellido"], (string)lector["Email"], estado};
 
                         }
 
@@ -90,7 +99,9 @@ namespace API_Choferes.Controllers
         {
             DateTime fecha = DateTime.Now;
             stringEncriptada = this.securityController.EncriptarBase64(contrasena);
-            
+
+            if (estado == "Activo") estado = "1";
+            if (estado == "Inactivo") estado = "0";
 
             try
             {
@@ -149,6 +160,9 @@ namespace API_Choferes.Controllers
                        "UPDATE dbo.Chofer SET  Nombre = @nombre, Apellido = @apellidos, Email = @email, Contraseña = @password, Estado = @estado " +
                        "WHERE  IdentificadorChofer = @id";
                 }
+
+                if (estado == "Activo") estado = "1";
+                if (estado == "Inactivo") estado = "0";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
