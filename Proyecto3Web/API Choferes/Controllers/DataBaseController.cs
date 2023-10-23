@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Reflection.Metadata;
 
-namespace API_Choferes.Controllers, namespace API_
+namespace API_Choferes.Controllers
 
 {
     public class DataBaseController

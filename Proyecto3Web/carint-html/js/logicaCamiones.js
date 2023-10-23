@@ -18,24 +18,26 @@ $("#crearCamion").click(function () {
 
 $("#ConfirmarCrearCamion").click(function () {
 
-    var numeroPlaca = $('#form-numeroPLaca').val();
-    var Marca = $('#form-Marca ').val();
-    var Modelo = $('#form-Modelo ').val();
-    var Fabricacion = $('#form-Fabricacion ').val();
-    var estado = $("#form-estado").children(":selected")[0].label;
+    $("#ConfirmarCrearCamion").click(function () {
+        var numeroPlaca = $('#form-numeroPlaca').val();
+        var Marca = $('#form-Marca').val();
+        var Modelo = $('#form-Modelo').val();
+        var Fabricacion = $('#form-Fabricacion').val();
+        var estado = $("#form-estado option:selected").text();
 
-    jQuery.ajax({
-        type: 'post',
-        url: "https://localhost:7088/api/camionesControllers?numeroPlaca=" + numeroPlaca + " &Marca=" + Marca + "&Modelo=" + Modelo + "&Fabricacion=" + Fabricacion + "&estado=" + estado + "",
-        contentType: "application/json; charset=utf-8",
-        cache: false,
-        datatype: 'jsonp',
-        traditional: true,
-        success: function (response) {
-            $('#modalMensaje').text("El Camion con el numero de placa " + numeroPlaca + ", Marca " + Marca + ", Modelo  " + Modelo + ", fabricado en " + Fabricacion + " en estado " + estado + " fue agregado.");
-            $('#modalup').trigger('click');
-        },
-        failure: function (response) {
+        $.ajax({
+            type: 'post',
+            url: "https://localhost:7088/api/camionesControllers",
+            data: JSON.stringify({
+                numeroPlaca: numeroPlaca,
+                Marca: Marca,
+                Modelo: Modelo,
+                Fabricacion: Fabricacion,
+                Estado: estado
+            }),
+            contentType: "application/json; charset=utf-8",
+            cache: false,
+            success: function (response) {
             alert("Error: Camion No Agregado")
         }
     });
@@ -76,16 +78,14 @@ $("#ConfirmarBuscarCamion").click(function () {
 
 $("#ConfirmarBuscarCamion").click(function () {
 
-    var numeroPlaca = $('#form-numeroPlaca').val();
-  
 
-    jQuery.ajax({
+    var numeroPlaca = $('#form-numeroPlaca').val();
+
+    $.ajax({
         type: 'get',
         url: "https://localhost:7088/api/camionesControllers/" + numeroPlaca,
         contentType: "application/json; charset=utf-8",
         cache: false,
-        datatype: 'jsonp',
-        traditional: true,
         success: function (response) {
             $("#form-numeroPlaca").prop('disabled', true);
             $('#form-Marca').val(response[0]);
