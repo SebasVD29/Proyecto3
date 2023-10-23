@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
 using API_Choferes.Models;
 using Dapper;
@@ -18,16 +16,14 @@ namespace API_Choferes.Services
 
         public IEnumerable<string> Get()
         {
-            // Aquí deberías realizar una consulta a la base de datos utilizando Dapper.
             using (IDbConnection db = new SqlConnection(connectionString))
             {
                 return db.Query<string>("SELECT * FROM dbo.Camiones");
             }
         }
 
-        public IEnumerable<string> GetByNumeroPca(string numeroPlaca)
+        public IEnumerable<string> GetByNumeroPlaca(string numeroPlaca)
         {
-            // Aquí deberías realizar una consulta a la base de datos utilizando Dapper.
             using (IDbConnection db = new SqlConnection(connectionString))
             {
                 return db.Query<string>("SELECT * FROM dbo.Camiones WHERE numeroPlaca = @numeroPlaca", new { numeroPlaca });
@@ -42,52 +38,14 @@ namespace API_Choferes.Services
                 {
                     string querySQL =
                         "INSERT INTO dbo.Camiones(numeroPlaca, Marca, Modelo, Fabricacion, Estado) " +
-                        "VALUES (@numeroPlaca, @Marca, @Modelo, @Fabricacion, @Estado)";
+                        "VALUES (@NumeroPlaca, @Marca, @Modelo, @Fabricacion, @Estado)";
 
                     db.Execute(querySQL, camion);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
-            }
-        }
-
-        public IEnumerable<string> GetByNumeroPlaca(string numeroPlaca)
-        {
-            try
-            {
-                using (SqlConnection conexion = new SqlConnection(connectionString))
-                {
-                    conexion.Open();
-
-                    string querySQL = "SELECT * FROM dbo.Camiones WHERE numeroPlaca = @numeroPlaca";
-
-                    using (SqlCommand comando = new SqlCommand(querySQL, conexion))
-                    {
-                        comando.Parameters.AddWithValue("numeroPlaca", numeroPlaca);
-
-                        using (SqlDataReader lector = comando.ExecuteReader())
-                        {
-                            List<string> returnValues = new List<string>();
-
-                            while (lector.Read())
-                            {
-                                returnValues.Add((string)lector["Marca"]);
-                                returnValues.Add((string)lector["Modelo"]);
-                                returnValues.Add(((DateTime)lector["Fabricacion"]).ToString());
-                                returnValues.Add((string)lector["Estado"]);
-                            }
-
-                            return returnValues;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Camión agregado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})");
                 throw;
             }
         }
@@ -112,7 +70,7 @@ namespace API_Choferes.Services
             }
         }
 
-        public void InactivarCamion(string numeroPlaca)
+        public void DeleteCamion(string numeroPlaca)
         {
             try
             {
@@ -131,5 +89,10 @@ namespace API_Choferes.Services
             }
         }
 
+        internal void UpdateCamion(string numeroPlaca, string marca, string modelo, DateOnly fabricacion, string estado)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
+

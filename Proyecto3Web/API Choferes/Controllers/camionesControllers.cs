@@ -36,7 +36,7 @@ namespace API_Choferes.Controllers
             try
             {
                 _camionesService.InsertCamion(camion);
-                return Ok();  // Indica que la operación fue exitosa
+                return Ok($"Camión agregado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})"); // Indica que la operación fue exitosa
             }
             catch (Exception ex)
             {
@@ -46,15 +46,11 @@ namespace API_Choferes.Controllers
         }
 
         [HttpPut("{numeroPlaca}")]
-        public void Put(string numeroPlaca, string Marca, string Modelo, DateTime Fabricacion, string Estado)
+        public void Put(string numeroPlaca, string Marca, string Modelo, DateOnly Fabricacion, string Estado)
         {
             _camionesService.UpdateCamion(numeroPlaca, Marca, Modelo, Fabricacion, Estado);
         }
 
-        [HttpDelete("{numeroPlaca}")]
-        public void Delete(string numeroPlaca)
-        {
-            _camionesService.InactivarCamion(numeroPlaca);
-        }
+       
     }
 }

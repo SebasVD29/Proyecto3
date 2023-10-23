@@ -17,32 +17,36 @@ $("#crearCamion").click(function () {
 });
 
 $("#ConfirmarCrearCamion").click(function () {
+    var numeroPlaca = $('#form-numeroPlaca').val();
+    var Marca = $('#form-Marca').val();
+    var Modelo = $('#form-Modelo').val();
+    var Fabricacion = $('#form-Fabricacion').val();
+    var estado = $("#form-estado").children(":selected").text(); // Cambiado a obtener el texto del option
 
-    $("#ConfirmarCrearCamion").click(function () {
-        var numeroPlaca = $('#form-numeroPlaca').val();
-        var Marca = $('#form-Marca').val();
-        var Modelo = $('#form-Modelo').val();
-        var Fabricacion = $('#form-Fabricacion').val();
-        var estado = $("#form-estado option:selected").text();
-
-        $.ajax({
-            type: 'post',
-            url: "https://localhost:7088/api/camionesControllers",
-            data: JSON.stringify({
-                numeroPlaca: numeroPlaca,
-                Marca: Marca,
-                Modelo: Modelo,
-                Fabricacion: Fabricacion,
-                Estado: estado
-            }),
-            contentType: "application/json; charset=utf-8",
-            cache: false,
-            success: function (response) {
-            alert("Error: Camion No Agregado")
+    jQuery.ajax({
+        type: 'post',
+        url: "https://localhost:7088/api/camionesControllers",
+        data: JSON.stringify({
+            numeroPlaca: numeroPlaca,
+            Marca: Marca,
+            Modelo: Modelo,
+            Fabricacion: Fabricacion,
+            Estado: estado
+        }),
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        dataType: 'json', // Cambiado de 'jsonp' a 'json'
+        traditional: true,
+        success: function (response) {
+            $('#modalMensaje').text("El Camion con el numero de placa " + numeroPlaca + ", Marca " + Marca + ", Modelo  " + Modelo + ", fabricado en " + Fabricacion + " en estado " + estado + " fue agregado.");
+            $('#modalup').trigger('click');
+        },
+        error: function (xhr, status, error) {
+            alert("Error: Camion No Agregado. " + error);
         }
     });
-
 });
+
 
 $("#buscarCamion").click(function () {
 
@@ -59,33 +63,43 @@ $("#buscarCamion").click(function () {
 
 });
 $("#ConfirmarBuscarCamion").click(function () {
-    $("#ConfirmarBuscarCamion").css("visibility", "hidden");
-    $("#ConfirmarCrearCamion").css("visibility", "hidden");
-    $("#buscarCamion").css("visibility", "hidden");
-    $("#ConfirmarEditarCamion").css("visibility", "visible");
-    $("#crearCamion").css("visibility", "hidden");
-    $("#editarCamion").css("visibility", "visible");
-    $("#form-numeroPlaca").css('background-color', "#f0f0f0");
-    $("#form-Marca").css('background-color', "#ffffff52");
-    $("#form-Modelo").css('background-color', "#ffffff52");
-    $("#form-Fabricacion").css('background-color', "#ffffff52");
-    $("#form-numeroPlaca").prop('disabled', true);
-    $("#form-Marca").prop('disabled', false);
-    $("#form-Modelo").prop('disabled', false);
-    $("#form-Fabricacion").prop('disabled', false);
-    $("#form-estado").prop('disabled', false);
-});
-
-$("#ConfirmarBuscarCamion").click(function () {
-
-
     var numeroPlaca = $('#form-numeroPlaca').val();
 
-    $.ajax({
+    jQuery.ajax({
         type: 'get',
         url: "https://localhost:7088/api/camionesControllers/" + numeroPlaca,
         contentType: "application/json; charset=utf-8",
         cache: false,
+        dataType: 'json', // Cambiado de 'jsonp' a 'json'
+        traditional: true,
+        success: function (response) {
+            $("#form-numeroPlaca").prop('disabled', true);
+            $('#form-Marca').val(response[0]);
+            $('#form-Modelo').val(response[1]);
+            $('#form-Fabricacion').val(response[2]);
+            $('#form-estado').val(response[3]).change();
+            $('#modalMensaje').text("El Camion con numeroPlaca " + numeroPlaca + ", Marca " + response[0] + ", Modelo  " + response[1] + ", Fabricacion " + response[2] + " en estado " + response[3] + " fue agregado.");
+            $('#modalup').trigger('click');
+        },
+        error: function (xhr, status, error) {
+            alert("Error: Camion no encontrado. " + error);
+        }
+    });
+});
+
+
+$("#ConfirmarBuscarCamion").click(function () {
+
+    var numeroPlaca = $('#form-numeroPlaca').val();
+  
+
+    jQuery.ajax({
+        type: 'get',
+        url: "https://localhost:7088/api/camionesControllers/" + numeroPlaca,
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        datatype: 'jsonp',
+        traditional: true,
         success: function (response) {
             $("#form-numeroPlaca").prop('disabled', true);
             $('#form-Marca').val(response[0]);
