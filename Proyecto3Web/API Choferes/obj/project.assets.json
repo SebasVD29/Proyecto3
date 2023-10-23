@@ -7457,23 +7457,40 @@
     ]
   },
   "packageFolders": {
+<<<<<<< Updated upstream
     "C:\\Users\\sebas\\.nuget\\packages\\": {},
     "D:\\Apps\\apps\\Visual Studio\\Shared\\NuGetPackages": {}
+=======
+    "C:\\Users\\Admin\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+>>>>>>> Stashed changes
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< Updated upstream
       "projectUniqueName": "C:\\Users\\sebas\\Documents\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj",
       "projectName": "API Choferes",
       "projectPath": "C:\\Users\\sebas\\Documents\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj",
       "packagesPath": "C:\\Users\\sebas\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\sebas\\Documents\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\Admin\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj",
+      "projectName": "API Choferes",
+      "projectPath": "C:\\Users\\Admin\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Admin\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\obj\\",
+>>>>>>> Stashed changes
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Apps\\apps\\Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
+<<<<<<< Updated upstream
         "C:\\Users\\sebas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> Stashed changes
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
