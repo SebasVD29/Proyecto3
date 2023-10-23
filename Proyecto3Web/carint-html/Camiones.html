@@ -70,7 +70,7 @@
                             <div class="form_container">
                                 <form action="">
                                     <div>
-                                        <input id="form-numeroPlaca" type="text" placeholder="Numero Placa"
+                                        <input id="form-numeroPlaca" type="text" placeholder="Numero de Placa"
                                                style="background-color: #f0f0f0;" disabled />
                                     </div>
                                     <div>
@@ -80,9 +80,13 @@
                                         <input id="form-Modelo" type="text" placeholder="Modelo"
                                                style="background-color: #f0f0f0;" disabled />
                                     </div>
-                                    <div>
-                                        <input id="form-Fabricacion" type="DateOnly" placeholder="Año de Fabricación" style="background-color: #f0f0f0;" disabled />
+                                    <div class="DropDown" style="background-color: #f0f0f0; text-align: center;">
+                                        <label for="form-Fabricacion">Año de Fabricación:</label>
+                                        <select id="form-Fabricacion" disabled required>
+                                            <!-- Script para generar opciones de años -->
+                                        </select>
                                     </div>
+                                    
                            
                                     <h4 style="
                                         font-size: small;

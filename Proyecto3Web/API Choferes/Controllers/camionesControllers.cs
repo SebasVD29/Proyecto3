@@ -46,11 +46,11 @@ namespace API_Choferes.Controllers
         }
 
         [HttpPut("{numeroPlaca}")]
-        public void Put(string numeroPlaca, string Marca, string Modelo, DateOnly Fabricacion, string Estado)
+        public void Put(string numeroPlaca, string Marca, string Modelo, int Fabricacion, string Estado)
         {
             _camionesService.UpdateCamion(numeroPlaca, Marca, Modelo, Fabricacion, Estado);
         }
 
-       
+
     }
 }

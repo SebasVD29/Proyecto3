@@ -50,7 +50,7 @@ namespace API_Choferes.Services
             }
         }
 
-        public void UpdateCamion(string numeroPlaca, string Marca, string Modelo, DateTime Fabricacion, string Estado)
+        public void UpdateCamion(string numeroPlaca, string Marca, string Modelo, int Fabricacion, string Estado)
         {
             try
             {
@@ -89,10 +89,7 @@ namespace API_Choferes.Services
             }
         }
 
-        internal void UpdateCamion(string numeroPlaca, string marca, string modelo, DateOnly fabricacion, string estado)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
 

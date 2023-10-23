@@ -115,7 +115,15 @@ $("#ConfirmarBuscarCamion").click(function () {
     });
 
 });
-
+$(document).ready(function() {
+    var currentYear = new Date().getFullYear();
+    for (var i = currentYear; i >= currentYear - 20; i--) {
+        $('#form-Fabricacion').append($('<option>', {
+            value: i,
+            text: i
+        }));
+    }
+});
 $("#editarCamion").click(function(){
 
       var numeroPlaca = $('#form-numeroPlaca').val();
