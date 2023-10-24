@@ -136,17 +136,37 @@ namespace API_Choferes.Controllers
 
             try
             {
-                //stringEncriptada = securityController.EncriptarBase64(contrasena);
+                
+                stringEncriptada = this.securityController.EncriptarBase64(contrasena);
                 this.conexion.Open();
                 string[] returnValues = new string[100];
-                string querySQL =
-                    "UPDATE dbo.Administradores SET   Nombre = @nombre, Apellido = @apellido, Email = @email, Contraseña = @password , Estado = @estado  " +
+                string querySQL;
+
+                if (contrasena == "NoCambiarContrasena")
+                {
+                    querySQL =
+                    "UPDATE dbo.Administradores SET Nombre = @nombre, Apellido = @apellido, Email = @email, Estado = @estado  " +
                     "WHERE IdentificadorAdministrador = @id ";
+                }
+                else
+                {
+                    querySQL =
+                       "UPDATE dbo.Administradores SET Nombre = @nombre, Apellido = @apellido, Email = @email, Contraseña = @password , Estado = @estado  " +
+                    "WHERE IdentificadorAdministrador = @id ";
+                }
+
+                if (estado == "Activo") estado = "1";
+                if (estado == "Inactivo") estado = "0";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
-                    
-                    
+
+                    comando.Parameters.AddWithValue("identificador", identificacion);
+                    comando.Parameters.AddWithValue("nombre", nombre);
+                    comando.Parameters.AddWithValue("apellidos", apellidos);
+                    comando.Parameters.AddWithValue("email", email);
+                    comando.Parameters.AddWithValue("password", stringEncriptada);
+                    comando.Parameters.AddWithValue("estado", estado);
                     comando.ExecuteNonQuery();
 
 
