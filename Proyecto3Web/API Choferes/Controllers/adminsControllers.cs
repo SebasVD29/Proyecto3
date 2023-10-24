@@ -47,16 +47,25 @@ namespace API_Choferes.Controllers
                 string[] returnValues = new string[100];
                 //int counter = 0;
                 this.conexion.Open();
-                string querySQL = "Select * from dbo. where ";
+                string querySQL = "Select * from dbo.Administradores where IdentificadorAdministrador = @id";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion ))
                 {
-                   //comando.Parameters.AddWithValue("@id", id);
+                   comando.Parameters.AddWithValue("@id", id);
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
                         while (lector.Read())
                         {
-                            //return ;
+                            string estado = "";
+                            if ((int)lector["Estado"] == 1)
+                            {
+                                estado = "Activo";
+                            }
+                            else
+                            {
+                                estado = "Inactivo";
+                            }
+                            return new string[] { (string)lector["Nombre"], (string)lector["Apellido"], (string)lector["Email"], estado };
 
                         }
 
@@ -77,24 +86,34 @@ namespace API_Choferes.Controllers
         // POST api/<choferesControllers>
         [HttpPost]
         [EnableCors(origins: "*", methods: "*", headers: "*")]
-        public void Post()
+        public void Post(int identificacion, string nombre, string apellidos, string email, string contrasena, string estado)
         {
-    
-            //stringEncriptada = securityController.EncriptarBase64(contrasena);
-            
+
+            DateTime fecha = DateTime.Now;
+            stringEncriptada = this.securityController.EncriptarBase64(contrasena);
+
+            if (estado == "Activo") estado = "1";
+            if (estado == "Inactivo") estado = "0";
+
 
             try
             {
                 this.conexion.Open();
                 string[] returnValues = new string[100];
                 string querySQL =
-                    "INSERT INTO dbo.() " +
-                    "VALUES ()";
+                    "INSERT INTO dbo.Administradores(IdentificadorAdministrador, Nombre, Apellido, Email, Contraseña, FechaRegistro, Estado) " +
+                    "VALUES (@identificador, @nombre, @apellido, @email, @password, @fecha, @estado)";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
-                    
 
+                    comando.Parameters.AddWithValue("identificador", identificacion);
+                    comando.Parameters.AddWithValue("nombre", nombre);
+                    comando.Parameters.AddWithValue("apellidos", apellidos);
+                    comando.Parameters.AddWithValue("email", email);
+                    comando.Parameters.AddWithValue("password", stringEncriptada);
+                    comando.Parameters.AddWithValue("fecha", fecha);
+                    comando.Parameters.AddWithValue("estado", estado);
                     comando.ExecuteNonQuery();
 
 
@@ -111,7 +130,7 @@ namespace API_Choferes.Controllers
 
         // PUT api/<choferesControllers>/5
         [HttpPut("{id}")]
-        public void Put()
+        public void Put(int identificacion, string nombre, string apellidos, string email, string contrasena, string estado)
         {
             
 
@@ -121,8 +140,8 @@ namespace API_Choferes.Controllers
                 this.conexion.Open();
                 string[] returnValues = new string[100];
                 string querySQL =
-                    "UPDATE dbo. SET   " +
-                    "WHERE  " ;
+                    "UPDATE dbo.Administradores SET   Nombre = @nombre, Apellido = @apellido, Email = @email, Contraseña = @password , Estado = @estado  " +
+                    "WHERE IdentificadorAdministrador = @id ";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
@@ -135,10 +154,7 @@ namespace API_Choferes.Controllers
                 }
                 this.conexion.Close();
 
-                /*SqlDataReader reader = comando.ExecuteReader();
-                while (reader.Read())
-                { }
-                reader.Close();*/
+                
             }
             catch (Exception ex)
             {
@@ -150,10 +166,6 @@ namespace API_Choferes.Controllers
 
         }
 
-        // DELETE api/<choferesControllers>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        
     }
 }
