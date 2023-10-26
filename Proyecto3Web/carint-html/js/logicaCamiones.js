@@ -1,4 +1,3 @@
-
 $("#crearCamion").click(function () {
 
     $("#ConfirmarCrearCamion").css("visibility", "visible");
@@ -14,18 +13,50 @@ $("#crearCamion").click(function () {
     $("#form-Modelo").prop('disabled', false);
     $("#form-Fabricacion").prop('disabled', false);
     $("#form-estado").prop('disabled', false);
+    
 });
+
 
 $("#ConfirmarCrearCamion").click(function () {
     var numeroPlaca = $('#form-numeroPlaca').val();
     var Marca = $('#form-Marca').val();
     var Modelo = $('#form-Modelo').val();
-    var Fabricacion = $('#form-Fabricacion').val();
-    var estado = $("#form-estado").children(":selected").text(); // Cambiado a obtener el texto del option
-
+    var Fabricacion = parseInt($('#form-Fabricacion').val());   
+    var estado = $("#form-estado").children(":selected").val(); // Cambiado a obtener el texto del option
+    if (numeroPlaca == "") {
+        alert("Ingrese un número de placa")
+        return;
+    }  
+    if (Marca == "") {
+        alert("Ingrese la Marca")
+        return;
+    }  
+    if (Modelo == "") {
+        alert("Ingrese el Modelo")
+        return;
+    }
+    if (Fabricacion == "") {
+            alert("Ingrese el año de fabricación")
+            return;
+    } 
+   
+  
+    if (!validatePlaca(numeroPlaca)) {
+        alert("El número de placa debe tener al menos 6 digitos")
+        return;
+    }
+    if (!validateLetras(Marca)) {
+        alert("La marca debe contener solo letras")
+        return;
+    }
+    if (!validateLetras(Modelo)) {
+        alert("La marca debe contener solo letras")
+        return;
+    } 
+   
     jQuery.ajax({
         type: 'post',
-        url: "https://localhost:7088/api/camionesControllers",
+        url: "https://localhost:7088/api/Camiones",
         data: JSON.stringify({
             numeroPlaca: numeroPlaca,
             Marca: Marca,
@@ -36,11 +67,12 @@ $("#ConfirmarCrearCamion").click(function () {
         contentType: "application/json; charset=utf-8",
         cache: false,
         dataType: 'json', // Cambiado de 'jsonp' a 'json'
-        traditional: true,
         success: function (response) {
+            console.log(response); // Imprime la respuesta del servidor en la consola del navegador
             $('#modalMensaje').text("El Camion con el numero de placa " + numeroPlaca + ", Marca " + Marca + ", Modelo  " + Modelo + ", fabricado en " + Fabricacion + " en estado " + estado + " fue agregado.");
             $('#modalup').trigger('click');
         },
+        
         error: function (xhr, status, error) {
             alert("Error: Camion No Agregado. " + error);
         }
@@ -67,7 +99,7 @@ $("#ConfirmarBuscarCamion").click(function () {
 
     jQuery.ajax({
         type: 'get',
-        url: "https://localhost:7088/api/camionesControllers/" + numeroPlaca,
+        url: "https://localhost:7088/api/Camiones" + numeroPlaca,
         contentType: "application/json; charset=utf-8",
         cache: false,
         dataType: 'json', // Cambiado de 'jsonp' a 'json'
@@ -76,7 +108,7 @@ $("#ConfirmarBuscarCamion").click(function () {
             $("#form-numeroPlaca").prop('disabled', true);
             $('#form-Marca').val(response[0]);
             $('#form-Modelo').val(response[1]);
-            $('#form-Fabricacion').val(response[2]);
+            $('#form-Fabricacion').val(response[2]).change();
             $('#form-estado').val(response[3]).change();
             $('#modalMensaje').text("El Camion con numeroPlaca " + numeroPlaca + ", Marca " + response[0] + ", Modelo  " + response[1] + ", Fabricacion " + response[2] + " en estado " + response[3] + " fue agregado.");
             $('#modalup').trigger('click');
@@ -95,10 +127,10 @@ $("#ConfirmarBuscarCamion").click(function () {
 
     jQuery.ajax({
         type: 'get',
-        url: "https://localhost:7088/api/camionesControllers/" + numeroPlaca,
+        url: "https://localhost:7088/api/Camiones" + numeroPlaca,
         contentType: "application/json; charset=utf-8",
         cache: false,
-        datatype: 'jsonp',
+        datatype: 'json',
         traditional: true,
         success: function (response) {
             $("#form-numeroPlaca").prop('disabled', true);
@@ -134,10 +166,10 @@ $("#editarCamion").click(function(){
       
        jQuery.ajax({
                   type: 'put',
-           url: "https://localhost:7088/api/camionesControllers/" + numeroPlaca + "?numeroPlaca=" + numeroPlaca + "&Marca=" + Marca + "&Modelo=" + Modelo +"&Fabricacion=" +Fabricacion + "&estado=" + estado + "",
+           url: "https://localhost:7088/api/Camiones" + numeroPlaca + "?numeroPlaca=" + numeroPlaca + "&Marca=" + Marca + "&Modelo=" + Modelo +"&Fabricacion=" +Fabricacion + "&estado=" + estado + "",
                   contentType: "application/json; charset=utf-8",
                   cache: false, 
-                  datatype: 'jsonp',
+                  datatype: 'json',
                   traditional: true,
                   success: function (response) {
                         $('#modalMensaje').text("El Camion con el número de placa " + numeroPlaca + ", Marca " + Marca + ", Modelo  " + Modelo +", Fabricacion " +Fabricacion  + " en estado " + estado + " fue actualizado.");
@@ -150,3 +182,15 @@ $("#editarCamion").click(function(){
       
       });
 
+function validatePlaca(numeroPlaca) {
+
+    var pattern = new RegExp("\\d{6}");
+    return pattern.test(numeroPlaca);
+
+}
+function validateLetras(Letras) {
+
+    var pattern = new RegExp("[a-zA-Z\s]+");
+    return pattern.test(Letras);
+
+}

@@ -38,7 +38,7 @@ namespace API_Choferes.Services
                 {
                     string querySQL =
                         "INSERT INTO dbo.Camiones(numeroPlaca, Marca, Modelo, Fabricacion, Estado) " +
-                        "VALUES (@NumeroPlaca, @Marca, @Modelo, @Fabricacion, @Estado)";
+                        "VALUES (@numeroPlaca, @Marca, @Modelo, @Fabricacion, @Estado)";
 
                     db.Execute(querySQL, camion);
                 }
@@ -50,7 +50,7 @@ namespace API_Choferes.Services
             }
         }
 
-        public void UpdateCamion(string numeroPlaca, string Marca, string Modelo, int Fabricacion, string Estado)
+        public void UpdateCamion(string numeroPlaca, string Marca, string Modelo, int Fabricacion, int Estado)
         {
             try
             {

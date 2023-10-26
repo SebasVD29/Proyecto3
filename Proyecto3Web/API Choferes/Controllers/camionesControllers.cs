@@ -1,6 +1,8 @@
 ﻿using API_Choferes.Models;
 using API_Choferes.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Web.Http.Cors;
 
 namespace API_Choferes.Controllers
@@ -8,49 +10,48 @@ namespace API_Choferes.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [EnableCors(origins: "*", methods: "*", headers: "*")]
-    public class camionesControllers : ControllerBase
+    public class CamionesController : ControllerBase
     {
         private readonly CamionesService _camionesService;
 
-        public camionesControllers(CamionesService camionesService)
+        public CamionesController(CamionesService camionesService)
         {
             _camionesService = camionesService;
         }
 
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return _camionesService.Get();
+            var camiones = _camionesService.Get();
+            return Ok(camiones);
         }
 
         [HttpGet("{numeroPlaca}")]
-        public IEnumerable<string> Get(string numeroPlaca)
+        public IActionResult Get(string numeroPlaca)
         {
-            return _camionesService.GetByNumeroPlaca(numeroPlaca);
+            var camiones = _camionesService.GetByNumeroPlaca(numeroPlaca);
+            return Ok(camiones);
         }
 
         [HttpPost]
-        [EnableCors(origins: "*", methods: "*", headers: "*")]
         public IActionResult Post([FromBody] CamionModel camion)
         {
             try
             {
                 _camionesService.InsertCamion(camion);
-                return Ok($"Camión agregado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})"); // Indica que la operación fue exitosa
+                return Ok($"Camión agregado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})");
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error interno del servidor");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error al agregar el camión: {ex.Message}");
             }
         }
 
         [HttpPut("{numeroPlaca}")]
-        public void Put(string numeroPlaca, string Marca, string Modelo, int Fabricacion, string Estado)
+        public IActionResult Put(string numeroPlaca, [FromBody] CamionModel camion)
         {
-            _camionesService.UpdateCamion(numeroPlaca, Marca, Modelo, Fabricacion, Estado);
+            _camionesService.UpdateCamion(numeroPlaca, camion.Marca, camion.Modelo, camion.Fabricacion, camion.Estado);
+            return Ok($"Camión actualizado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})");
         }
-
-
     }
 }

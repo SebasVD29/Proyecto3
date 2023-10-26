@@ -80,9 +80,16 @@
                                         <input id="form-Modelo" type="text" placeholder="Modelo"
                                                style="background-color: #f0f0f0;" disabled />
                                     </div>
+                                    <h4 style="
+                                    font-size: small;
+                                    color: black;
+                                    text-align: left;">
+
+                                      Año de Fabricación
+                                </h4>
                                     <div class="DropDown" style="background-color: #f0f0f0; text-align: center;">
-                                        <label for="form-Fabricacion">Año de Fabricación:</label>
-                                        <select id="form-Fabricacion" disabled required>
+                                       
+                                        <select id="form-Fabricacion" style="background-color: #f0f0f0;" disabled>
                                             <!-- Script para generar opciones de años -->
                                         </select>
                                     </div>
@@ -164,6 +171,35 @@
 
 
 
+        <button id="back" type="submit" onclick="location.reload()" style="background-color: #ADD8E6; /* Green */
+      border: none;
+      color: black;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      margin-left: 5%;
+      font-size: 16px;">
+            Atras 
+        </button>
+
+
+        <button id="menuprincipal" type="submit" onClick="window.location='MenuAdmin.html'" style="background-color: #ADD8E6; /* Green */
+      border: none;
+      color: black;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      margin-left: 5%;
+      font-size: 16px;">
+            Menu Principal
+        </button>
+
+    </div>
+
+
+
 
 
     <!-- Button trigger modal -->
@@ -203,10 +239,7 @@
     </script>
     <!-- custom js -->
     <script type="text/javascript" src="js/custom.js"></script>
-    <!-- Google Map -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
-    </script>
-    <!-- End Google Map -->
+
 </body>
 
 </html>
