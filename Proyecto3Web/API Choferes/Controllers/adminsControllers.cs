@@ -47,7 +47,7 @@ namespace API_Choferes.Controllers
                 string[] returnValues = new string[100];
                 //int counter = 0;
                 this.conexion.Open();
-                string querySQL = "Select * from dbo.Administradores where IdentificadorAdministrador = @id";
+                string querySQL = "Select * from dbo.Administrador where IdentificadorAdministrador = @id";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion ))
                 {
@@ -65,7 +65,8 @@ namespace API_Choferes.Controllers
                             {
                                 estado = "Inactivo";
                             }
-                            return new string[] { (string)lector["Nombre"], (string)lector["Apellido"], (string)lector["Email"], estado };
+                            stringDesencriptada = this.securityController.DesencriptarBase64((string)lector["Contraseña"]);
+                            return new string[] { (string)lector["Nombre"], (string)lector["Apellido"], (string)lector["Email"], stringDesencriptada, estado };
 
                         }
 
@@ -101,7 +102,7 @@ namespace API_Choferes.Controllers
                 this.conexion.Open();
                 string[] returnValues = new string[100];
                 string querySQL =
-                    "INSERT INTO dbo.Administradores(IdentificadorAdministrador, Nombre, Apellido, Email, Contraseña, FechaRegistro, Estado) " +
+                    "INSERT INTO dbo.Administrador(IdentificadorAdministrador, Nombre, Apellido, Email, Contraseña, FechaRegistro, Estado) " +
                     "VALUES (@identificador, @nombre, @apellido, @email, @password, @fecha, @estado)";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
@@ -109,7 +110,7 @@ namespace API_Choferes.Controllers
 
                     comando.Parameters.AddWithValue("identificador", identificacion);
                     comando.Parameters.AddWithValue("nombre", nombre);
-                    comando.Parameters.AddWithValue("apellidos", apellidos);
+                    comando.Parameters.AddWithValue("apellido", apellidos);
                     comando.Parameters.AddWithValue("email", email);
                     comando.Parameters.AddWithValue("password", stringEncriptada);
                     comando.Parameters.AddWithValue("fecha", fecha);
@@ -145,13 +146,13 @@ namespace API_Choferes.Controllers
                 if (contrasena == "NoCambiarContrasena")
                 {
                     querySQL =
-                    "UPDATE dbo.Administradores SET Nombre = @nombre, Apellido = @apellido, Email = @email, Estado = @estado  " +
+                    "UPDATE dbo.Administrador SET Nombre = @nombre, Apellido = @apellido, Email = @email, Estado = @estado  " +
                     "WHERE IdentificadorAdministrador = @id ";
                 }
                 else
                 {
                     querySQL =
-                       "UPDATE dbo.Administradores SET Nombre = @nombre, Apellido = @apellido, Email = @email, Contraseña = @password , Estado = @estado  " +
+                       "UPDATE dbo.Administrador SET Nombre = @nombre, Apellido = @apellido, Email = @email, Contraseña = @password , Estado = @estado  " +
                     "WHERE IdentificadorAdministrador = @id ";
                 }
 
@@ -161,9 +162,10 @@ namespace API_Choferes.Controllers
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
 
-                    comando.Parameters.AddWithValue("identificador", identificacion);
+                    comando.Parameters.AddWithValue("id", identificacion);
+
                     comando.Parameters.AddWithValue("nombre", nombre);
-                    comando.Parameters.AddWithValue("apellidos", apellidos);
+                    comando.Parameters.AddWithValue("apellido", apellidos);
                     comando.Parameters.AddWithValue("email", email);
                     comando.Parameters.AddWithValue("password", stringEncriptada);
                     comando.Parameters.AddWithValue("estado", estado);

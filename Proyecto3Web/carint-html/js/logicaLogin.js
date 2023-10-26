@@ -1,21 +1,20 @@
-
-
-$("#ingresarSistema").click(function () {
+console.log('Hizo algo');
+$("#IngresarSistema").click(function () {
+    console.log('Hizo algo2');
 
     var identificacion = $('#form-identificacion').val();
-
+    //var password = $('#form-password').val();
 
     jQuery.ajax({
         type: 'get',
-        url: "https://localhost:7088/api/choferesControllers/" + identificacion,
+        url: "https://localhost:7088/api/adminsControllers/" + identificacion,
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'jsonp',
         traditional: true,
         success: function (response) {
-            console.log("Respuesta", response);
-            //$('#modalMensaje').text("El chofer con identificacion " + identificacion + ", nombre " + nombre + ", apellidos  " + apellidos + ", email " + email + " en estado " + estado + " fue agregado.");
-            // $('#modalup').trigger('click');
+            console.log("respuesta", response)
+
         },
         failure: function (response) {
             alert("Error: Chofer no encontrado")
@@ -24,6 +23,7 @@ $("#ingresarSistema").click(function () {
 
 });
 
+/*
 function login() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
@@ -40,4 +40,4 @@ function login() {
         message.style.color = "red";
     }
 }
-
+*/
