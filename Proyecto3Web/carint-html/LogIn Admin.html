@@ -101,8 +101,16 @@
                                             </div>
                                         </section>
                                         <div class="btn-box">
-                                            <button class="btn1" type="button"
-                                                onclick="window.location.href='menuAdmin.html'">Ingresar</button>
+                                            <button id="ingresarSistema" type="submit" type="submit" style="background-color: #ADD8E6; /* Green */
+                                                border: none;
+                                                color: black;
+                                                padding: 15px 32px;
+                                                text-align: center;
+                                                text-decoration: none;
+                                                display: inline-block;
+                                                font-size: 16px;">
+                                                Ingresar
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -114,6 +122,7 @@
         </section>
         <!-- end slider section -->
     </div>
+    <script type="text/javascript" src="js/logicaLogin.js"></script>
     <!-- jQery -->
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
     <!-- popper js -->
@@ -131,24 +140,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
     </script>
     <!-- End Google Map -->
-
-    <script>
-        function login() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-
-            // Estos son los valores predefinidos. En una aplicación real, no querrías almacenar contraseñas de esta manera.
-            var correctUsername = "admin";
-            var correctPassword = "12345";
-
-            if (username === correctUsername && password === correctPassword) {
-                window.location.href = 'mainPage.html';
-            } else {
-                var message = document.querySelector(".message");
-                message.textContent = "Invalid username or password!";
-                message.style.color = "red";
-            }
-        }</script>
 
 </body>
 

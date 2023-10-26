@@ -168,8 +168,6 @@ namespace API_Choferes.Controllers
                     comando.Parameters.AddWithValue("password", stringEncriptada);
                     comando.Parameters.AddWithValue("estado", estado);
                     comando.ExecuteNonQuery();
-
-
                    
                 }
                 this.conexion.Close();

@@ -29,25 +29,25 @@ $("#ConfirmarCrearChofer").click(function () {
     if (contrasena == "") {
         alert("Ingrese una contrasena")
         return;
-    }  
+    }
     if (identificacion == "") {
         alert("Ingrese una identificacion")
         return;
-    }  
+    }
     if (apellidos == "") {
         alert("Ingrese apellidos")
         return;
     }
     if (nombre == "") {
-            alert("Ingrese el nombre")
-            return;
-    } 
+        alert("Ingrese el nombre")
+        return;
+    }
 
     if (email == "") {
         alert("Ingrese un email valido")
         return;
-    } 
-    
+    }
+
     if (!validateEmail(email)) {
         alert("Correo Invalido")
         return;
@@ -63,11 +63,16 @@ $("#ConfirmarCrearChofer").click(function () {
     if (!validateLetras(apellidos)) {
         alert("El apellido debe contener solo letras")
         return;
-    } 
-    
+    }
+    if (!validatePassword(contrasena)) {
+        alert("La contrasena debe contener al menos: Una mayuscula," +
+            "una minuscula, un numero y un caracter especial ")
+        return;
+    }
+
     jQuery.ajax({
         type: 'post',
-        url: "https://localhost:7088/api/choferesControllers?identificacion=" + identificacion + " &nombre=" + nombre + "&apellidos=" + apellidos + "&email=" + email + "&contrasena=" + contrasena + "&estado=" + estado + "",
+        url: "https://localhost:7088/api/adminsControllers?IdentificadorAdministrador=" + identificacion + " &nombre=" + nombre + "&apellidos=" + apellidos + "&email=" + email + "&contrasena=" + contrasena + "&estado=" + estado + "",
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'jsonp',
@@ -125,11 +130,11 @@ $("#ConfirmarBuscarChofer").click(function () {
 $("#ConfirmarBuscarChofer").click(function () {
 
     var identificacion = $('#form-identificacion').val();
-  
+
 
     jQuery.ajax({
         type: 'get',
-        url: "https://localhost:7088/api/choferesControllers/" + identificacion,
+        url: "https://localhost:7088/api/adminsControllers/" + identificacion,
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'jsonp',
@@ -140,8 +145,7 @@ $("#ConfirmarBuscarChofer").click(function () {
             $('#form-apellidos').val(response[1]);
             $('#form-email').val(response[2]);
             $('#form-estado').val(0).change();
-            //$('#modalMensaje').text("El chofer con identificacion " + identificacion + ", nombre " + nombre + ", apellidos  " + apellidos + ", email " + email + " en estado " + estado + " fue agregado.");
-           // $('#modalup').trigger('click');
+
         },
         failure: function (response) {
             alert("Error: Chofer no encontrado")
@@ -150,31 +154,31 @@ $("#ConfirmarBuscarChofer").click(function () {
 
 });
 
-$("#editarChofer").click(function(){
+$("#editarChofer").click(function () {
 
-      var identificacion = $('#form-identificacion').val();
-      var nombre = $('#form-nombre ').val();
-      var apellidos = $('#form-apellidos ').val();
-      var email = $('#form-email ').val();
-      var contrasena = $('#form-contrasena ').val();
-      var estado = $("#form-estado").children(":selected")[0].label;
+    var identificacion = $('#form-identificacion').val();
+    var nombre = $('#form-nombre ').val();
+    var apellidos = $('#form-apellidos ').val();
+    var email = $('#form-email ').val();
+    var contrasena = $('#form-contrasena ').val();
+    var estado = $("#form-estado").children(":selected")[0].label;
 
     if (!validateEmail(email)) {
         alert("Correo Invalido")
         return;
-    }  
+    }
     if (!validateId(identificacion)) {
         alert("El numero de identificacion debe tener al menos 9 digitos")
         return;
-    }  
+    }
     if (!validateLetras(nombre)) {
         alert("Por favor ingrese un nombre valido")
         return;
-    }  
+    }
     if (!validateLetras(apellidos)) {
         alert("Por favor ingrese un apellido valido")
         return;
-    } 
+    }
     if (apellidos == "") {
         alert("Ingrese apellidos")
         return;
@@ -187,32 +191,32 @@ $("#editarChofer").click(function(){
     if (email == "") {
         alert("Ingrese un email valido")
         return;
-    } 
+    }
     if (contrasena == "") {
         contrasena = "NoCambiarContrasena";
-    } 
-       jQuery.ajax({
-                  type: 'put',
-           url: "https://localhost:7088/api/choferesControllers/" + identificacion + "?identificacion=" + identificacion + "&nombre=" + nombre + "&apellidos=" + apellidos +"&email=" +email +"&contrasena=" +contrasena+ "&estado=" + estado + "",
-                  contentType: "application/json; charset=utf-8",
-                  cache: false, 
-                  datatype: 'jsonp',
-                  traditional: true,
-                  success: function (response) {
-                        $('#modalMensaje').text("El chofer con identificacion " + identificacion + ", nombre " + nombre + ", apellidos  " + apellidos +", email " +email  + " en estado " + estado + " fue actualizado.");
-                         $('#modalup').trigger('click');
+    }
+    jQuery.ajax({
+        type: 'put',
+        url: "https://localhost:7088/api/adminsControllers/" + identificacion + "?IdentificadorAdministrador=" + identificacion + "&nombre=" + nombre + "&apellidos=" + apellidos + "&email=" + email + "&contrasena=" + contrasena + "&estado=" + estado + "",
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        datatype: 'jsonp',
+        traditional: true,
+        success: function (response) {
+            $('#modalMensaje').text("El chofer con identificacion " + identificacion + ", nombre " + nombre + ", apellidos  " + apellidos + ", email " + email + " en estado " + estado + " fue actualizado.");
+            $('#modalup').trigger('click');
 
-                      setTimeout(
-                          function () {
-                              location.reload();
-                          }, 3000);
-                  },
-                  failure: function (response) {
-                        alert("Error: Chofer No Actualizado")
-                  }
-              });
-      
-      });
+            setTimeout(
+                function () {
+                    location.reload();
+                }, 3000);
+        },
+        failure: function (response) {
+            alert("Error: Chofer No Actualizado")
+        }
+    });
+
+});
 
 function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
@@ -231,12 +235,12 @@ function validateLetras(Letras) {
     return pattern.test(Letras);
 
 }
-/*
+
 function validatePassword(contrasena) {
 
-    var pattern = new RegExp("[a-zA-Z\s]+");
-    return pattern.test(contrasena);
+    var re = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    return re.test(contrasena);
 
 }
-*/
+
 
