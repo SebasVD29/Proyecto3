@@ -1,10 +1,10 @@
 
-$("#crearChofer").click(function () {
+$("#crearAdmin").click(function () {
 
-    $("#ConfirmarCrearChofer").css("visibility", "visible");
-    $("#editarChofer").css("visibility", "hidden");
-    $("#buscarChofer").css("visibility", "hidden");
-    $("#crearChofer").css("visibility", "hidden");
+    $("#ConfirmarCrearAdmin").css("visibility", "visible");
+    $("#editarAdmin").css("visibility", "hidden");
+    $("#buscarAdmin").css("visibility", "hidden");
+    $("#crearAdmin").css("visibility", "hidden");
     $("#form-identificacion").css('background-color', "#ffffff52");
     $("#form-nombre").css('background-color', "#ffffff52");
     $("#form-apellidos").css('background-color', "#ffffff52");
@@ -18,10 +18,10 @@ $("#crearChofer").click(function () {
     $("#form-estado").prop('disabled', false);
 });
 
-$("#ConfirmarCrearChofer").click(function () {
+$("#ConfirmarCrearAdmin").click(function () {
 
     var identificacion = $('#form-identificacion').val();
-    var nombre = $('#form-nombre ').val();
+    var nombre = $('#form-nombre').val();
     var apellidos = $('#form-apellidos ').val();
     var email = $('#form-email ').val();
     var contrasena = $('#form-contrasena ').val();
@@ -66,13 +66,14 @@ $("#ConfirmarCrearChofer").click(function () {
     }
     if (!validatePassword(contrasena)) {
         alert("La contrasena debe contener al menos: Una mayuscula," +
-            "una minuscula, un numero y un caracter especial ")
+            "una minuscula, un numero, un caracter especial y " + 
+            "ser mayor o igual a 8 digitos.")
         return;
     }
 
     jQuery.ajax({
         type: 'post',
-        url: "https://localhost:7088/api/adminsControllers?IdentificadorAdministrador=" + identificacion + " &nombre=" + nombre + "&apellidos=" + apellidos + "&email=" + email + "&contrasena=" + contrasena + "&estado=" + estado + "",
+        url: "https://localhost:7088/api/adminsControllers?identificacion=" + identificacion + " &nombre=" + nombre + "&apellidos=" + apellidos + "&email=" + email + "&contrasena=" + contrasena + "&estado=" + estado + "",
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'jsonp',
@@ -92,28 +93,28 @@ $("#ConfirmarCrearChofer").click(function () {
 
 });
 
-$("#buscarChofer").click(function () {
+$("#buscarAdmin").click(function () {
 
-    $("#ConfirmarCrearChofer").css("visibility", "hidden");
-    $("#ConfirmarBuscarChofer").css("visibility", "visible");
-    $("#editarChofer").css("visibility", "hidden");
-    $("#crearChofer").css("visibility", "hidden");
+    $("#ConfirmarCrearAdmin").css("visibility", "hidden");
+    $("#ConfirmarBuscarAdmin").css("visibility", "visible");
+    $("#editarAdmin").css("visibility", "hidden");
+    $("#crearAdmin").css("visibility", "hidden");
     $("#form-identificacion").prop('disabled', false);
     $("#form-identificacion").css('background-color', "#ffffff52");
     $("#form-nombre").css('background-color', "#f0f0f0");
     $("#form-apellidos").css('background-color', "#f0f0f0");
     $("#form-email").css('background-color', "#f0f0f0");
     $("#form-contrasena").css('background-color', "#f0f0f0");
-    $("#buscarChofer").css("visibility", "hidden");
+    $("#buscarAdmin").css("visibility", "hidden");
 
 });
-$("#ConfirmarBuscarChofer").click(function () {
-    $("#ConfirmarBuscarChofer").css("visibility", "hidden");
-    $("#ConfirmarCrearChofer").css("visibility", "hidden");
-    $("#buscarChofer").css("visibility", "hidden");
-    $("#ConfirmarEditarChofer").css("visibility", "visible");
-    $("#crearChofer").css("visibility", "hidden");
-    $("#editarChofer").css("visibility", "visible");
+$("#ConfirmarBuscarAdmin").click(function () {
+    $("#ConfirmarBuscarAdmin").css("visibility", "hidden");
+    $("#ConfirmarCrearAdmin").css("visibility", "hidden");
+    $("#buscarAdmin").css("visibility", "hidden");
+   // $("#ConfirmarEditarChofer").css("visibility", "visible");
+    $("#crearAdmin").css("visibility", "hidden");
+    $("#editarAdmin").css("visibility", "visible");
     $("#form-identificacion").css('background-color', "#f0f0f0");
     $("#form-nombre").css('background-color', "#ffffff52");
     $("#form-apellidos").css('background-color', "#ffffff52");
@@ -127,7 +128,7 @@ $("#ConfirmarBuscarChofer").click(function () {
     $("#form-estado").prop('disabled', false);
 });
 
-$("#ConfirmarBuscarChofer").click(function () {
+$("#ConfirmarBuscarAdmin").click(function () {
 
     var identificacion = $('#form-identificacion').val();
 
@@ -154,7 +155,7 @@ $("#ConfirmarBuscarChofer").click(function () {
 
 });
 
-$("#editarChofer").click(function () {
+$("#editarAdmin").click(function () {
 
     var identificacion = $('#form-identificacion').val();
     var nombre = $('#form-nombre ').val();
@@ -197,7 +198,7 @@ $("#editarChofer").click(function () {
     }
     jQuery.ajax({
         type: 'put',
-        url: "https://localhost:7088/api/adminsControllers/" + identificacion + "?IdentificadorAdministrador=" + identificacion + "&nombre=" + nombre + "&apellidos=" + apellidos + "&email=" + email + "&contrasena=" + contrasena + "&estado=" + estado + "",
+        url: "https://localhost:7088/api/adminsControllers/" + identificacion + "?identificacion=" + identificacion + "&nombre=" + nombre + "&apellidos=" + apellidos + "&email=" + email + "&contrasena=" + contrasena + "&estado=" + estado + "",
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'jsonp',
