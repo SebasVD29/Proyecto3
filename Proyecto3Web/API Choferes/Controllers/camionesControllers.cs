@@ -70,7 +70,7 @@ namespace API_Camiones.Controllers
         // POST api/<camionesControllers>
         [HttpPost]
         [EnableCors(origins: "*", methods: "*", headers: "*")]
-        public void Post(int numeroPlaca, string Marca, string Modelo, string AñoFabricacion,, string Estado)
+        public void Post(int numeroPlaca, string Marca, string Modelo, string AñoFabricacion, string Estado)
         {
             DateTime fecha = DateTime.Now;
            

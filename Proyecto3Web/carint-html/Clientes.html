@@ -71,21 +71,21 @@
                                 <form action="">
                                     <div>
                                         <input id="form-identificacion" type="text" placeholder="Identificación"
-                                               style="background-color: #ffffff52;" />
+                                               style="background-color: #f0f0f0; "  disabled />
                                     </div>
                                     <div>
-                                        <input id="form-nombreCompleto" type="text" placeholder="Nombre Completo" style="background-color: #ffffff52;" />
-                                    </div>
-
-                                    <div>
-                                        <input id="form-direccion" type="text" placeholder="Direccion" style=" background-color: #ffffff52;" />
+                                        <input id="form-nombreCompleto" type="text" placeholder="Nombre Completo" style="background-color: #f0f0f0;"  disabled  />
                                     </div>
 
                                     <div>
-                                        <input id="form-telefono" type="number" placeholder="telefono" style=" background-color: #ffffff52;" />
+                                        <input id="form-direccion" type="text" placeholder="Direccion" style=" background-color: #f0f0f0;"  disabled  />
+                                    </div>
+
+                                    <div>
+                                        <input id="form-telefono" type="number" placeholder="telefono" style=" background-color: #f0f0f0;"  disabled  />
                                     </div>
                                     <div>
-                                        <input id="form-email" type="email" placeholder="Correo electronico" style=" background-color: #ffffff52;" />
+                                        <input id="form-email" type="email" placeholder="Correo electronico" style=" background-color: #f0f0f0;"  disabled  />
                                     </div>
                                     <h4 style="
                                         font-size: small;
@@ -94,10 +94,10 @@
 
                                         Estado
                                     </h4>
-                                    <div class="DropDown8" style="background-color: #ffffff52;text-align: center;">
-                                        <select id="form-estado" style="background-color: #ffffff52;">
-                                            <option value=""> Activo</option>
-                                            <option value=""> Inactivo</option>
+                                    <div class="DropDown8" style="background-color: #f0f0f0; text-align: center;">
+                                        <select id="form-estado" style="background-color: #f0f0f0;">
+                                            <option value="1"> Activo</option>
+                                            <option value="0"> Inactivo</option>
                                         </select>
                                     </div>
                                 </form>
@@ -159,6 +159,32 @@ font-size: 16px;">
             </button>
 
         </div>
+        <button id="back" type="submit" onclick="location.reload()" style="background-color: #ADD8E6; /* Green */
+      border: none;
+      color: black;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      margin-left: 5%;
+      font-size: 16px;">
+            Atras
+        </button>
+
+
+        <button id="menuprincipal" type="submit" onClick="window.location='MenuAdmin.html'" style="background-color: #ADD8E6; /* Green */
+      border: none;
+      color: black;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      margin-left: 5%;
+      font-size: 16px;">
+            Menu Principal
+        </button>
+
+
     </div>
 
     <!-- Button trigger modal -->

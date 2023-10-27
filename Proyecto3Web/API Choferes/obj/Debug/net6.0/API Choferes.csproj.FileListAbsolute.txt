@@ -275,11 +275,9 @@ C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug
 C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.csproj.CoreCompileInputs.cache
 C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.MvcApplicationPartsAssemblyInfo.cache
-<<<<<<< Updated upstream
 C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.dll
 C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\refint\API Choferes.dll
 C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.pdb
-=======
 C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\staticwebassets\msbuild.API Choferes.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\staticwebassets\msbuild.build.API Choferes.props
 C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.API Choferes.props
@@ -289,9 +287,5 @@ C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug
 C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\scopedcss\bundle\API Choferes.styles.css
 C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.csproj.CopyComplete
-C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.dll
-C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\refint\API Choferes.dll
-C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.pdb
 C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.genruntimeconfig.cache
 C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\ref\API Choferes.dll
->>>>>>> Stashed changes

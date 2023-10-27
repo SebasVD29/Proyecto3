@@ -1,4 +1,4 @@
-//
+
 $("#crearCliente").click(function () {
 
     $("#ConfirmarCrearCliente").css("visibility", "visible");
@@ -27,30 +27,64 @@ $("#ConfirmarCrearCliente").click(function () {
     var direccion = $('#form-direccion ').val();
     var telefono = $('#form-telefono ').val();
     var correo = $('#form-email ').val();
-    var estado = $("#form-estado").children(":selected")[0].label;
+    var estado = $("#form-estado").val();
 
+
+    if (identificacion == "") {
+        alert("Ingrese una identificacion")
+        return;
+    }
+    if (nombre == "") {
+        alert("Ingrese nombre")
+        return;
+    }
+    if (direccion == "") {
+        alert("Ingrese direccion")
+        return;
+    }
+
+    if (telefono == "") {
+        alert("Ingrese un numero de telefono")
+        return;
+    }
+
+    if (!validateEmail(correo)) {
+        alert("Correo Invalido")
+        return;
+    }
+    if (!validateId(identificacion)) {
+        alert("El numero de identificacion debe tener al menos 9 digitos")
+        return;
+    }
+    if (!validateLetras(nombre)) {
+        alert("El nombre debe contener solo letras")
+        return;
+    }
+    if (!validateLetras(direccion)) {
+        alert("La direccion debe contener solo letras")
+        return;
+    } 
     jQuery.ajax({
         type: 'post',
-        url: "https://localhost:7088/api/clientesControllers?identificacion=" + identificacion + " &nombre=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono + "&email=" + correo + + "&estado=" + estado + "",
+        url: "https://localhost:7088/api/clientesControllers?identificadorCliente=" + identificacion + " &nombreCompleto=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono  + "&email=" + correo + "&estado=" + estado + "",
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'jsonp',
         traditional: true,
         success: function (response) {
-            $('#modalMensaje').text("El cliente con identificacion " + identificacion + ", nombre " + nombre + ", direccion  " + direccion + ", telefono " + telefono  + " email " + email, + " en estado " + estado + " fue agregado.");
+            $('#modalMensaje').text("El cliente con identificacion " + identificacion + ", nombre " + nombre + ", direccion  " + direccion + ", telefono " + telefono  + " email " + correo + ", en estado " + estado + " fue agregado exitosamente.");
             $('#modalup').trigger('click');
+            setTimeout(
+                function () {
+                    location.reload();
+                }, 3000);
         },
         failure: function (response) {
-            alert("Error: Chofer No Agregado")
+            alert("Error: Cliente  No Agregado")
         }
     });
 
 });
-
-<<<<<<< Updated upstream
-/*
-$("#editarChofer").click(function(){
-=======
 
 $("#buscarCliente").click(function () {
 
@@ -65,7 +99,6 @@ $("#buscarCliente").click(function () {
     $("#form-telefono").css('background-color', "#f0f0f0");
     $("#form-email").css('background-color', "#f0f0f0");
     $("#buscarCliente").css("visibility", "hidden");
->>>>>>> Stashed changes
 
 });
 
@@ -107,7 +140,7 @@ $("#ConfirmarBuscarCliente").click(function () {
             $('#form-nombreCompleto').val(response[0]);
             $('#form-direccion').val(response[1]);
             $('#form-telefono').val(response[2]);
-            $('#form-telefono').val(response[3]);
+            $('#form-email').val(response[3]);
             $('#form-estado').val(0).change();
             //$('#modalMensaje').text("El chofer con identificacion " + identificacion + ", nombre " + nombre + ", apellidos  " + apellidos + ", email " + email + " en estado " + estado + " fue agregado.");
             // $('#modalup').trigger('click');
@@ -129,9 +162,41 @@ $("#editarCliente").click(function () {
     var correo = $('#form-email ').val();
     var estado = $("#form-estado").val();
 
+
+    if (!validateEmail(correo)) {
+        alert("Correo Invalido")
+        return;
+    }
+    if (!validateId(identificacion)) {
+        alert("El numero de identificacion debe tener al menos 9 digitos")
+        return;
+    }
+    if (!validateLetras(nombre)) {
+        alert("Por favor ingrese un nombre valido")
+        return;
+    }
+    if (!validateLetras(direccion)) {
+        alert("Por favor ingrese una direccion valida")
+        return;
+    }
+  
+    if (nombre == "") {
+        alert("Ingrese el nombre")
+        return;
+    }
+    if (telefono == "") {
+        alert("Ingrese el nombre")
+        return;
+    }
+
+    if (correo == "") {
+        alert("Ingrese un email valido")
+        return;
+    }
+    
     jQuery.ajax({
         type: 'put',
-        url: "https://localhost:7088/api/clientesControllers/" + identificacion + " &nombreCompleto=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono + "&email=" + correo + "&estado=" + estado + "",
+        url:" https://localhost:7088/api/clientesControllers/" + identificacion + "?identificadorCliente= "+ identificacion+"&nombreCompleto=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono + "&email=" + correo + "&estado=" + estado + "" ,
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'jsonp',
@@ -139,6 +204,10 @@ $("#editarCliente").click(function () {
         success: function (response) {
             $('#modalMensaje').text("El cliente con identificacion " + identificacion + ", nombre " + nombre + ", direccion  " + direccion + ", telefono " + telefono + " email " + correo + ", en estado " + estado + " fue editado exitosamente.");
             $('#modalup').trigger('click');
+            setTimeout(
+                function () {
+                    location.reload();
+                }, 3000);
         },
         failure: function (response) {
             alert("Error: Cliente No Actualizado")
@@ -146,4 +215,20 @@ $("#editarCliente").click(function () {
     });
 
 });
-/**/
+function validateEmail(correo) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+
+function validateId(Identificacion) {
+
+    var pattern = new RegExp("\\d{9}");
+    return pattern.test(Identificacion);
+
+}
+function validateLetras(Letras) {
+
+    var pattern = new RegExp("[a-zA-Z\s]+");
+    return pattern.test(Letras);
+
+}
