@@ -1,165 +1,57 @@
-﻿using API_Choferes.Controllers;
+﻿using API_Choferes.Models;
+using API_Choferes.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
-using Microsoft.SqlServer.Server;
-using System.ComponentModel.DataAnnotations;
+using System;
 using System.Web.Http.Cors;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace API_Camiones.Controllers
+namespace API_Choferes.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     [EnableCors(origins: "*", methods: "*", headers: "*")]
-    public class camionesControllers : ControllerBase
+    public class CamionesController : ControllerBase
     {
-        string stringEncriptada = "";
-        string stringDesencriptada = "";
-        private securityController securityController = new securityController();
+        private readonly CamionesService _camionesService;
 
+        public CamionesController(CamionesService camionesService)
+        {
+            _camionesService = camionesService;
+        }
 
-        int count = 0;
-        SqlConnection? sqlConnection;
-
-        // GET: api/<camionesControllers>
         [HttpGet]
-        public IEnumerable<string> Get()
-        {         
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<camionesControllers>/5
-        [HttpGet("{NumeroPlaca}")]
-        public string[] Get(int numeroPlaca)
+        public IActionResult Get()
         {
-            string sqlconn = $"Server=tcp:proyecto3ulatina.database.windows.net,1433;Initial Catalog=plogisticsdatabase;Persist Security Info=False;User ID=julihr;Password=Belfast0101.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            sqlConnection = new SqlConnection(sqlconn);
-
-            try
-            {
-                string[] returnValues = new string[100];
-                //int counter = 0;
-                sqlConnection.Open();
-                string querySQL = "Select * from dbo.Camiones where numerPlaca = " + numeroPlaca;
-
-                using (SqlCommand comando = new SqlCommand(querySQL, sqlConnection))
-                {
-                    using (SqlDataReader lector = comando.ExecuteReader())
-                    {
-                        while (lector.Read())
-                        {
-                            return new string[] { (string)lector["Marca"], (string)lector["Modelo"] };
-
-                        }
-
-                        lector.Close();
-                    }
-                    sqlConnection.Close();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw;
-            }
-            return new string[] { "error", "error" };
+            var camiones = _camionesService.Get();
+            return Ok(camiones);
         }
 
-        // POST api/<camionesControllers>
+        [HttpGet("{numeroPlaca}")]
+        public IActionResult Get(string numeroPlaca)
+        {
+            var camiones = _camionesService.GetByNumeroPlaca(numeroPlaca);
+            return Ok(camiones);
+        }
+
         [HttpPost]
-        [EnableCors(origins: "*", methods: "*", headers: "*")]
-        public void Post(int numeroPlaca, string Marca, string Modelo, string AñoFabricacion, string Estado)
+        public IActionResult Post([FromBody] CamionModel camion)
         {
-            DateTime fecha = DateTime.Now;
-           
-            string sqlconn = $"Server=tcp:proyecto3ulatina.database.windows.net,1433;Initial Catalog=plogisticsdatabase;Persist Security Info=False;User ID=julihr;Password=Belfast0101.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            sqlConnection = new SqlConnection(sqlconn);
-
             try
             {
-                sqlConnection.Open();
-                string[] returnValues = new string[100];
-                string querySQL =
-                    "INSERT INTO dbo.Camiones(numeroPlaca, Marca, Modelo, AñoFabricacion, Estado) " +
-                    "VALUES (@numeroPlaca, @Marca, @Modelo, @AñoFabricacion, @password, @Estado)";
-
-                using (SqlCommand comando = new SqlCommand(querySQL, sqlConnection))
-                {
-             
-                    comando.Parameters.AddWithValue("numero de placa", numeroPlaca);
-                    comando.Parameters.AddWithValue("Marca", Marca);
-                    comando.Parameters.AddWithValue("Modelo", Modelo);
-                    comando.Parameters.AddWithValue("Año de fabricacion", AñoFabricacion);
-                    comando.Parameters.AddWithValue("Estado", Estado);
-                    comando.ExecuteNonQuery();
-
-
-                    /*SqlDataReader reader = comando.ExecuteReader();
-                    while (reader.Read())
-                    { }
-                    reader.Close();*/
-                }
-                sqlConnection.Close();
+                _camionesService.InsertCamion(camion);
+                return Ok($"Camión agregado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})");
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error al agregar el camión: {ex.Message}");
             }
-            return;
         }
 
-        // PUT api/<camionesControllers>/5
         [HttpPut("{numeroPlaca}")]
-        public void Put(int numeroPlaca, string Marca, string Modelo, string AñoFabricacion,  string Estado)
+        public IActionResult Put(string numeroPlaca, [FromBody] CamionModel camion)
         {
-            string sqlconn = $"Server=tcp:proyecto3ulatina.database.windows.net,1433;Initial Catalog=plogisticsdatabase;Persist Security Info=False;User ID=julihr;Password=Belfast0101.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            sqlConnection = new SqlConnection(sqlconn);
-
-            try
-            {
-               
-                sqlConnection.Open();
-                string[] returnValues = new string[100];
-                string querySQL =
-                    "UPDATE dbo.Camiones SET  Marca = @Marca, Modelo = @Modelo, Estado = @Estado " +
-                    "WHERE  numeroPlaca = " + numeroPlaca;
-
-                using (SqlCommand comando = new SqlCommand(querySQL, sqlConnection))
-                {
-                    
-                    comando.Parameters.AddWithValue("numero de Placa", numeroPlaca);
-                    comando.Parameters.AddWithValue("Marca", Marca);
-                    comando.Parameters.AddWithValue("Modelo", Modelo);
-                    comando.Parameters.AddWithValue("Estado", Estado);
-                    comando.ExecuteNonQuery();
-
-
-                   
-                }
-                sqlConnection.Close();
-
-                /*SqlDataReader reader = comando.ExecuteReader();
-                while (reader.Read())
-                { }
-                reader.Close();*/
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw;
-            }
-            return;
-
-
-        }
-
-        // DELETE api/<camionesControllers>/5
-        [HttpDelete("{numeroPlaca}")]
-        public void Delete(int numeroPlaca)
-        {
+            _camionesService.UpdateCamion(numeroPlaca, camion.Marca, camion.Modelo, camion.Fabricacion, camion.Estado);
+            return Ok($"Camión actualizado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})");
         }
     }
 }

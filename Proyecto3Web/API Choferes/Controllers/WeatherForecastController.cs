@@ -2,8 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API_Choferes.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

@@ -48,7 +48,7 @@
 </head>
 <!--background-image: url('images/chofer1.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;-->
 <body class="sub_page"
-    style=" background-color:rgb(232, 247, 254); ">
+      style=" background-color:rgb(232, 247, 254); ">
     <!-- end header section -->
     <!-- contact section -->
 
@@ -71,21 +71,21 @@
                                 <form action="">
                                     <div>
                                         <input id="form-identificacion" type="text" placeholder="Identificación"
-                                               style="background-color: #ffffff52;" />
+                                               style="background-color: #f0f0f0;" disabled />
                                     </div>
                                     <div>
-                                        <input id="form-nombre" type="text" placeholder="Nombre" style="background-color: #ffffff52;" />
+                                        <input id="form-nombre" type="text" placeholder="Nombre" style="background-color: #f0f0f0;" disabled />
                                     </div>
                                     <div>
                                         <input id="form-apellidos" type="text" placeholder="Apellidos"
-                                               style="background-color: #ffffff52;" />
+                                               style="background-color: #f0f0f0;" disabled />
                                     </div>
                                     <div>
-                                        <input id="form-email" type="email" placeholder="Email" style="background-color: #ffffff52;" />
+                                        <input id="form-email" type="email" placeholder="Email" style="background-color: #f0f0f0;" disabled />
                                     </div>
                                     <div>
                                         <input id="form-contrasena" type="password" placeholder="Contraseña"
-                                               style=" background-color: #ffffff52;" />
+                                               style=" background-color: #f0f0f0;" disabled />
                                     </div>
                                     <h4 style="
                                         font-size: small;
@@ -94,10 +94,10 @@
 
                                         Estado
                                     </h4>
-                                    <div class="DropDown" style="background-color: #ffffff52;text-align: center;">
-                                        <select id="form-estado" style="background-color: #ffffff52;">
-                                            <option value=""> Activo</option>
-                                            <option value=""> Inactivo</option>
+                                    <div class="DropDown" style="background-color: #f0f0f0; text-align: center;">
+                                        <select id="form-estado" style="background-color: #f0f0f0;" disabled>
+                                            <option value="0"> Activo</option>
+                                            <option value="1"> Inactivo</option>
                                         </select>
                                     </div>
                                 </form>
@@ -110,7 +110,7 @@
             </section>
         </div>
         <div style="margin: auto;" class="column">
-        
+
             <button id="crearChofer" type="submit" style="background-color: #ADD8E6; /* Green */
   border: none;
   color: black;
@@ -119,52 +119,110 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;">
-                Agregar
+                Crear chofer
             </button>
-            <button id="editarChofer" type="submit" style="background-color: #ADD8E6; /* Green */
-  border: none;
-  color: black;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;">
+            <button id="buscarChofer" type="submit" style="background-color: #ADD8E6; /* Green */
+   border: none;
+   color: black;
+   padding: 15px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;">
+                Buscar
+            </button>
+            <button id="editarChofer" type="submit" style="background-color: #ADD8E6;visibility : hidden; /* Green */ border: none; color: black; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;">
                 Editar
             </button>
+
+            <button id="ConfirmarCrearChofer" type="submit" style="background-color: #ADD8E6; visibility: hidden;
+                    border: none;
+                    color: black;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;">
+                Agregar chofer
+            </button>
+
+            <button id="ConfirmarBuscarChofer" type="submit" style="background-color: #ADD8E6; visibility: hidden; /* Green */
+                border: none;
+                color: black;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;">
+                Buscar chofer
+            </button>
+
+
+
+
         </div>
+
+        <button id="back" type="submit" onclick="location.reload()" style="background-color: #ADD8E6; /* Green */
+      border: none;
+      color: black;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      margin-left: 5%;
+      font-size: 16px;">
+            Atras 
+        </button>
+
+
+        <button id="menuprincipal" type="submit" onClick="window.location='MenuAdmin.html'" style="background-color: #ADD8E6; /* Green */
+      border: none;
+      color: black;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      margin-left: 5%;
+      font-size: 16px;">
+            Menu Principal
+        </button>
+
     </div>
 
 
-<!-- Button trigger modal -->
-<button style="visibility: hidden;" id="modalup" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Chofer Agregado</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+
+
+
+    <!-- Button trigger modal -->
+    <button style="visibility: hidden;" id="modalup" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ejecutado correctamente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modalMensaje" class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
         </div>
-        <div id="modalMensaje" class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">     
-        </div>
-      </div>
     </div>
-  </div>
 
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="js/logica.js"></script>
+    <script type="text/javascript" src="js/logicaChoferes.js"></script>
     <!-- popper js -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-        </script>
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
     <!-- bootstrap js -->
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <!-- owl slider -->

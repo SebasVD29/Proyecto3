@@ -72,7 +72,6 @@ namespace API_Clientes.Controllers
         [HttpPost]
         public void Post(int identificadorCliente, string nombreCompleto, int telefono, string direccion, string email, int estado)
         {
-
             try
             {
                 this.conexion.Open();
@@ -103,7 +102,6 @@ namespace API_Clientes.Controllers
         [HttpPut("{id}")]
         public void Put(int identificadorCliente, string nombreCompleto, int telefono, string direccion, string email, string estado)
         {
-
 
 
             try

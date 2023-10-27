@@ -8,18 +8,27 @@ using System.Web.Http.Cors;
 
 namespace API_Choferes.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    
     [EnableCors(origins: "*", methods: "*", headers: "*")]
     public class choferesControllers : ControllerBase
     {
         string stringEncriptada = "";
         string stringDesencriptada = "";
-        private securityController securityController = new securityController();
+        private securityController securityController;
+        private DataBaseController dataBase ;
+        private SqlConnection conexion;
 
 
         int count = 0;
-        SqlConnection? sqlConnection;
+
+        public choferesControllers()
+        { 
+            this.dataBase = new DataBaseController();
+            this.securityController = new securityController();
+            this.conexion = new SqlConnection(this.dataBase.StringConexion());
+        }
 
         // GET: api/<choferesControllers>
         [HttpGet]
@@ -32,30 +41,42 @@ namespace API_Choferes.Controllers
         [HttpGet("{id}")]
         public string[] Get(int id)
         {
-            string sqlconn = $"Server=tcp:proyecto3ulatina.database.windows.net,1433;Initial Catalog=plogisticsdatabase;Persist Security Info=False;User ID=julihr;Password=Belfast0101.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            sqlConnection = new SqlConnection(sqlconn);
 
             try
             {
                 string[] returnValues = new string[100];
                 //int counter = 0;
-                sqlConnection.Open();
-                string querySQL = "Select * from dbo.Chofer where IdentificadorChofer = " + id;
+           
+                this.conexion.Open();
 
-                using (SqlCommand comando = new SqlCommand(querySQL, sqlConnection))
+                string querySQL = "Select * from dbo.Chofer where IdentificadorChofer = @id";
+                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
-                    using (SqlDataReader lector = comando.ExecuteReader())
+
+                    comando.Parameters.AddWithValue("@id", id);
+                    using (SqlDataReader lector = comando.ExecuteReader()) 
                     {
                         while (lector.Read())
                         {
-                            return new string[] { (string)lector["Nombre"], (string)lector["Email"] };
+                            string estado = "";
+                            if ((int)lector["Estado"] == 1)
+                            {
+                                estado = "Activo";
+                            }
+                            else
+                            {
+                                estado = "Inactivo";
+                            }
+                            return new string[] { (string)lector["Nombre"], (string)lector["Apellido"], (string)lector["Email"], estado};
 
                         }
 
                         lector.Close();
                     }
-                    sqlConnection.Close();
+
                 }
+
+                this.conexion.Close();
 
             }
             catch (Exception ex)
@@ -66,25 +87,31 @@ namespace API_Choferes.Controllers
             return new string[] { "error", "error" };
         }
 
+            
+            
+        
+        
+
         // POST api/<choferesControllers>
         [HttpPost]
         [EnableCors(origins: "*", methods: "*", headers: "*")]
         public void Post(int identificacion, string nombre, string apellidos, string email, string contrasena, string estado)
         {
             DateTime fecha = DateTime.Now;
-            stringEncriptada = securityController.EncriptarBase64(contrasena);
-            string sqlconn = $"Server=tcp:proyecto3ulatina.database.windows.net,1433;Initial Catalog=plogisticsdatabase;Persist Security Info=False;User ID=julihr;Password=Belfast0101.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            sqlConnection = new SqlConnection(sqlconn);
+            stringEncriptada = this.securityController.EncriptarBase64(contrasena);
+
+            if (estado == "Activo") estado = "1";
+            if (estado == "Inactivo") estado = "0";
 
             try
             {
-                sqlConnection.Open();
+                this.conexion.Open();
                 string[] returnValues = new string[100];
                 string querySQL =
                     "INSERT INTO dbo.Chofer(IdentificadorChofer, Nombre, Apellido, Email, Contraseña, FechaRegistro, Estado) " +
-                    "VALUES (@idetificador, @nombre, @apellidos, @email, @password, @fecha, @estado)";
+                    "VALUES (@identificador, @nombre, @apellidos, @email, @password, @fecha, @estado)";
 
-                using (SqlCommand comando = new SqlCommand(querySQL, sqlConnection))
+                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
                     comando.Parameters.AddWithValue("identificador", identificacion);
                     comando.Parameters.AddWithValue("nombre", nombre);
@@ -96,12 +123,9 @@ namespace API_Choferes.Controllers
                     comando.ExecuteNonQuery();
 
 
-                    /*SqlDataReader reader = comando.ExecuteReader();
-                    while (reader.Read())
-                    { }
-                    reader.Close();*/
+                   
                 }
-                sqlConnection.Close();
+                this.conexion.Close();
             }
             catch (Exception ex)
             {
@@ -115,21 +139,35 @@ namespace API_Choferes.Controllers
         [HttpPut("{id}")]
         public void Put(int identificacion, string nombre, string apellidos, string email, string contrasena, string estado)
         {
-            string sqlconn = $"Server=tcp:proyecto3ulatina.database.windows.net,1433;Initial Catalog=plogisticsdatabase;Persist Security Info=False;User ID=julihr;Password=Belfast0101.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            sqlConnection = new SqlConnection(sqlconn);
+            
 
             try
             {
-                stringEncriptada = securityController.EncriptarBase64(contrasena);
-                sqlConnection.Open();
-                string[] returnValues = new string[100];
-                string querySQL =
-                    "UPDATE dbo.Chofer SET  Nombre = @nombre, Apellido = @apellidos, Email = @email, Contraseña = @password, Estado = @estado " +
-                    "WHERE  IdentificadorChofer = " + identificacion;
 
-                using (SqlCommand comando = new SqlCommand(querySQL, sqlConnection))
+                stringEncriptada = this.securityController.EncriptarBase64(contrasena);
+                this.conexion.Open();
+                string[] returnValues = new string[100];
+                string querySQL;
+
+                if (contrasena == "NoCambiarContrasena")
                 {
-                    
+                    querySQL =
+                    "UPDATE dbo.Chofer SET  Nombre = @nombre, Apellido = @apellidos, Email = @email, Estado = @estado " +
+                    "WHERE  IdentificadorChofer = @id";
+                }
+                else {
+                    querySQL =
+                       "UPDATE dbo.Chofer SET  Nombre = @nombre, Apellido = @apellidos, Email = @email, Contraseña = @password, Estado = @estado " +
+                       "WHERE  IdentificadorChofer = @id";
+                }
+
+                if (estado == "Activo") estado = "1";
+                if (estado == "Inactivo") estado = "0";
+
+                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
+                {
+                    comando.Parameters.AddWithValue("@id", identificacion);
+
                     comando.Parameters.AddWithValue("nombre", nombre);
                     comando.Parameters.AddWithValue("apellidos", apellidos);
                     comando.Parameters.AddWithValue("email", email);
@@ -140,7 +178,7 @@ namespace API_Choferes.Controllers
 
                    
                 }
-                sqlConnection.Close();
+                this.conexion.Close();
 
                 /*SqlDataReader reader = comando.ExecuteReader();
                 while (reader.Read())
@@ -164,3 +202,4 @@ namespace API_Choferes.Controllers
         }
     }
 }
+
