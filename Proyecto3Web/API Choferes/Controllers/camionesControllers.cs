@@ -1,162 +1,57 @@
-﻿using API_Choferes.Controllers;
+﻿using API_Choferes.Models;
+using API_Choferes.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
-using Microsoft.SqlServer.Server;
-using System.ComponentModel.DataAnnotations;
+using System;
 using System.Web.Http.Cors;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace API_Camiones.Controllers
+namespace API_Choferes.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     [EnableCors(origins: "*", methods: "*", headers: "*")]
-    public class camionesControllers : ControllerBase
+    public class CamionesController : ControllerBase
     {
-       
-        private DataBaseController dataBase;
-        private SqlConnection conexion;
+        private readonly CamionesService _camionesService;
 
-
-        int count = 0;
-
-        public camionesControllers()
+        public CamionesController(CamionesService camionesService)
         {
-            this.dataBase = new DataBaseController();
-            this.conexion = new SqlConnection(this.dataBase.StringConexion());
+            _camionesService = camionesService;
         }
-        // GET: api/<camionesControllers>
+
         [HttpGet]
-        public IEnumerable<string> Get()
-        {         
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<camionesControllers>/5
-        [HttpGet("{NumeroPlaca}")]
-        public string[] Get(int numeroPlaca)
+        public IActionResult Get()
         {
-            
-            try
-            {
-                this.conexion.Open();
-                string[] returnValues = new string[100];
-                //int counter = 0;
-                string querySQL = "Select * from dbo.Camiones where numerPlaca = " + numeroPlaca;
-
-                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
-                {
-                    using (SqlDataReader lector = comando.ExecuteReader())
-                    {
-                        while (lector.Read())
-                        {
-                            return new string[] { (string)lector["Marca"], (string)lector["Modelo"] };
-
-                        }
-
-                        lector.Close();
-                    }
-                    this.conexion.Close();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw;
-            }
-            return new string[] { "error", "error" };
+            var camiones = _camionesService.Get();
+            return Ok(camiones);
         }
 
-        // POST api/<camionesControllers>
+        [HttpGet("{numeroPlaca}")]
+        public IActionResult Get(string numeroPlaca)
+        {
+            var camiones = _camionesService.GetByNumeroPlaca(numeroPlaca);
+            return Ok(camiones);
+        }
+
         [HttpPost]
-        [EnableCors(origins: "*", methods: "*", headers: "*")]
-        public void Post(int numeroPlaca, string Marca, string Modelo, string AñoFabricacion, string Estado)
+        public IActionResult Post([FromBody] CamionModel camion)
         {
-            DateTime fecha = DateTime.Now;
-           
             try
             {
-                this.conexion.Open();
-                string[] returnValues = new string[100];
-                string querySQL =
-                    "INSERT INTO dbo.Camiones(numeroPlaca, Marca, Modelo, AñoFabricacion, Estado) " +
-                    "VALUES (@numeroPlaca, @Marca, @Modelo, @AnoFabricacion, @Estado)";
-
-                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
-                {
-             
-                    comando.Parameters.AddWithValue("numeroPlaca", numeroPlaca);
-                    comando.Parameters.AddWithValue("Marca", Marca);
-                    comando.Parameters.AddWithValue("Modelo", Modelo);
-                    comando.Parameters.AddWithValue("AnoFabricacion", AñoFabricacion);
-                    comando.Parameters.AddWithValue("Estado", Estado);
-                    comando.ExecuteNonQuery();
-
-
-                    /*SqlDataReader reader = comando.ExecuteReader();
-                    while (reader.Read())
-                    { }
-                    reader.Close();*/
-                }
-                this.conexion.Close();
+                _camionesService.InsertCamion(camion);
+                return Ok($"Camión agregado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})");
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error al agregar el camión: {ex.Message}");
             }
-            return;
         }
 
-        // PUT api/<camionesControllers>/5
         [HttpPut("{numeroPlaca}")]
-        public void Put(int numeroPlaca, string Marca, string Modelo, string AñoFabricacion,  string Estado)
+        public IActionResult Put(string numeroPlaca, [FromBody] CamionModel camion)
         {
-           
-            try
-            {
-
-                this.conexion.Open();
-                string[] returnValues = new string[100];
-                string querySQL =
-                    "UPDATE dbo.Camiones SET  Marca = @Marca, Modelo = @Modelo, Estado = @Estado " +
-                    "WHERE  numeroPlaca = " + numeroPlaca;
-
-                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
-                {
-                    
-                    comando.Parameters.AddWithValue("numeroPlaca", numeroPlaca);
-                    comando.Parameters.AddWithValue("Marca", Marca);
-                    comando.Parameters.AddWithValue("Modelo", Modelo);
-                    comando.Parameters.AddWithValue("Estado", Estado);
-                    comando.ExecuteNonQuery();
-
-
-                   
-                }
-                this.conexion.Close();
-
-                /*SqlDataReader reader = comando.ExecuteReader();
-                while (reader.Read())
-                { }
-                reader.Close();*/
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw;
-            }
-            return;
-
-
-        }
-
-        // DELETE api/<camionesControllers>/5
-        [HttpDelete("{numeroPlaca}")]
-        public void Delete(int numeroPlaca)
-        {
+            _camionesService.UpdateCamion(numeroPlaca, camion.Marca, camion.Modelo, camion.Fabricacion, camion.Estado);
+            return Ok($"Camión actualizado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})");
         }
     }
 }
