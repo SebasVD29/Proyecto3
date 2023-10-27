@@ -23,9 +23,6 @@ namespace API_Clientes.Controllers
 
         // GET api/<ClientesController>/5
         [HttpGet("{id}")]
-<<<<<<< Updated upstream
-       /* public void Get(int id)
-=======
          public string[] Get(int id)
          {
              
@@ -59,7 +56,6 @@ namespace API_Clientes.Controllers
         // POST api/<ClientesController>
         [HttpPost]
         public void Post(int identificadorCliente, string nombreCompleto, string direccion, int telefono, string email, int estado)
->>>>>>> Stashed changes
         {
             sqlConnection = new SqlConnection(connectionString);
             try
