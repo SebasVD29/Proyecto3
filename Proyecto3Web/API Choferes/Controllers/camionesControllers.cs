@@ -19,12 +19,6 @@ namespace API_Choferes.Controllers
             _camionesService = camionesService;
         }
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            var camiones = _camionesService.Get();
-            return Ok(camiones);
-        }
 
         [HttpGet("{numeroPlaca}")]
         public IActionResult Get(string numeroPlaca)
@@ -39,8 +33,8 @@ namespace API_Choferes.Controllers
             try
             {
                 _camionesService.InsertCamion(camion);
-                return Ok($"Camión agregado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})");
-            }
+                return Ok(new { Message = $"Camión agregado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})", Camion = camion });
+                }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error al agregar el camión: {ex.Message}");
@@ -50,8 +44,9 @@ namespace API_Choferes.Controllers
         [HttpPut("{numeroPlaca}")]
         public IActionResult Put(string numeroPlaca, [FromBody] CamionModel camion)
         {
-            _camionesService.UpdateCamion(numeroPlaca, camion.Marca, camion.Modelo, camion.Fabricacion, camion.Estado);
-            return Ok($"Camión actualizado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})");
+           _camionesService.UpdateCamion(numeroPlaca, camion.Marca, camion.Modelo, camion.Fabricacion, camion.Estado);
+           return Ok(new { Message = $"Camión actualizado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})", Camion = camion });
+
         }
     }
 }
