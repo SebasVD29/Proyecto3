@@ -1,4 +1,4 @@
-
+//
 $("#crearCliente").click(function () {
 
     $("#ConfirmarCrearCliente").css("visibility", "visible");
@@ -63,16 +63,16 @@ $("#ConfirmarCrearCliente").click(function () {
     if (!validateLetras(direccion)) {
         alert("La direccion debe contener solo letras")
         return;
-    } 
+    }
     jQuery.ajax({
         type: 'post',
-        url: "https://localhost:7088/api/clientesControllers?identificadorCliente=" + identificacion + " &nombreCompleto=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono  + "&email=" + correo + "&estado=" + estado + "",
+        url: "https://localhost:7088/api/clientesControllers?identificadorCliente=" + identificacion + " &nombreCompleto=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono + "&email=" + correo + "&estado=" + estado + "",
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'jsonp',
         traditional: true,
         success: function (response) {
-            $('#modalMensaje').text("El cliente con identificacion " + identificacion + ", nombre " + nombre + ", direccion  " + direccion + ", telefono " + telefono  + " email " + correo + ", en estado " + estado + " fue agregado exitosamente.");
+            $('#modalMensaje').text("El cliente con identificacion " + identificacion + ", nombre " + nombre + ", direccion  " + direccion + ", telefono " + telefono + " email " + correo + ", en estado " + estado + " fue agregado exitosamente.");
             $('#modalup').trigger('click');
             setTimeout(
                 function () {
@@ -179,7 +179,7 @@ $("#editarCliente").click(function () {
         alert("Por favor ingrese una direccion valida")
         return;
     }
-  
+
     if (nombre == "") {
         alert("Ingrese el nombre")
         return;
@@ -193,10 +193,10 @@ $("#editarCliente").click(function () {
         alert("Ingrese un email valido")
         return;
     }
-    
+
     jQuery.ajax({
         type: 'put',
-        url:" https://localhost:7088/api/clientesControllers/" + identificacion + "?identificadorCliente= "+ identificacion+"&nombreCompleto=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono + "&email=" + correo + "&estado=" + estado + "" ,
+        url: " https://localhost:7088/api/clientesControllers/" + identificacion + "?identificadorCliente= " + identificacion + "&nombreCompleto=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono + "&email=" + correo + "&estado=" + estado + "",
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'jsonp',
