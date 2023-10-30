@@ -65,8 +65,8 @@ namespace API_Choferes.Controllers
                             {
                                 estado = "Inactivo";
                             }
-                            stringDesencriptada = this.securityController.DesencriptarBase64((string)lector["Contraseña"]);
-                            return new string[] { (string)lector["Nombre"], (string)lector["Apellido"], (string)lector["Email"], stringDesencriptada, estado };
+                            //stringDesencriptada = this.securityController.DesencriptarBase64((string)lector["Contraseña"]);
+                            return new string[] { (string)lector["Nombre"], (string)lector["Apellido"], (string)lector["Email"], estado };
 
                         }
 
@@ -95,16 +95,12 @@ namespace API_Choferes.Controllers
         // POST api/<choferesControllers>
         [HttpPost]
         [EnableCors(origins: "*", methods: "*", headers: "*")]
-        public void Post(int identificacion, string nombre, string apellidos, string email, string contrasena, string estado)
+        public void Post(int identificacion, string nombre, string apellidos, string email, string contrasena, int estado)
         {
 
             DateTime fecha = DateTime.Now;
-            stringEncriptada = this.securityController.EncriptarBase64(contrasena);
-
-            if (estado == "Activo") estado = "1";
-            if (estado == "Inactivo") estado = "0";
-
-
+            stringEncriptada = this.securityController.Encriptar(contrasena);
+           
             try
             {
                 this.conexion.Open();
@@ -139,14 +135,14 @@ namespace API_Choferes.Controllers
 
         // PUT api/<choferesControllers>/5
         [HttpPut("{id}")]
-        public void Put(int identificacion, string nombre, string apellidos, string email, string contrasena, string estado)
+        public void Put(int identificacion, string nombre, string apellidos, string email, string contrasena, int estado)
         {
             
 
             try
             {
                 
-                stringEncriptada = this.securityController.EncriptarBase64(contrasena);
+                stringEncriptada = this.securityController.Encriptar(contrasena);
                 this.conexion.Open();
                 string[] returnValues = new string[100];
                 string querySQL;
@@ -164,9 +160,7 @@ namespace API_Choferes.Controllers
                     "WHERE IdentificadorAdministrador = @id ";
                 }
 
-                if (estado == "Activo") estado = "1";
-                if (estado == "Inactivo") estado = "0";
-
+        
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
 
