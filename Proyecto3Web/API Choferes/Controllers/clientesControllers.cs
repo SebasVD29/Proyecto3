@@ -1,5 +1,4 @@
-﻿using API_Choferes.Controllers;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -47,11 +46,26 @@ namespace API_Clientes.Controllers
                     {
                         while (reader.Read())
                         {
+                            string estado = "";
+                            if ((int)lector["Estado"] == 1)
+                            {
+                                estado = "Activo";
+                            }
+                            else
+                            {
+                                estado = "Inactivo";
+                            }
+
                             string telefono = Convert.ToString(reader["Telefono"]);
 
-                            string estado = Convert.ToString(reader["Estado"]);
-
-                            return new string[] { (string)reader["NombreCompleto"], (string)reader["Direccion"], telefono, (string)reader["Email"], estado };
+                            return new string[]
+                            {
+                                (string)reader["NombreCompleto"],
+                                (string)reader["Direccion"],
+                                telefono,
+                                (string)reader["Email"],
+                                estado
+                            };
                         }
                         reader.Close();
                     }
