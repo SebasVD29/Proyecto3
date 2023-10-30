@@ -1,4 +1,4 @@
-
+//
 $("#crearCliente").click(function () {
 
     $("#ConfirmarCrearCliente").css("visibility", "visible");
@@ -15,7 +15,7 @@ $("#crearCliente").click(function () {
     $("#form-direccion").prop('disabled', false);
     $("#form-telefono").prop('disabled', false);
     $("#form-email").prop('disabled', false);
-    $("#form-estado").prop('disabled', false);
+    $("#form-estado").prop('disabled', true);
 });
 
 
@@ -27,7 +27,7 @@ $("#ConfirmarCrearCliente").click(function () {
     var direccion = $('#form-direccion ').val();
     var telefono = $('#form-telefono ').val();
     var correo = $('#form-email ').val();
-    var estado = $("#form-estado").val();
+    var estado = 1;
 
 
     if (identificacion == "") {
@@ -67,13 +67,13 @@ $("#ConfirmarCrearCliente").click(function () {
 
     jQuery.ajax({
         type: 'post',
-        url: "https://localhost:7088/api/clientesControllers?identificadorCliente=" + identificacion + " &nombreCompleto=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono  + "&email=" + correo + "&estado=" + estado + "",
+        url: "https://localhost:7088/api/clientesControllers?identificadorCliente=" + identificacion + " &nombreCompleto=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono + "&email=" + correo + "&estado=" + estado + "",
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'jsonp',
         traditional: true,
         success: function (response) {
-            $('#modalMensaje').text("El cliente con identificacion " + identificacion + ", nombre " + nombre + ", direccion  " + direccion + ", telefono " + telefono  + " email " + correo + ", en estado " + estado + " fue agregado exitosamente.");
+            $('#modalMensaje').text("El cliente con identificacion " + identificacion + ", nombre " + nombre + ", direccion  " + direccion + ", telefono " + telefono + " email " + correo + ", en estado " + estado + " fue agregado exitosamente.");
             $('#modalup').trigger('click');
             setTimeout(
                 function () {
@@ -180,7 +180,7 @@ $("#editarCliente").click(function () {
         alert("Por favor ingrese una direccion valida")
         return;
     }
-  
+
     if (nombre == "") {
         alert("Ingrese el nombre")
         return;
@@ -194,10 +194,10 @@ $("#editarCliente").click(function () {
         alert("Ingrese un email valido")
         return;
     }
-    
+
     jQuery.ajax({
         type: 'put',
-        url:" https://localhost:7088/api/clientesControllers/" + identificacion + "?identificadorCliente= "+ identificacion+"&nombreCompleto=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono + "&email=" + correo + "&estado=" + estado + "" ,
+        url: " https://localhost:7088/api/clientesControllers/" + identificacion + "?identificadorCliente= " + identificacion + "&nombreCompleto=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono + "&email=" + correo + "&estado=" + estado + "",
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'jsonp',
