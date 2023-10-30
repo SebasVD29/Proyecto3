@@ -64,6 +64,7 @@ $("#ConfirmarCrearCliente").click(function () {
         alert("La direccion debe contener solo letras")
         return;
     } 
+
     jQuery.ajax({
         type: 'post',
         url: "https://localhost:7088/api/clientesControllers?identificadorCliente=" + identificacion + " &nombreCompleto=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono  + "&email=" + correo + "&estado=" + estado + "",
@@ -217,7 +218,7 @@ $("#editarCliente").click(function () {
 });
 function validateEmail(correo) {
     var re = /\S+@\S+\.\S+/;
-    return re.test(email);
+    return re.test(correo);
 }
 
 function validateId(Identificacion) {

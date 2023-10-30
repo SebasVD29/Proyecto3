@@ -293,3 +293,13 @@ C:\Users\Admin\GitHub\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\refin
 C:\Users\Admin\GitHub\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.pdb
 C:\Users\Admin\GitHub\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.genruntimeconfig.cache
 C:\Users\Admin\GitHub\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\ref\API Choferes.dll
+C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.csproj.AssemblyReference.cache
+C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.AssemblyInfoInputs.cache
+C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.AssemblyInfo.cs
+C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.csproj.CoreCompileInputs.cache
+C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.dll
+C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\refint\API Choferes.dll
+C:\Users\raque\OneDrive\Documentos\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.pdb
