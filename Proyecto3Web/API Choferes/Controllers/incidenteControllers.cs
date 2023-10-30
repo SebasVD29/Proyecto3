@@ -1,19 +1,26 @@
+using API_Choferes.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Server;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Http.Cors;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace API_Choferes.Controllers
+namespace API_Incidente.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-
-    [EnableCors(origins: "*", methods: "*", headers: "*")]
+   [EnableCors(origins: "*", methods: "*", headers: "*")]
     public class choferesControllers : ControllerBase
     {
+
+        private DataBaseController dataBase;
+        private SqlConnection conexion;
+
+
+
         // GET: api/<choferesControllers>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -23,53 +30,45 @@ namespace API_Choferes.Controllers
 
         // GET api/<choferesControllers>/5
         [HttpGet("{id}")]
-        public string[] Get(int id)
+        public List<string[]> Get(int id)
         {
+            List<string[]> incidencias = new List<string[]>();
 
             try
             {
-                string[] returnValues = new string[100];
-                //int counter = 0;
-
                 this.conexion.Open();
 
-                string querySQL = "Select * from dbo.Chofer where IdentificadorChofer = @id";
+                string querySQL = "Select * from dbo.Incidentes where IdentificadorRuta = @id";
+
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
-
                     comando.Parameters.AddWithValue("@id", id);
+
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
                         while (lector.Read())
                         {
-                            string estado = "";
-                            if ((int)lector["Estado"] == 1)
-                            {
-                                estado = "Activo";
-                            }
-                            else
-                            {
-                                estado = "Inactivo";
-                            }
-                            return new string[] { (string)lector["Nombre"], (string)lector["Apellido"], (string)lector["Email"], estado };
+                            string identificadorIncidente = Convert.ToString(lector["IdentificadorIncidente"]);
+                            string fecha = Convert.ToString(lector["Fecha"]);
+                            string solucion = Convert.ToString(lector["Solucion"]);
 
+                            incidencias.Add(new string[] { identificadorIncidente, fecha, solucion });
                         }
 
                         lector.Close();
                     }
-
                 }
-
-                this.conexion.Close();
-
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw;
+                incidencias.Clear();
+                incidencias.Add(new string[] { "error", "error" });
             }
-            return new string[] { "error", "error" };
+
+            return incidencias;
         }
+
 
 
 
