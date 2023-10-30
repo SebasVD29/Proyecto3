@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using System.Data.SqlClient;
 using Microsoft.SqlServer.Server;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Http.Cors;
