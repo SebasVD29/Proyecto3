@@ -1,32 +1,25 @@
-using API_Choferes.Controllers;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using Microsoft.SqlServer.Server;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Http.Cors;
 
+
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace API_Incidente.Controllers
+namespace API_Incidentes.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-   [EnableCors(origins: "*", methods: "*", headers: "*")]
-    public class choferesControllers : ControllerBase
+    [EnableCors(origins: "*", methods: "*", headers: "*")]
+    public class incidentesControllers : ControllerBase
     {
 
         private DataBaseController dataBase;
         private SqlConnection conexion;
 
-
-
-        // GET: api/<choferesControllers>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
         // GET api/<choferesControllers>/5
         [HttpGet("{id}")]
