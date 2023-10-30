@@ -15,7 +15,7 @@ $("#crearCliente").click(function () {
     $("#form-direccion").prop('disabled', false);
     $("#form-telefono").prop('disabled', false);
     $("#form-email").prop('disabled', false);
-    $("#form-estado").prop('disabled', false);
+    $("#form-estado").prop('disabled', true);
 });
 
 
@@ -27,7 +27,7 @@ $("#ConfirmarCrearCliente").click(function () {
     var direccion = $('#form-direccion ').val();
     var telefono = $('#form-telefono ').val();
     var correo = $('#form-email ').val();
-    var estado = $("#form-estado").val();
+    var estado = 1;
 
 
     if (identificacion == "") {
@@ -63,7 +63,8 @@ $("#ConfirmarCrearCliente").click(function () {
     if (!validateLetras(direccion)) {
         alert("La direccion debe contener solo letras")
         return;
-    }
+    } 
+
     jQuery.ajax({
         type: 'post',
         url: "https://localhost:7088/api/clientesControllers?identificadorCliente=" + identificacion + " &nombreCompleto=" + nombre + "&direccion=" + direccion + "&telefono=" + telefono + "&email=" + correo + "&estado=" + estado + "",
@@ -217,7 +218,7 @@ $("#editarCliente").click(function () {
 });
 function validateEmail(correo) {
     var re = /\S+@\S+\.\S+/;
-    return re.test(email);
+    return re.test(correo);
 }
 
 function validateId(Identificacion) {

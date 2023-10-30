@@ -46,12 +46,12 @@ namespace API_Choferes.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error al agregar el camión: {ex.Message}");
             }
         }
-
+/*
         [HttpPut("{numeroPlaca}")]
         public IActionResult Put(string numeroPlaca, [FromBody] CamionModel camion)
         {
             _camionesService.UpdateCamion(numeroPlaca, camion.Marca, camion.Modelo, camion.Fabricacion, camion.Estado);
             return Ok($"Camión actualizado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})");
-        }
+        }*/
     }
 }

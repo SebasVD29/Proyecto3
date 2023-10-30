@@ -1,4 +1,18 @@
 
+// Clave secreta para el cifrado (debe mantenerse segura)
+const claveSecreta = "claveSuperSecreta";
+
+// Datos a cifrar
+const datos = "Información confidencial";
+
+// Cifrado
+const datosCifrados = CryptoJS.AES.encrypt(datos, claveSecreta).toString();
+console.log("Datos cifrados: " + datosCifrados);
+
+// Descifrado
+const datosDescifrados = CryptoJS.AES.decrypt(datosCifrados, claveSecreta).toString(CryptoJS.enc.Utf8);
+console.log("Datos descifrados: " + datosDescifrados);
+
 $("#crearAdmin").click(function () {
 
     $("#ConfirmarCrearAdmin").css("visibility", "visible");
@@ -15,7 +29,7 @@ $("#crearAdmin").click(function () {
     $("#form-apellidos").prop('disabled', false);
     $("#form-email").prop('disabled', false);
     $("#form-contrasena").prop('disabled', false);
-    $("#form-estado").prop('disabled', false);
+    $("#form-estado").prop('disabled', true);
 });
 
 $("#ConfirmarCrearAdmin").click(function () {
@@ -25,7 +39,7 @@ $("#ConfirmarCrearAdmin").click(function () {
     var apellidos = $('#form-apellidos ').val();
     var email = $('#form-email ').val();
     var contrasena = $('#form-contrasena ').val();
-    var estado = $("#form-estado").children(":selected")[0].label;
+    var estado = 1;
     if (contrasena == "") {
         alert("Ingrese una contrasena")
         return;
@@ -162,7 +176,7 @@ $("#editarAdmin").click(function () {
     var apellidos = $('#form-apellidos ').val();
     var email = $('#form-email ').val();
     var contrasena = $('#form-contrasena ').val();
-    var estado = $("#form-estado").children(":selected")[0].label;
+    var estado = $("#form-estado").val();
 
     if (!validateEmail(email)) {
         alert("Correo Invalido")
@@ -191,6 +205,12 @@ $("#editarAdmin").click(function () {
 
     if (email == "") {
         alert("Ingrese un email valido")
+        return;
+    }
+    if((!contrasena == "") && (!validatePassword(contrasena))){
+        alert("La contrasena debe contener al menos: Una mayuscula," +
+            "una minuscula, un numero, un caracter especial y " + 
+            "ser mayor o igual a 8 digitos.")
         return;
     }
     if (contrasena == "") {

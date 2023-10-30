@@ -293,3 +293,10 @@ C:\Users\Admin\GitHub\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\refin
 C:\Users\Admin\GitHub\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.pdb
 C:\Users\Admin\GitHub\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\API Choferes.genruntimeconfig.cache
 C:\Users\Admin\GitHub\Proyecto3\Proyecto3Web\API Choferes\obj\Debug\net6.0\ref\API Choferes.dll
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Web\API Choferes\bin\Debug\net6.0\Dapper.dll
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Web\API Choferes\bin\Debug\net6.0\System.Data.SqlClient.dll
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Web\API Choferes\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Web\API Choferes\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Web\API Choferes\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Web\API Choferes\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Web\API Choferes\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
