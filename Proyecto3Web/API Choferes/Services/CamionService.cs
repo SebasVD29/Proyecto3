@@ -26,7 +26,7 @@ namespace API_Choferes.Services
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                return db.Query<string>("SELECT * FROM dbo.Camiones WHERE numeroPlaca = @numeroPlaca", new { numeroPlaca });
+                return db.Query<string>("SELECT * FROM dbo.Camiones WHERE numeroPlaca =" + numeroPlaca);
             }
         }
 

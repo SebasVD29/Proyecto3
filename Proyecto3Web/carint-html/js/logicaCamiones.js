@@ -94,30 +94,7 @@ $("#buscarCamion").click(function () {
     $("#buscarCamion").css("visibility", "hidden");
 
 });
-$("#ConfirmarBuscarCamion").click(function () {
-    var numeroPlaca = $('#form-numeroPlaca').val();
 
-    jQuery.ajax({
-        type: 'get',
-        url: "https://localhost:7088/api/Camiones" + numeroPlaca,
-        contentType: "application/json; charset=utf-8",
-        cache: false,
-        dataType: 'json', // Cambiado de 'jsonp' a 'json'
-        traditional: true,
-        success: function (response) {
-            $("#form-numeroPlaca").prop('disabled', true);
-            $('#form-Marca').val(response[0]);
-            $('#form-Modelo').val(response[1]);
-            $('#form-Fabricacion').val(response[2]).change();
-            $('#form-estado').val(response[3]).change();
-            $('#modalMensaje').text("El Camion con numeroPlaca " + numeroPlaca + ", Marca " + response[0] + ", Modelo  " + response[1] + ", Fabricacion " + response[2] + " en estado " + response[3] + " fue agregado.");
-            $('#modalup').trigger('click');
-        },
-        error: function (xhr, status, error) {
-            alert("Error: Camion no encontrado. " + error);
-        }
-    });
-});
 
 
 $("#ConfirmarBuscarCamion").click(function () {
@@ -127,22 +104,21 @@ $("#ConfirmarBuscarCamion").click(function () {
 
     jQuery.ajax({
         type: 'get',
-        url: "https://localhost:7088/api/Camiones" + numeroPlaca,
+        url: "https://localhost:7088/api/Camiones/" + numeroPlaca,
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'json',
         traditional: true,
         success: function (response) {
-            $("#form-numeroPlaca").prop('disabled', true);
-            $('#form-Marca').val(response[0]);
-            $('#form-Modelo').val(response[1]);
-            $('#form-Fabricacion').val(response[2]);
-            $('#form-estado').val(0).change();
-            $('#modalMensaje').text("El Camion con numeroPlaca " + numeroPlaca + ", Marca " + Marca + ", Modelo  " + Modelo + ", Fabricacion " + Fabricacion + " en estado " + estado + " fue agregado.");
-            $('#modalup').trigger('click');
-        },
-        failure: function (response) {
-            alert("Error: Camion no encontrado")
+            if (Array.isArray(response) && response.length >= 3) {
+                $('#form-numeroPlaca').val(response[0]);
+                $('#form-Marca').val(response[1]);
+                $('#form-Modelo').val(response[2]);
+                $('#form-Fabricacion').val(response[3].change);
+                $('#form-estado').val(response[4]).change(); // Cambiado a .change() para seleccionar el estado
+            } else {
+                alert("Error: Datos de camión no encontrados en la respuesta");
+            }
         }
     });
 
