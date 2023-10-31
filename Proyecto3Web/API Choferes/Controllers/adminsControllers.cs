@@ -15,7 +15,7 @@ namespace API_Choferes.Controllers
     public class adminsControllers : ControllerBase
     {
         string stringEncriptada = "";
-        string stringDesencriptada = "";
+       
         private securityController securityController;
         private DataBaseController dataBase;
         private SqlConnection conexion;
@@ -184,10 +184,6 @@ namespace API_Choferes.Controllers
                 throw;
             }
             return;
-
-
         }
-
-        
     }
 }

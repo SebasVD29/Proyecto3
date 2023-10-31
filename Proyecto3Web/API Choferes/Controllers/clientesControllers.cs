@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using API_Choferes.Controllers;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -47,7 +48,7 @@ namespace API_Clientes.Controllers
                         while (reader.Read())
                         {
                             string estado = "";
-                            if ((int)lector["Estado"] == 1)
+                            if ((int)reader["Estado"] == 1)
                             {
                                 estado = "Activo";
                             }
