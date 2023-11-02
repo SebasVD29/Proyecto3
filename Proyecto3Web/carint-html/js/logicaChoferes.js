@@ -15,7 +15,7 @@ $("#crearChofer").click(function () {
     $("#form-apellidos").prop('disabled', false);
     $("#form-email").prop('disabled', false);
     $("#form-contrasena").prop('disabled', false);
-    $("#form-estado").prop('disabled', false);
+    $("#form-estado").prop('disabled', true);
 });
 
 $("#ConfirmarCrearChofer").click(function () {
@@ -25,7 +25,7 @@ $("#ConfirmarCrearChofer").click(function () {
     var apellidos = $('#form-apellidos ').val();
     var email = $('#form-email ').val();
     var contrasena = $('#form-contrasena ').val();
-    var estado = $("#form-estado").children(":selected")[0].label;
+    var estado = 1;
     if (contrasena == "") {
         alert("Ingrese una contrasena")
         return;
@@ -64,6 +64,12 @@ $("#ConfirmarCrearChofer").click(function () {
         alert("El apellido debe contener solo letras")
         return;
     } 
+    if (!validatePassword(contrasena)) {
+        alert("La contrasena debe contener al menos: Una mayuscula," +
+            "una minuscula, un numero, un caracter especial y " + 
+            "ser mayor o igual a 8 digitos.")
+        return;
+    }
     
     jQuery.ajax({
         type: 'post',
@@ -157,7 +163,7 @@ $("#editarChofer").click(function(){
       var apellidos = $('#form-apellidos ').val();
       var email = $('#form-email ').val();
       var contrasena = $('#form-contrasena ').val();
-      var estado = $("#form-estado").children(":selected")[0].label;
+      var estado = $("#form-estado").val();
 
     if (!validateEmail(email)) {
         alert("Correo Invalido")
@@ -188,9 +194,16 @@ $("#editarChofer").click(function(){
         alert("Ingrese un email valido")
         return;
     } 
+    if((!contrasena == "") && (!validatePassword(contrasena))){
+        alert("La contrasena debe contener al menos: Una mayuscula," +
+            "una minuscula, un numero, un caracter especial y " + 
+            "ser mayor o igual a 8 digitos.")
+        return;
+    }
     if (contrasena == "") {
         contrasena = "NoCambiarContrasena";
     } 
+    
        jQuery.ajax({
                   type: 'put',
            url: "https://localhost:7088/api/choferesControllers/" + identificacion + "?identificacion=" + identificacion + "&nombre=" + nombre + "&apellidos=" + apellidos +"&email=" +email +"&contrasena=" +contrasena+ "&estado=" + estado + "",
@@ -229,5 +242,12 @@ function validateLetras(Letras) {
 
     var pattern = new RegExp("[a-zA-Z\s]+");
     return pattern.test(Letras);
+
+}
+
+function validatePassword(contrasena) {
+
+    var re = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    return re.test(contrasena);
 
 }

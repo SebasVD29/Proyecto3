@@ -47,16 +47,26 @@ namespace API_Choferes.Controllers
                 string[] returnValues = new string[100];
                 //int counter = 0;
                 this.conexion.Open();
-                string querySQL = "Select * from dbo. where ";
+                string querySQL = "Select * from dbo.Administrador where IdentificadorAdministrador = @id";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion ))
                 {
-                   //comando.Parameters.AddWithValue("@id", id);
+                   comando.Parameters.AddWithValue("@id", id);
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
                         while (lector.Read())
                         {
-                            //return ;
+                            string estado = "";
+                            if ((int)lector["Estado"] == 1)
+                            {
+                                estado = "Activo";
+                            }
+                            else
+                            {
+                                estado = "Inactivo";
+                            }
+                            //stringDesencriptada = this.securityController.DesencriptarBase64((string)lector["Contraseña"]);
+                            return new string[] { (string)lector["Nombre"], (string)lector["Apellido"], (string)lector["Email"], estado };
 
                         }
 
@@ -66,35 +76,49 @@ namespace API_Choferes.Controllers
                 }
 
             }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine("Error de base de datos: " + sqlEx.Message);
+                throw;
+
+            }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 throw;
             }
+           
+
             return new string[] { "error", "error" };
         }
 
         // POST api/<choferesControllers>
         [HttpPost]
         [EnableCors(origins: "*", methods: "*", headers: "*")]
-        public void Post()
+        public void Post(int identificacion, string nombre, string apellidos, string email, string contrasena, int estado)
         {
-    
-            //stringEncriptada = securityController.EncriptarBase64(contrasena);
-            
 
+            DateTime fecha = DateTime.Now;
+            stringEncriptada = this.securityController.Encriptar(contrasena);
+           
             try
             {
                 this.conexion.Open();
                 string[] returnValues = new string[100];
                 string querySQL =
-                    "INSERT INTO dbo.() " +
-                    "VALUES ()";
+                    "INSERT INTO dbo.Administrador(IdentificadorAdministrador, Nombre, Apellido, Email, Contraseña, FechaRegistro, Estado) " +
+                    "VALUES (@identificador, @nombre, @apellido, @email, @password, @fecha, @estado)";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
-                    
 
+                    comando.Parameters.AddWithValue("identificador", identificacion);
+                    comando.Parameters.AddWithValue("nombre", nombre);
+                    comando.Parameters.AddWithValue("apellido", apellidos);
+                    comando.Parameters.AddWithValue("email", email);
+                    comando.Parameters.AddWithValue("password", stringEncriptada);
+                    comando.Parameters.AddWithValue("fecha", fecha);
+                    comando.Parameters.AddWithValue("estado", estado);
                     comando.ExecuteNonQuery();
 
 
@@ -111,34 +135,48 @@ namespace API_Choferes.Controllers
 
         // PUT api/<choferesControllers>/5
         [HttpPut("{id}")]
-        public void Put()
+        public void Put(int identificacion, string nombre, string apellidos, string email, string contrasena, int estado)
         {
             
 
             try
             {
-                //stringEncriptada = securityController.EncriptarBase64(contrasena);
+                
+                stringEncriptada = this.securityController.Encriptar(contrasena);
                 this.conexion.Open();
                 string[] returnValues = new string[100];
-                string querySQL =
-                    "UPDATE dbo. SET   " +
-                    "WHERE  " ;
+                string querySQL;
 
+                if (contrasena == "NoCambiarContrasena")
+                {
+                    querySQL =
+                    "UPDATE dbo.Administrador SET Nombre = @nombre, Apellido = @apellido, Email = @email, Estado = @estado  " +
+                    "WHERE IdentificadorAdministrador = @id ";
+                }
+                else
+                {
+                    querySQL =
+                       "UPDATE dbo.Administrador SET Nombre = @nombre, Apellido = @apellido, Email = @email, Contraseña = @password , Estado = @estado  " +
+                    "WHERE IdentificadorAdministrador = @id ";
+                }
+
+        
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
-                    
-                    
+
+                    comando.Parameters.AddWithValue("id", identificacion);
+
+                    comando.Parameters.AddWithValue("nombre", nombre);
+                    comando.Parameters.AddWithValue("apellido", apellidos);
+                    comando.Parameters.AddWithValue("email", email);
+                    comando.Parameters.AddWithValue("password", stringEncriptada);
+                    comando.Parameters.AddWithValue("estado", estado);
                     comando.ExecuteNonQuery();
-
-
                    
                 }
                 this.conexion.Close();
 
-                /*SqlDataReader reader = comando.ExecuteReader();
-                while (reader.Read())
-                { }
-                reader.Close();*/
+                
             }
             catch (Exception ex)
             {
@@ -150,10 +188,6 @@ namespace API_Choferes.Controllers
 
         }
 
-        // DELETE api/<choferesControllers>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        
     }
 }
