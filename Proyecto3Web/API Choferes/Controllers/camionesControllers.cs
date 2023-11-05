@@ -45,7 +45,11 @@ namespace API_Choferes.Controllers
         [HttpPut("{numeroPlaca}")]
         public IActionResult Put(string numeroPlaca, [FromBody] CamionModel camion)
         {
-           _camionesService.UpdateCamion(numeroPlaca, camion.Marca, camion.Modelo, camion.Fabricacion, camion.Estado);
+           _camionesService.UpdateCamion(numeroPlaca,
+                                         camion.Marca,
+                                         camion.Modelo,
+                                         camion.Fabricacion,
+                                         camion.Estado);
            return Ok(new { Message = $"Camión actualizado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})", Camion = camion });
 
         }
