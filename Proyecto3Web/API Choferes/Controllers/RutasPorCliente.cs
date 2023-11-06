@@ -1,70 +1,77 @@
-﻿using API_Choferes.Models;
-using API_Choferes.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Web.Http.Cors;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Server;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Http.Cors;
+
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace API_Choferes.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
     [EnableCors(origins: "*", methods: "*", headers: "*")]
-    public class CamionesController : ControllerBase
+    [ApiController]
+    public class RutasPorCliente : ControllerBase
     {
-        private readonly CamionesService _camionesService;
         private securityController securityController;
         private DataBaseController dataBase;
         private SqlConnection conexion;
-
-
-        public CamionesController(CamionesService camionesService)
+        public RutasPorCliente()
         {
-            _camionesService = camionesService;
             this.dataBase = new DataBaseController();
             this.securityController = new securityController();
             this.conexion = new SqlConnection(this.dataBase.StringConexion());
         }
 
+
+        // GET: api/<RutasPorCliente>
         [HttpGet]
-        public string[][] Get()
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
+
+        // GET api/<RutasPorCliente>/5
+        // Get rutas por cliente
+        // GET api/<RutasController>/5
+        [HttpGet("{id}")]
+        public string[][] Get(int id)
         {
             try
             {
                 this.conexion.Open();
 
                 // Cantidad de rutas 
-                string querySQL = "Select * from dbo.Camiones";
-                int cantidadChoferes = 0;
+                string querySQL = "Select * from dbo.DireccionRuta where Cliente = @id";
+                int cantidadRutas = 0;
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
 
+                    comando.Parameters.AddWithValue("@id", id);
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
                         while (lector.Read())
                         {
-                            cantidadChoferes++;
+                            cantidadRutas++;
                         }
                         lector.Close();
                     }
 
                 }
-                string[][] returnValues = new string[cantidadChoferes][];
+                string[][] returnValues = new string[cantidadRutas][];
                 int contador = 0;
-                querySQL = "Select * from dbo.Camiones";
+                querySQL = "Select * from dbo.DireccionRuta where Cliente = @id";
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
 
-
+                    comando.Parameters.AddWithValue("@id", id);
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
                         while (lector.Read())
                         {
                             // Devolver array en lugar de primer elemento 
-                            returnValues[contador] = new string[] { ((String)lector["numeroPlaca"])};
+                            returnValues[contador] = new string[] { ((int)lector["idDireccionRuta"]).ToString(), (string)lector["NombreDireccionRuta"] };
                             contador++;
                         }
                         return returnValues;
@@ -83,33 +90,22 @@ namespace API_Choferes.Controllers
             }
         }
 
-        [HttpGet("{numeroPlaca}")]
-        public IActionResult Get(string numeroPlaca)
-        {
-            var camiones = _camionesService.GetByNumeroPlaca(numeroPlaca);
-            return Ok(camiones);
-        }
-
+        // POST api/<RutasPorCliente>
         [HttpPost]
-        public IActionResult Post([FromBody] CamionModel camion)
+        public void Post([FromBody] string value)
         {
-            try
-            {
-                _camionesService.InsertCamion(camion);
-                return Ok(new { Message = $"Camión agregado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})", Camion = camion });
-                }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error al agregar el camión: {ex.Message}");
-            }
         }
 
-        [HttpPut("{numeroPlaca}")]
-        public IActionResult Put(string numeroPlaca, [FromBody] CamionModel camion)
+        // PUT api/<RutasPorCliente>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
         {
-           _camionesService.UpdateCamion(numeroPlaca, camion.Marca, camion.Modelo, camion.Fabricacion, camion.Estado);
-           return Ok(new { Message = $"Camión actualizado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})", Camion = camion });
+        }
 
+        // DELETE api/<RutasPorCliente>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
         }
     }
 }
