@@ -4,15 +4,12 @@ using Microsoft.SqlServer.Server;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Http.Cors;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace API_Choferes.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    
     [EnableCors(origins: "*", methods: "*", headers: "*")]
-    public class adminsControllers : ControllerBase
+    public class AdminsControllers : ControllerBase
     {
         string stringEncriptada = "";
        
@@ -23,29 +20,21 @@ namespace API_Choferes.Controllers
 
         int count = 0;
 
-        public adminsControllers()
+        public AdminsControllers()
         {
             this.dataBase = new DataBaseController();
             this.securityController = new securityController();
             this.conexion = new SqlConnection(this.dataBase.StringConexion());
         }
-
-        // GET: api/<choferesControllers>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {         
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<choferesControllers>/5
+  
         [HttpGet("{id}")]
-        public string[] Get(int id)
+        public IActionResult Get(int id)
         {
-            
+            string estado = "";
             try
             {
                 string[] returnValues = new string[100];
-                //int counter = 0;
+                
                 this.conexion.Open();
                 string querySQL = "Select * from dbo.Administrador where IdentificadorAdministrador = @id";
 
@@ -54,9 +43,8 @@ namespace API_Choferes.Controllers
                    comando.Parameters.AddWithValue("@id", id);
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
-                        while (lector.Read())
+                        if (lector.Read())
                         {
-                            string estado = "";
                             if ((int)lector["Estado"] == 1)
                             {
                                 estado = "Activo";
@@ -65,37 +53,40 @@ namespace API_Choferes.Controllers
                             {
                                 estado = "Inactivo";
                             }
-                            //stringDesencriptada = this.securityController.DesencriptarBase64((string)lector["Contraseña"]);
-                            return new string[] { (string)lector["Nombre"], (string)lector["Apellido"], (string)lector["Email"], estado };
+                            return Ok(new string[]
+                            {
+                                (string)lector["Nombre"],
+                                (string)lector["Apellido"],
+                                (string)lector["Email"],
+                                estado
+                            });
 
                         }
-
                         lector.Close();
                     }
-                    this.conexion.Close();
                 }
+                this.conexion.Close();
 
+                Console.WriteLine($"La desencriptación falló.");
+                var errorData = new { success = false, message = "Busqueda fallida" };
+                return BadRequest(errorData);
             }
             catch (SqlException sqlEx)
             {
-                Console.WriteLine("Error de base de datos: " + sqlEx.Message);
-                throw;
+                Console.WriteLine($"Error en la BD del select. {sqlEx.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = sqlEx.Message });
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                Console.WriteLine($"Error general del select. {ex.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = ex.Message });
             }
-           
-
-            return new string[] { "error", "error" };
         }
 
-        // POST api/<choferesControllers>
         [HttpPost]
         [EnableCors(origins: "*", methods: "*", headers: "*")]
-        public void Post(int identificacion, string nombre, string apellidos, string email, string contrasena, int estado)
+        public IActionResult Post(int identificacion, string nombre, string apellidos, string email, string contrasena, int estado)
         {
 
             DateTime fecha = DateTime.Now;
@@ -124,24 +115,28 @@ namespace API_Choferes.Controllers
 
                 }
                 this.conexion.Close();
+                return Ok(new { Message = "Operación exitosa" });
+
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en la BD del insert. {sqlEx.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = sqlEx.Message });
+
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                Console.WriteLine($"Error general del insert. {ex.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = ex.Message });
             }
-            return;
         }
 
-        // PUT api/<choferesControllers>/5
-        [HttpPut("{id}")]
-        public void Put(int identificacion, string nombre, string apellidos, string email, string contrasena, int estado)
-        {
-            
 
+        [HttpPut("{id}")]
+        public IActionResult Put(int identificacion, string nombre, string apellidos, string email, string contrasena, int estado)
+        {
             try
-            {
-                
+            {    
                 stringEncriptada = this.securityController.Encriptar(contrasena);
                 this.conexion.Open();
                 string[] returnValues = new string[100];
@@ -175,15 +170,75 @@ namespace API_Choferes.Controllers
                    
                 }
                 this.conexion.Close();
+                return Ok(new { Message = "Operación exitosa" });
+               
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en la BD del update. {sqlEx.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = sqlEx.Message });
 
-                
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                Console.WriteLine($"Error general del update. {ex.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = ex.Message });
             }
-            return;
         }
+
+        [HttpPost("login")]
+        public IActionResult Login(string correo, string password)
+        {
+                         
+            try
+            {
+                this.conexion.Open();
+                string querySQL = "Select * from dbo.Administrador where Email = @email AND Estado = 1 ";
+
+                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
+                {
+                    comando.Parameters.AddWithValue("@email", correo);
+                    
+                    using (SqlDataReader lector = comando.ExecuteReader())
+                    {
+                        while(lector.Read())
+                        {
+                            var email = (string)lector["Email"];
+                            string pass = this.securityController.Desencriptar((string)lector["Contraseña"]);
+                          
+                            if (email.Equals(correo) && pass.Equals(password)) 
+                            { 
+                                Console.WriteLine("Hizo el if");
+                                var data = new { success = true, message = "Autenticación exitosa" };
+                                return Ok(data);
+                
+                            }
+                           
+                        }
+
+                        lector.Close();
+                    }
+                }
+                this.conexion.Close();
+                Console.WriteLine($"Error del login.");
+                var errorData = new { success = false, message = "Autenticación fallida" };
+                return BadRequest(errorData);
+
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en la BD del login. {sqlEx.Message}");
+                var errorData = new { success = false, message = "Error de base de datos: " + sqlEx.Message };
+                return StatusCode(500, errorData);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error general del login. {ex.Message}");
+                var errorData = new { success = false, message = "Error interno: " + ex.Message };
+                return StatusCode(500, errorData);
+            }
+        }
+
     }
 }

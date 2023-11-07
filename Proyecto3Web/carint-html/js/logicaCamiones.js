@@ -13,7 +13,7 @@ $("#crearCamion").click(function () {
     $("#form-Modelo").prop('disabled', false);
     $("#form-Fabricacion").prop('disabled', false);
     $("#form-estado").prop('disabled', false);
-    
+
 });
 
 
@@ -21,26 +21,26 @@ $("#ConfirmarCrearCamion").click(function () {
     var numeroPlaca = $('#form-numeroPlaca').val();
     var Marca = $('#form-Marca').val();
     var Modelo = $('#form-Modelo').val();
-    var Fabricacion = parseInt($('#form-Fabricacion').val());   
+    var Fabricacion = parseInt($('#form-Fabricacion').val());
     var estado = $("#form-estado").children(":selected").val(); // Cambiado a obtener el texto del option
     if (numeroPlaca == "") {
         alert("Ingrese un número de placa")
         return;
-    }  
+    }
     if (Marca == "") {
         alert("Ingrese la Marca")
         return;
-    }  
+    }
     if (Modelo == "") {
         alert("Ingrese el Modelo")
         return;
     }
     if (Fabricacion == "") {
-            alert("Ingrese el año de fabricación")
-            return;
-    } 
-   
-  
+        alert("Ingrese el año de fabricación")
+        return;
+    }
+
+
     if (!validatePlaca(numeroPlaca)) {
         alert("El número de placa debe tener al menos 6 digitos")
         return;
@@ -52,8 +52,8 @@ $("#ConfirmarCrearCamion").click(function () {
     if (!validateLetras(Modelo)) {
         alert("La marca debe contener solo letras")
         return;
-    } 
-   
+    }
+
     jQuery.ajax({
         type: 'post',
         url: "https://localhost:7088/api/Camiones",
@@ -72,9 +72,15 @@ $("#ConfirmarCrearCamion").click(function () {
             $('#modalMensaje').text("El Camion con el numero de placa " + numeroPlaca + ", Marca " + Marca + ", Modelo  " + Modelo + ", fabricado en " + Fabricacion + " en estado " + estado + " fue agregado.");
             $('#modalup').trigger('click');
         },
-        
+
         error: function (xhr, status, error) {
-            alert("Error: Camion No Agregado. " + error);
+            responseData = xhr.responseJSON;
+            if (responseData) {
+                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
+            } else {
+                alert("Error desconocido: " + error);
+            }
+        
         }
     });
 });
@@ -100,7 +106,7 @@ $("#buscarCamion").click(function () {
 $("#ConfirmarBuscarCamion").click(function () {
 
     var numeroPlaca = $('#form-numeroPlaca').val();
-  
+
 
     jQuery.ajax({
         type: 'get',
@@ -116,14 +122,21 @@ $("#ConfirmarBuscarCamion").click(function () {
                 $('#form-Modelo').val(response[2]);
                 $('#form-Fabricacion').val(response[3].change);
                 $('#form-estado').val(response[4]).change(); // Cambiado a .change() para seleccionar el estado
-            } else {
-                alert("Error: Datos de camión no encontrados en la respuesta");
             }
+        },
+        error: function (xhr, status, error) {
+            responseData = xhr.responseJSON;
+            if (responseData) {
+                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
+            } else {
+                alert("Error desconocido: " + error);
+            }
+
         }
     });
 
 });
-$(document).ready(function() {
+$(document).ready(function () {
     var currentYear = new Date().getFullYear();
     for (var i = currentYear; i >= currentYear - 20; i--) {
         $('#form-Fabricacion').append($('<option>', {
@@ -132,31 +145,37 @@ $(document).ready(function() {
         }));
     }
 });
-$("#editarCamion").click(function(){
+$("#editarCamion").click(function () {
 
-      var numeroPlaca = $('#form-numeroPlaca').val();
-      var Marca = $('#form-Marca ').val();
-      var Modelo = $('#form-Modelo ').val();
-      var Fabricacion = $('#form-Fabricacion ').val();
-      var estado = $("#form-estado").children(":selected")[0].label;
-      
-       jQuery.ajax({
-                  type: 'put',
-           url: "https://localhost:7088/api/Camiones" + numeroPlaca + "?numeroPlaca=" + numeroPlaca + "&Marca=" + Marca + "&Modelo=" + Modelo +"&Fabricacion=" +Fabricacion + "&estado=" + estado + "",
-                  contentType: "application/json; charset=utf-8",
-                  cache: false, 
-                  datatype: 'json',
-                  traditional: true,
-                  success: function (response) {
-                        $('#modalMensaje').text("El Camion con el número de placa " + numeroPlaca + ", Marca " + Marca + ", Modelo  " + Modelo +", Fabricacion " +Fabricacion  + " en estado " + estado + " fue actualizado.");
-                        $('#modalup').trigger('click');
-                  },
-                  failure: function (response) {
-                        alert("Error: Camion No Actualizado")
-                  }
-              });
-      
-      });
+    var numeroPlaca = $('#form-numeroPlaca').val();
+    var Marca = $('#form-Marca ').val();
+    var Modelo = $('#form-Modelo ').val();
+    var Fabricacion = $('#form-Fabricacion ').val();
+    var estado = $("#form-estado").children(":selected")[0].label;
+
+    jQuery.ajax({
+        type: 'put',
+        url: "https://localhost:7088/api/Camiones" + numeroPlaca + "?numeroPlaca=" + numeroPlaca + "&Marca=" + Marca + "&Modelo=" + Modelo + "&Fabricacion=" + Fabricacion + "&estado=" + estado + "",
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        datatype: 'json',
+        traditional: true,
+        success: function (response) {
+            $('#modalMensaje').text("El Camion con el número de placa " + numeroPlaca + ", Marca " + Marca + ", Modelo  " + Modelo + ", Fabricacion " + Fabricacion + " en estado " + estado + " fue actualizado.");
+            $('#modalup').trigger('click');
+        },
+        error: function (xhr, status, error) {
+            responseData = xhr.responseJSON;
+            if (responseData) {
+                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
+            } else {
+                alert("Error desconocido: " + error);
+            }
+
+        }
+    });
+
+});
 
 function validatePlaca(numeroPlaca) {
 
