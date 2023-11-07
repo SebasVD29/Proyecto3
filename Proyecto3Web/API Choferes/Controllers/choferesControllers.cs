@@ -32,9 +32,57 @@ namespace API_Choferes.Controllers
 
         // GET: api/<choferesControllers>
         [HttpGet]
-        public IEnumerable<string> Get()
-        {         
-            return new string[] { "value1", "value2" };
+        public string[][] Get()
+        {
+            try
+            {
+                this.conexion.Open();
+
+                // Cantidad de rutas 
+                string querySQL = "Select * from dbo.Chofer";
+                int cantidadChoferes = 0;
+                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
+                {
+
+                    using (SqlDataReader lector = comando.ExecuteReader())
+                    {
+                        while (lector.Read())
+                        {
+                            cantidadChoferes++;
+                        }
+                        lector.Close();
+                    }
+
+                }
+                string[][] returnValues = new string[cantidadChoferes][];
+                int contador = 0;
+                querySQL = "Select * from dbo.Chofer";
+                using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
+                {
+
+                    
+                    using (SqlDataReader lector = comando.ExecuteReader())
+                    {
+                        while (lector.Read())
+                        {
+                            // Devolver array en lugar de primer elemento 
+                            returnValues[contador] = new string[] { ((int)lector["IdentificadorChofer"]).ToString(), (string)lector["Nombre"], (string)lector["Apellido"] };
+                            contador++;
+                        }
+                        return returnValues;
+                        lector.Close();
+                    }
+
+                }
+
+                this.conexion.Close();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
         }
 
         // GET api/<choferesControllers>/5
