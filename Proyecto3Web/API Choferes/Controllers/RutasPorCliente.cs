@@ -43,7 +43,7 @@ namespace API_Choferes.Controllers
                 this.conexion.Open();
 
                 // Cantidad de rutas 
-                string querySQL = "Select * from dbo.DireccionRuta where Cliente = @id";
+                string querySQL = "SELECT  *\r\nFROM [dbo].[Ruta]\r\nINNER JOIN Clientes\r\nON Ruta.IdentificadorCliente = Clientes.IdentificadorCliente\r\nWHERE Ruta.IdentificadorCliente = @id AND Clientes.Estado = 1";
                 int cantidadRutas = 0;
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
@@ -61,7 +61,7 @@ namespace API_Choferes.Controllers
                 }
                 string[][] returnValues = new string[cantidadRutas][];
                 int contador = 0;
-                querySQL = "Select * from dbo.DireccionRuta where Cliente = @id";
+                querySQL = "SELECT  *\r\nFROM [dbo].[Ruta]\r\nINNER JOIN Clientes\r\nON Ruta.IdentificadorCliente = Clientes.IdentificadorCliente\r\nWHERE Ruta.IdentificadorCliente = @id AND Clientes.Estado = 1";
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
 
@@ -71,7 +71,7 @@ namespace API_Choferes.Controllers
                         while (lector.Read())
                         {
                             // Devolver array en lugar de primer elemento 
-                            returnValues[contador] = new string[] { ((int)lector["idDireccionRuta"]).ToString(), (string)lector["NombreDireccionRuta"] };
+                            returnValues[contador] = new string[] { ((int)lector["idDireccionRuta"]).ToString(), (string)lector["Nombre"] };
                             contador++;
                         }
                         return returnValues;
