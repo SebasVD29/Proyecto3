@@ -1,43 +1,44 @@
-console.log('Hizo algo');
-$("#IngresarSistema").click(function () {
-    console.log('Hizo algo2');
 
-    var identificacion = $('#form-identificacion').val();
-    //var password = $('#form-password').val();
+$("#IngresarSistema").click(function () {
+    var correo = $('#form-correo').val();
+    var password = $('#form-password').val();
+
+    if (!validateEmail(correo)) {
+        alert("Correo Invalido")
+        return;
+    }
+
+    if (correo == "") {
+        alert("Ingrese un email valido")
+        return;
+    }
+    if (password == "") {
+        alert("Ingrese la contraseña")
+        return;
+    }
 
     jQuery.ajax({
-        type: 'get',
-        url: "https://localhost:7088/api/adminsControllers/" + identificacion,
+        type: 'post',
+        url: "https://localhost:7088/api/AdminsControllers/login?correo=" + correo+"&password="+password,
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'jsonp',
         traditional: true,
         success: function (response) {
+            window.location.href = 'MenuAdmin.html';
             console.log("respuesta", response)
 
         },
-        failure: function (response) {
-            alert("Error: Chofer no encontrado")
+        failure: function (xhr, status, error) {
+            var message = document.querySelector(".message");
+            message.textContent = "Invalid username or password!";
+            message.style.color = "red";
+            alert("Error: Administrador no encontrado", error)
         }
     });
 
 });
-
-/*
-function login() {
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
-
-    // Estos son los valores predefinidos. En una aplicación real, no querrías almacenar contraseñas de esta manera.
-    var correctUsername = "admin";
-    var correctPassword = "12345";
-
-    if (username === correctUsername && password === correctPassword) {
-        window.location.href = 'mainPage.html';
-    } else {
-        var message = document.querySelector(".message");
-        message.textContent = "Invalid username or password!";
-        message.style.color = "red";
-    }
+function validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
 }
-*/

@@ -1,4 +1,3 @@
-//
 $("#crearCliente").click(function () {
 
     $("#ConfirmarCrearCliente").css("visibility", "visible");
@@ -80,8 +79,14 @@ $("#ConfirmarCrearCliente").click(function () {
                     location.reload();
                 }, 3000);
         },
-        failure: function (response) {
-            alert("Error: Cliente  No Agregado")
+        error: function (xhr, status, error) {
+            responseData = xhr.responseJSON;
+            if (responseData) {
+                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
+            } else {
+                alert("Error desconocido: " + error);
+            }
+        
         }
     });
 
@@ -143,11 +148,16 @@ $("#ConfirmarBuscarCliente").click(function () {
             $('#form-telefono').val(response[2]);
             $('#form-email').val(response[3]);
             $('#form-estado').val(0).change();
-            //$('#modalMensaje').text("El chofer con identificacion " + identificacion + ", nombre " + nombre + ", apellidos  " + apellidos + ", email " + email + " en estado " + estado + " fue agregado.");
-            // $('#modalup').trigger('click');
+            
         },
-        failure: function (response) {
-            alert("Error: Chofer no encontrado")
+        error: function (xhr, status, error) {
+            responseData = xhr.responseJSON;
+            if (responseData) {
+                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
+            } else {
+                alert("Error desconocido: " + error);
+            }
+        
         }
     });
 
@@ -210,8 +220,14 @@ $("#editarCliente").click(function () {
                     location.reload();
                 }, 3000);
         },
-        failure: function (response) {
-            alert("Error: Cliente No Actualizado")
+        error: function (xhr, status, error) {
+            responseData = xhr.responseJSON;
+            if (responseData) {
+                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
+            } else {
+                alert("Error desconocido: " + error);
+            }
+        
         }
     });
 
