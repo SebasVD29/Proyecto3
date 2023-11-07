@@ -53,23 +53,25 @@ namespace API_Choferes.Controllers
                             {
                                 estado = "Inactivo";
                             }
-                            return Ok(new string[]
-                            {
-                                (string)lector["Nombre"],
-                                (string)lector["Apellido"],
-                                (string)lector["Email"],
-                                estado
-                            });
+                            
 
                         }
+
+                        return Ok(new string[]
+                        {
+                            (string)lector["Nombre"],
+                            (string)lector["Apellido"],
+                            (string)lector["Email"],
+                            estado
+                        });
+
+
                         lector.Close();
                     }
                 }
                 this.conexion.Close();
 
-                Console.WriteLine($"La desencriptación falló.");
-                var errorData = new { success = false, message = "Busqueda fallida" };
-                return BadRequest(errorData);
+            
             }
             catch (SqlException sqlEx)
             {
@@ -228,7 +230,7 @@ namespace API_Choferes.Controllers
             catch (SqlException sqlEx)
             {
                 Console.WriteLine($"Error en la BD del login. {sqlEx.Message}");
-                var errorData = new { success = false, message = "Error de base de datos: " + sqlEx.Message };
+                var errorData = new { success = false, message = "Error interno: " + sqlEx.Message };
                 return StatusCode(500, errorData);
 
             }
