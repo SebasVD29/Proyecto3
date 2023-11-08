@@ -22,32 +22,24 @@ namespace API_Clientes.Controllers
             this.conexion = new SqlConnection(this.dataBase.StringConexion());
         }
 
-        // GET: api/<ClientesController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET api/<ClientesController>/5
         [HttpGet("{id}")]
 
-        public string[] Get(int id)
+        public IActionResult Get(int id)
         {
-
+            string telefono = "";
+            string estado = "";
             try
             {
                 this.conexion.Open();
                 string querySQL = "SELECT * FROM dbo.Clientes WHERE IdentificadorCliente = @id";
-
                 using (SqlCommand command = new SqlCommand(querySQL, this.conexion))
                 {
                     command.Parameters.AddWithValue("@id", id);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
-                        {
-                            string estado = "";
+                        {                 
                             if ((int)reader["Estado"] == 1)
                             {
                                 estado = "Activo";
@@ -56,36 +48,39 @@ namespace API_Clientes.Controllers
                             {
                                 estado = "Inactivo";
                             }
-
-                            string telefono = Convert.ToString(reader["Telefono"]);
-
-                            return new string[]
-                            {
-                                (string)reader["NombreCompleto"],
-                                (string)reader["Direccion"],
-                                telefono,
-                                (string)reader["Email"],
-                                estado
-                            };
+                            telefono = Convert.ToString(reader["Telefono"]);
                         }
+                        return Ok(new string[]
+                        {
+                            (string)reader["NombreCompleto"],
+                            (string)reader["Direccion"],
+                            telefono,
+                            (string)reader["Email"],
+                            estado
+                        });
+
                         reader.Close();
                     }
                 }
                 this.conexion.Close();
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en la BD del select. {sqlEx.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = sqlEx.Message });
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                Console.WriteLine($"Error general del select. {ex.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = ex.Message });
             }
-            return new string[] { "error", "error" };
         }
 
 
         // POST api/<ClientesController>
         [HttpPost]
-        public void Post(int identificadorCliente, string nombreCompleto, int telefono, string direccion, string email, int estado)
+        public IActionResult Post(int identificadorCliente, string nombreCompleto, int telefono, string direccion, string email, int estado)
         {
             try
             {
@@ -104,21 +99,25 @@ namespace API_Clientes.Controllers
                     command.ExecuteNonQuery();
                 }
                 this.conexion.Close();
+                return Ok(new { Message = "Operación exitosa" });
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en la BD del insert. {sqlEx.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = sqlEx.Message });
+
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                Console.WriteLine($"Error general del insert. {ex.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = ex.Message });
             }
-            return;
         }
 
         // PUT api/<ClientesController>/5  
         [HttpPut("{id}")]
-        public void Put(int identificadorCliente, string nombreCompleto, int telefono, string direccion, string email, string estado)
+        public IActionResult Put(int identificadorCliente, string nombreCompleto, int telefono, string direccion, string email, string estado)
         {
-
-
             try
             {
                 this.conexion.Open();
@@ -136,22 +135,20 @@ namespace API_Clientes.Controllers
                     command.ExecuteNonQuery();
                 }
                 this.conexion.Close();
+                return Ok(new { Message = "Operación exitosa" });
+
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en la BD del update. {sqlEx.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = sqlEx.Message });
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                Console.WriteLine($"Error general del update. {ex.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = ex.Message });
             }
-            return;
-        }
-
-        // DELETE api/<ClientesController>/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            // Aquí puedes agregar el código para eliminar un cliente basado en su identificación.
-            return Ok("Cliente eliminado exitosamente.");
         }
     }
 }

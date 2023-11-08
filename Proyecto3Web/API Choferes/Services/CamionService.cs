@@ -24,9 +24,17 @@ namespace API_Choferes.Services
 */
         public IEnumerable<CamionModel> GetByNumeroPlaca(string numeroPlaca)
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
+            try 
+            { 
+                using (IDbConnection db = new SqlConnection(connectionString))
+                {
+                    return db.Query<CamionModel>("SELECT * FROM dbo.Camiones WHERE numeroPlaca = @numeroPlaca", new { numeroPlaca });
+                }
+            }
+            catch (Exception ex)
             {
-                return db.Query<CamionModel>("SELECT * FROM dbo.Camiones WHERE numeroPlaca = @numeroPlaca", new { numeroPlaca });
+                Console.WriteLine(ex.Message);
+                throw;
             }
         }
 
@@ -43,10 +51,11 @@ namespace API_Choferes.Services
 
                     db.Execute(querySQL, camion);
                 }
+                Console.WriteLine($"Camión agregado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Camión agregado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})");
+                Console.WriteLine(ex.Message);
                 throw;
             }
         }

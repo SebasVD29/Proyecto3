@@ -20,7 +20,6 @@ namespace API_Choferes.Controllers
         private DataBaseController dataBase;
         private SqlConnection conexion;
 
-
         public CamionesController(CamionesService camionesService)
         {
             _camionesService = camionesService;
@@ -58,7 +57,6 @@ namespace API_Choferes.Controllers
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
 
-
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
                         while (lector.Read())
@@ -68,6 +66,7 @@ namespace API_Choferes.Controllers
                             contador++;
                         }
                         return returnValues;
+
                         lector.Close();
                     }
 
@@ -86,8 +85,23 @@ namespace API_Choferes.Controllers
         [HttpGet("{numeroPlaca}")]
         public IActionResult Get(string numeroPlaca)
         {
-            var camiones = _camionesService.GetByNumeroPlaca(numeroPlaca);
-            return Ok(camiones);
+            try
+            {
+                var camiones = _camionesService.GetByNumeroPlaca(numeroPlaca);
+                return Ok(camiones);
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en la BD del select. {sqlEx.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = sqlEx.Message });
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error general del select. {ex.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = ex.Message });
+            }
+
         }
 
         [HttpPost]
@@ -96,24 +110,59 @@ namespace API_Choferes.Controllers
             try
             {
                 _camionesService.InsertCamion(camion);
-                return Ok(new { Message = $"Camión agregado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})", Camion = camion });
-                }
+                return Ok(new { Message = "Operación exitosa al Insertar Camiones" });
+
+                /*return Ok(new { Message = $"Camión agregado correctamente: " +
+                    $"{camion.Marca} " +
+                    $"{camion.Modelo} " +
+                    $"(Placa: {camion.numeroPlaca})",
+                    Camion = camion });
+                }*/
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en la BD del insert. {sqlEx.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = sqlEx.Message });
+
+            }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error al agregar el camión: {ex.Message}");
+                Console.WriteLine($"Error general del insert. {ex.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = ex.Message });
             }
         }
 
         [HttpPut("{numeroPlaca}")]
         public IActionResult Put(string numeroPlaca, [FromBody] CamionModel camion)
         {
-           _camionesService.UpdateCamion(numeroPlaca,
-                                         camion.Marca,
-                                         camion.Modelo,
-                                         camion.Fabricacion,
-                                         camion.Estado);
-           return Ok(new { Message = $"Camión actualizado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})", Camion = camion });
+            try
+            {
 
+               _camionesService.UpdateCamion(numeroPlaca,
+                                             camion.Marca,
+                                             camion.Modelo,
+                                             camion.Fabricacion,
+                                             camion.Estado);
+
+                return Ok(new { Message = "Operación exitosa al Actualizas Camiones" });
+                /* return Ok(new { Message = $"Camión actualizado correctamente:" +
+                     $" {camion.Marca} {camion.Modelo} (Placa: " +
+                     $"{camion.numeroPlaca})", 
+                     Camion = camion });*/
+
+
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en la BD del update. {sqlEx.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = sqlEx.Message });
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error general del update. {ex.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = ex.Message });
+            }
         }
     }
 }

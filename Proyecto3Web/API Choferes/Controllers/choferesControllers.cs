@@ -66,7 +66,11 @@ namespace API_Choferes.Controllers
                         while (lector.Read())
                         {
                             // Devolver array en lugar de primer elemento 
-                            returnValues[contador] = new string[] { ((int)lector["IdentificadorChofer"]).ToString(), (string)lector["Nombre"], (string)lector["Apellido"] };
+                            returnValues[contador] = new string[] { 
+                                ((int)lector["IdentificadorChofer"]).ToString(), 
+                                (string)lector["Nombre"], 
+                                (string)lector["Apellido"] };
+
                             contador++;
                         }
                         return returnValues;
@@ -87,14 +91,11 @@ namespace API_Choferes.Controllers
 
         // GET api/<choferesControllers>/5
         [HttpGet("{id}")]
-        public string[] Get(int id)
+        public IActionResult Get(int id)
         {
-
+            string estado = "";
             try
             {
-                string[] returnValues = new string[100];
-                //int counter = 0;
-           
                 this.conexion.Open();
 
                 string querySQL = "Select * from dbo.Chofer where IdentificadorChofer = @id";
@@ -102,11 +103,11 @@ namespace API_Choferes.Controllers
                 {
 
                     comando.Parameters.AddWithValue("@id", id);
-                    using (SqlDataReader lector = comando.ExecuteReader()) 
+                    using (SqlDataReader lector = comando.ExecuteReader())
                     {
                         while (lector.Read())
                         {
-                            string estado = "";
+
                             if ((int)lector["Estado"] == 1)
                             {
                                 estado = "Activo";
@@ -115,9 +116,15 @@ namespace API_Choferes.Controllers
                             {
                                 estado = "Inactivo";
                             }
-                            return new string[] { (string)lector["Nombre"], (string)lector["Apellido"], (string)lector["Email"], estado};
-
                         }
+
+                        return Ok(new string[]
+                        {
+                            (string)lector["Nombre"],
+                            (string)lector["Apellido"],
+                            (string)lector["Email"],
+                            estado});
+                        
 
                         lector.Close();
                     }
@@ -125,32 +132,31 @@ namespace API_Choferes.Controllers
                 }
 
                 this.conexion.Close();
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en la BD del select. {sqlEx.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = sqlEx.Message });
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                Console.WriteLine($"Error general del select. {ex.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = ex.Message });
             }
-            return new string[] { "error", "error" };
         }
 
             
         // POST api/<choferesControllers>
         [HttpPost]
         [EnableCors(origins: "*", methods: "*", headers: "*")]
-        public void Post(int identificacion, string nombre, string apellidos, string email, string contrasena, int estado)
+        public IActionResult Post(int identificacion, string nombre, string apellidos, string email, string contrasena, int estado)
         {
             DateTime fecha = DateTime.Now;
             stringEncriptada = this.securityController.Encriptar(contrasena);
-            /*
-            if (estado == "Activo") estado = "1";
-            if (estado == "Inactivo") estado = "0";
-            */
             try
             {
                 this.conexion.Open();
-                string[] returnValues = new string[100];
                 string querySQL =
                     "INSERT INTO dbo.Chofer(IdentificadorChofer, Nombre, Apellido, Email, Contraseña, FechaRegistro, Estado) " +
                     "VALUES (@identificador, @nombre, @apellidos, @email, @password, @fecha, @estado)";
@@ -166,31 +172,31 @@ namespace API_Choferes.Controllers
                     comando.Parameters.AddWithValue("estado", estado);
                     comando.ExecuteNonQuery();
 
-
-                   
                 }
                 this.conexion.Close();
+                return Ok(new { Message = "Operación exitosa" });
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en la BD del insert. {sqlEx.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = sqlEx.Message });
+
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                Console.WriteLine($"Error general del insert. {ex.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = ex.Message });
             }
-            return;
         }
 
         // PUT api/<choferesControllers>/5
         [HttpPut("{id}")]
-        public void Put(int identificacion, string nombre, string apellidos, string email, string contrasena, int estado)
+        public IActionResult Put(int identificacion, string nombre, string apellidos, string email, string contrasena, int estado)
         {
-            
-
             try
             {
-
                 stringEncriptada = this.securityController.Encriptar(contrasena);
                 this.conexion.Open();
-                string[] returnValues = new string[100];
                 string querySQL;
 
                 if (contrasena == "NoCambiarContrasena")
@@ -204,9 +210,7 @@ namespace API_Choferes.Controllers
                        "UPDATE dbo.Chofer SET  Nombre = @nombre, Apellido = @apellidos, Email = @email, Contraseña = @password, Estado = @estado " +
                        "WHERE  IdentificadorChofer = @id";
                 }
-                /*
-                if (estado == "Activo") estado = "1";
-                if (estado == "Inactivo") estado = "0";*/
+               
 
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
@@ -219,27 +223,21 @@ namespace API_Choferes.Controllers
                     comando.Parameters.AddWithValue("estado", estado);
                     comando.ExecuteNonQuery();
 
-
-                   
                 }
                 this.conexion.Close();
+                return Ok(new { Message = "Operación exitosa" });
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en la BD del update. {sqlEx.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = sqlEx.Message });
 
-             
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                Console.WriteLine($"Error general del update. {ex.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = ex.Message });
             }
-            return;
-
-
-        }
-
-        // DELETE api/<choferesControllers>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

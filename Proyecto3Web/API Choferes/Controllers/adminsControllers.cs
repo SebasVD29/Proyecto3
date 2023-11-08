@@ -33,11 +33,8 @@ namespace API_Choferes.Controllers
             string estado = "";
             try
             {
-                string[] returnValues = new string[100];
-                
                 this.conexion.Open();
                 string querySQL = "Select * from dbo.Administrador where IdentificadorAdministrador = @id";
-
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion ))
                 {
                    comando.Parameters.AddWithValue("@id", id);
@@ -53,10 +50,7 @@ namespace API_Choferes.Controllers
                             {
                                 estado = "Inactivo";
                             }
-                            
-
                         }
-
                         return Ok(new string[]
                         {
                             (string)lector["Nombre"],
@@ -70,8 +64,6 @@ namespace API_Choferes.Controllers
                     }
                 }
                 this.conexion.Close();
-
-            
             }
             catch (SqlException sqlEx)
             {
@@ -97,7 +89,6 @@ namespace API_Choferes.Controllers
             try
             {
                 this.conexion.Open();
-                string[] returnValues = new string[100];
                 string querySQL =
                     "INSERT INTO dbo.Administrador(IdentificadorAdministrador, Nombre, Apellido, Email, Contraseña, FechaRegistro, Estado) " +
                     "VALUES (@identificador, @nombre, @apellido, @email, @password, @fecha, @estado)";
@@ -141,9 +132,7 @@ namespace API_Choferes.Controllers
             {    
                 stringEncriptada = this.securityController.Encriptar(contrasena);
                 this.conexion.Open();
-                string[] returnValues = new string[100];
                 string querySQL;
-
                 if (contrasena == "NoCambiarContrasena")
                 {
                     querySQL =
@@ -156,8 +145,6 @@ namespace API_Choferes.Controllers
                        "UPDATE dbo.Administrador SET Nombre = @nombre, Apellido = @apellido, Email = @email, Contraseña = @password , Estado = @estado  " +
                     "WHERE IdentificadorAdministrador = @id ";
                 }
-
-        
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
 
