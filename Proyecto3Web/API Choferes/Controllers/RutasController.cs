@@ -42,7 +42,7 @@ namespace API_Choferes.Controllers
 
                 this.conexion.Open();
 
-                string querySQL = "SELECT ruta.Nombre as NombreRuta,pais.Nombre as NombrePais,ciudad.nombre as NombreCiudad, ruta.Descripcion, chofer.IdentificadorChofer, Chofer.Nombre as NombreChofer,chofer.Apellido, Camiones.numeroPlaca, ruta.Estado\r\nFROM [dbo].[Ruta]\r\nINNER JOIN DireccionRuta ON [dbo].[Ruta].IdDireccionRuta = DireccionRuta.IdDireccionRuta\r\nINNER JOIN Chofer ON [dbo].[Ruta].IdentificadorChofer = Chofer.IdentificadorChofer\r\nINNER JOIN Camiones ON [dbo].[Ruta].numeroPlaca = Camiones.numeroPlaca\r\nINNER JOIN PaisCiudad ON DireccionRuta.idPaisCiudad = PaisCiudad.idPaisCiudad\r\nINNER JOIN Ciudad ON  Ciudad.IdentificadorCiudad = PaisCiudad.IdCiudad \r\nINNER JOIN Pais ON Pais.IdentificadorPais = PaisCiudad.IdPais\r\nWHERE IdentificadorRuta = @id";
+                string querySQL = "SELECT ruta.Nombre as NombreRuta,pais.Nombre as NombrePais,ciudad.nombre as NombreCiudad, ruta.Descripcion, ruta.FechaHoraInicio, ruta.FechaHoraFinal, chofer.IdentificadorChofer, Chofer.Nombre as NombreChofer,chofer.Apellido, Camiones.numeroPlaca, ruta.Estado\r\nFROM [dbo].[Ruta]\r\nINNER JOIN DireccionRuta ON [dbo].[Ruta].IdDireccionRuta = DireccionRuta.IdDireccionRuta\r\nINNER JOIN Chofer ON [dbo].[Ruta].IdentificadorChofer = Chofer.IdentificadorChofer\r\nINNER JOIN Camiones ON [dbo].[Ruta].numeroPlaca = Camiones.numeroPlaca\r\nINNER JOIN PaisCiudad ON DireccionRuta.idPaisCiudad = PaisCiudad.idPaisCiudad\r\nINNER JOIN Ciudad ON  Ciudad.IdentificadorCiudad = PaisCiudad.IdCiudad \r\nINNER JOIN Pais ON Pais.IdentificadorPais = PaisCiudad.IdPais\r\nWHERE IdentificadorRuta = @id";
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
 
@@ -52,7 +52,7 @@ namespace API_Choferes.Controllers
                         while (lector.Read())
                         {
                            
-                            return new string[] { (string)lector["NombreRuta"], (string)lector["NombrePais"], (string)lector["NombreCiudad"], (string)lector["Descripcion"], (string)lector["IdentificadorChofer"].ToString(), (string)lector["NombreChofer"], (string)lector["Apellido"], (string)lector["numeroPlaca"].ToString(), (string)lector["Estado"].ToString() };
+                            return new string[] { (string)lector["NombreRuta"], (string)lector["NombrePais"], (string)lector["NombreCiudad"], (string)lector["Descripcion"], (string)lector["IdentificadorChofer"].ToString(), (string)lector["NombreChofer"], (string)lector["Apellido"], (string)lector["numeroPlaca"].ToString(), (string)lector["Estado"].ToString(), (string)lector["FechaHoraInicio"].ToString(), (string)lector["FechaHoraFinal"].ToString() };
 
                         }
 
