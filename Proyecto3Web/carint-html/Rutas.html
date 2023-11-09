@@ -86,22 +86,23 @@
                                     </button>
                                 </div>
 
-                                <div class="DropDown" style="background-color: #ffffff52;text-align: center; ">
-                                    <select id="rutaSelect" style="background-color: #ffffff52;">
+                                <div class="DropDown" style="background-color: #ffffff52; text-align: center;">
+                                    <select id="rutaSelect" class="form-select" style="background-color: #ffffff52; width: 100%;">
                                     </select>
-                                    <button id="cargarRuta" style="background-color: #ADD8E6; /* Green */
-                                          border: none;
-                                          color: black;
-                                          margin-left: 35%;
-                                          margin-bottom: 5%;
-                                          padding: 15px 32px;
-                                          text-align: center;
-                                          text-decoration: none;
-                                          display: inline-block;
-                                          font-size: 16px;">
-                                        Cargar Ruta
-                                    </button>
                                 </div>
+                                <button id="cargarRuta" style="background-color: #ADD8E6; /* Green */
+                                    border: none;
+                                    color: black;
+                                    margin-left: 32%;
+                                    margin-bottom: 5%;
+                                    padding: 15px 32px;
+                                    text-align: center;
+                                    text-decoration: none;
+                                    display: inline-block;
+                                    margin-top: 5%;
+                                    font-size: 16px;">
+                                    Cargar Ruta
+                                </button>
                                 <div>
                                     <input id="nombreRuta" type="text" placeholder="Nombre de la Ruta"
                                            style="background-color: #ffffff52;" disabled />
@@ -128,9 +129,8 @@
          text-align: left;">
                                     Chofer
                                 </h4>
-                                <div  style="background-color: #ffffff52;text-align: center;">
+                                <div style="background-color: #ffffff52;text-align: center;">
                                     <select id="DropDownChofer" style="background-color: #ffffff52;">
-               
                                     </select>
                                 </div>
 
@@ -139,9 +139,8 @@
          text-align: left;">
                                     Camion
                                 </h4>
-                                <div  style="background-color: #ffffff52;text-align: center;">
+                                <div style="background-color: #ffffff52;text-align: center;">
                                     <select id="DropDownCamion" style="background-color: #ffffff52;">
-                                    
                                     </select>
                                 </div>
 
@@ -152,8 +151,8 @@
                                     Estado
                                 </h4>
                                 <div class="DropDown5"
-                                     style="background-color: #ffffff52;text-align: center; margin-top: 25px ">
-                                    <select style=" background-color: #ffffff52  ">
+                                     style="background-color: #ffffff52;text-align: center; margin-bottom: 15px ">
+                                    <select id="estado" style=" background-color: #ffffff52  ">
                                         <option value="0"> Pendiente</option>
                                         <option value="1"> En progreso</option>
                                         <option value="2"> Finalizada</option>
@@ -161,7 +160,7 @@
                                 </div>
                                 <h4 style="
                                         font-size: small;
-                                        color: #ffffff52;
+
                                         text-align: left;">
 
                                     Fecha de Inicio
@@ -172,7 +171,7 @@
                                 </div>
                                 <h4 style="
                                          font-size: small;
-                                            color: #ffffff52;
+
                                             text-align: left;">
 
                                     Fecha de Final
@@ -182,37 +181,84 @@
                                            style=" background-color: #ffffff52;" />
                                 </div>
 
+                                <button id="editarRuta" style="background-color: #ADD8E6; /* Green */
+                                    border: none;
+                                    color: black;
+                                    margin-left: 32%;
+                                    margin-bottom: 5%;
+                                    padding: 15px 32px;
+                                    text-align: center;
+                                    text-decoration: none;
+                                    display: inline-block;
+                                    margin-top: 5%;
+                                    font-size: 16px;">
+                                    Guardar Ruta
+                                </button>
+
                             </div>
+                            <button id="back" type="submit" onclick="location.reload()" style="background-color: #ADD8E6; /* Green */
+border: none;
+color: black;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+margin-left: 5%;
+font-size: 16px;">
+                                Atrás
+                            </button>
+
+                            <button id="menuprincipal" type="submit" onclick="window.location='MenuAdmin.html'" style="background-color: #ADD8E6; /* Green */
+border: none;
+color: black;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+margin-left: 5%;
+font-size: 16px;">
+                                Menú Principal
+                            </button>
                         </div>
                         <div class="col-lg-7 col-md-6 px-0">
                         </div>
                     </div>
+
+
+                    
                 </div>
             </section>
         </div>
         <div style="margin: auto;" class="column">
 
-            <button type="submit" style="background-color: #ADD8E6; /* Green */
-  border: none;
-  color: Black;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;">
-                Editar
-            </button>
-            <button type="submit" style="background-color: #ADD8E6; /* Green */
-  border: none;
-  color: black;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;">
-                Agregar
-            </button>
         </div>
+
+        <!-- Button trigger modal -->
+        <button style="visibility: hidden;" id="modalup" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Launch demo modal
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ejecutado correctamente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="modalMensaje" class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="js/logicaRutas.js"></script>
