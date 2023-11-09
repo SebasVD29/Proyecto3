@@ -16,7 +16,6 @@ namespace API_Choferes.Controllers
     public class CamionesController : ControllerBase
     {
         private readonly CamionesService _camionesService;
-        private securityController securityController;
         private DataBaseController dataBase;
         private SqlConnection conexion;
 
@@ -24,7 +23,6 @@ namespace API_Choferes.Controllers
         {
             _camionesService = camionesService;
             this.dataBase = new DataBaseController();
-            this.securityController = new securityController();
             this.conexion = new SqlConnection(this.dataBase.StringConexion());
         }
 
@@ -88,7 +86,14 @@ namespace API_Choferes.Controllers
             try
             {
                 var camiones = _camionesService.GetByNumeroPlaca(numeroPlaca);
-                return Ok(camiones);
+
+                if(camiones != null)
+                {
+                    return Ok(camiones);
+
+                }
+                Console.WriteLine($"Error al buscar un camion");
+                return StatusCode(500, new { Error = "Error inesperado", Message = $"Error al buscar un camion" });
             }
             catch (SqlException sqlEx)
             {

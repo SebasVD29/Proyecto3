@@ -13,15 +13,15 @@ namespace API_Choferes.Services
         {
             this.connectionString = connectionString;
         }
-/*
-        public IEnumerable<string> Get()
+
+       /* public IEnumerable<string> Get()
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
                 return db.Query<string>("SELECT * FROM dbo.Camiones");
             }
         }
-*/
+        */
         public IEnumerable<CamionModel> GetByNumeroPlaca(string numeroPlaca)
         {
             try 
@@ -31,9 +31,16 @@ namespace API_Choferes.Services
                     return db.Query<CamionModel>("SELECT * FROM dbo.Camiones WHERE numeroPlaca = @numeroPlaca", new { numeroPlaca });
                 }
             }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en el servicio de select {sqlEx.Message}");
+                throw;
+
+            }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+               
+                Console.WriteLine($"Error en el servicio del select {ex.Message}");
                 throw;
             }
         }
@@ -53,9 +60,15 @@ namespace API_Choferes.Services
                 }
                 Console.WriteLine($"Camión agregado correctamente: {camion.Marca} {camion.Modelo} (Placa: {camion.numeroPlaca})");
             }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en el servicio de insert {sqlEx.Message}");
+                throw;
+
+            }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error en el servicio de Insert {ex.Message}");
                 throw;
             }
         }
@@ -72,33 +85,22 @@ namespace API_Choferes.Services
 
                     db.Execute(querySQL, new { numeroPlaca, Marca, Modelo, Fabricacion, Estado });
                 }
+
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en el servicio de update {sqlEx.Message}");
+                throw;
+
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                string msg = ex.Message;
+                Console.WriteLine($"Error en el servicio de Update {ex.Message}");
                 throw;
+
             }
         }
-
-        public void DeleteCamion(string numeroPlaca)
-        {
-            try
-            {
-                using (IDbConnection db = new SqlConnection(connectionString))
-                {
-                    string querySQL =
-                        "UPDATE dbo.Camiones SET Estado = 'Inactivo' WHERE numeroPlaca = @numeroPlaca";
-
-                    db.Execute(querySQL, new { numeroPlaca });
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw;
-            }
-        }
-
 
     }
 }
