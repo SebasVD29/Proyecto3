@@ -23,7 +23,7 @@ namespace API_Incidentes.Controllers
 
         // GET api/<choferesControllers>/5
         [HttpGet("{id}")]
-        public List<string[]> Get(int id)
+        public List<string[]> Get(int id, DateTime fechaInicio, DateTime fechaFinal)
         {
             List<string[]> incidencias = new List<string[]>();
 
@@ -31,11 +31,13 @@ namespace API_Incidentes.Controllers
             {
                 this.conexion.Open();
 
-                string querySQL = "Select * from dbo.Incidentes where IdentificadorRuta = @id";
+                string querySQL = "SELECT * FROM dbo.Incidentes WHERE IdentificadorRuta = @id AND Fecha BETWEEN @fechaInicio AND @fechaFinal";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
                     comando.Parameters.AddWithValue("@id", id);
+                    comando.Parameters.AddWithValue("@fechaInicio", fechaInicio);
+                    comando.Parameters.AddWithValue("@fechaFinal", fechaFinal);
 
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
@@ -58,9 +60,14 @@ namespace API_Incidentes.Controllers
                 incidencias.Clear();
                 incidencias.Add(new string[] { "error", "error" });
             }
+            finally
+            {
+                this.conexion.Close();
+            }
 
             return incidencias;
         }
+
 
 
 

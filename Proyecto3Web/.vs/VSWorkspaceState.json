@@ -1,7 +1,15 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\API Choferes",
+    "\\API Choferes\\Controllers",
+    "\\API Choferes\\Models",
+    "\\API Choferes\\obj",
+    "\\API Choferes\\Properties",
+    "\\API Choferes\\Services",
+    "\\carint-html",
+    "\\carint-html\\js"
   ],
-  "SelectedNode": "\\API Choferes.sln",
+  "SelectedNode": "\\carint-html\\js\\logicaClientes.js",
   "PreviewInSolutionExplorer": false
 }

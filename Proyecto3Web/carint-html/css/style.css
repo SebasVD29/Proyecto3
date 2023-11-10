@@ -966,4 +966,24 @@ a:focus {
 .footer_section p a {
   color: inherit;
 }
+
+table {
+    width: 80%;
+    margin: 40px auto;
+    background-color: #89b5d7;
+    opacity: 0.7;
+}
+
+    table.list {
+        align-content: center;
+        text-align: center;
+        width: 100%;
+    }
+
+td {
+    border: 1px solid rgb(204,200,200);
+    text-align: left;
+    padding: 8px 15px;
+}
+
 /*# sourceMappingURL=style.css.map */
