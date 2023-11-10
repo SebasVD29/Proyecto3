@@ -13,7 +13,7 @@ namespace API_Choferes.Services
         {
             this.connectionString = connectionString;
         }
-
+/*
         public IEnumerable<string> Get()
         {
             using (IDbConnection db = new SqlConnection(connectionString))
@@ -21,14 +21,15 @@ namespace API_Choferes.Services
                 return db.Query<string>("SELECT * FROM dbo.Camiones");
             }
         }
-
-        public IEnumerable<string> GetByNumeroPlaca(string numeroPlaca)
+*/
+        public IEnumerable<CamionModel> GetByNumeroPlaca(string numeroPlaca)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                return db.Query<string>("SELECT * FROM dbo.Camiones WHERE numeroPlaca = @numeroPlaca", new { numeroPlaca });
+                return db.Query<CamionModel>("SELECT * FROM dbo.Camiones WHERE numeroPlaca = @numeroPlaca", new { numeroPlaca });
             }
         }
+
 
         public void InsertCamion(CamionModel camion)
         {

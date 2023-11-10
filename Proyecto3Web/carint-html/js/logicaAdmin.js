@@ -1,18 +1,4 @@
 
-// Clave secreta para el cifrado (debe mantenerse segura)
-const claveSecreta = "claveSuperSecreta";
-
-// Datos a cifrar
-const datos = "Información confidencial";
-
-// Cifrado
-const datosCifrados = CryptoJS.AES.encrypt(datos, claveSecreta).toString();
-console.log("Datos cifrados: " + datosCifrados);
-
-// Descifrado
-const datosDescifrados = CryptoJS.AES.decrypt(datosCifrados, claveSecreta).toString(CryptoJS.enc.Utf8);
-console.log("Datos descifrados: " + datosDescifrados);
-
 $("#crearAdmin").click(function () {
 
     $("#ConfirmarCrearAdmin").css("visibility", "visible");
@@ -100,8 +86,14 @@ $("#ConfirmarCrearAdmin").click(function () {
                     location.reload();
                 }, 3000);
         },
-        failure: function (response) {
-            alert("Error: Chofer No Agregado")
+        error: function (xhr, status, error) {
+            responseData = xhr.responseJSON;
+            if (responseData) {
+                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
+            } else {
+                alert("Error desconocido: " + error);
+            }
+        
         }
     });
 
@@ -162,8 +154,14 @@ $("#ConfirmarBuscarAdmin").click(function () {
             $('#form-estado').val(0).change();
 
         },
-        failure: function (response) {
-            alert("Error: Chofer no encontrado")
+        error: function (xhr, status, error) {
+            responseData = xhr.responseJSON;
+            if (responseData) {
+                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
+            } else {
+                alert("Error desconocido: " + error);
+            }
+        
         }
     });
 
@@ -208,7 +206,7 @@ $("#editarAdmin").click(function () {
         return;
     }
     if((!contrasena == "") && (!validatePassword(contrasena))){
-        alert("La contrasena debe contener al menos: Una mayuscula," +
+        alert("La contraseña debe contener al menos: Una mayuscula," +
             "una minuscula, un numero, un caracter especial y " + 
             "ser mayor o igual a 8 digitos.")
         return;
@@ -232,8 +230,14 @@ $("#editarAdmin").click(function () {
                     location.reload();
                 }, 3000);
         },
-        failure: function (response) {
-            alert("Error: Chofer No Actualizado")
+        error: function (xhr, status, error) {
+            responseData = xhr.responseJSON;
+            if (responseData) {
+                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
+            } else {
+                alert("Error desconocido: " + error);
+            }
+        
         }
     });
 
@@ -263,5 +267,8 @@ function validatePassword(contrasena) {
     return re.test(contrasena);
 
 }
+
+
+
 
 

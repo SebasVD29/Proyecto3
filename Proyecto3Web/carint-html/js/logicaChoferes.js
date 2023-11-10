@@ -29,25 +29,25 @@ $("#ConfirmarCrearChofer").click(function () {
     if (contrasena == "") {
         alert("Ingrese una contrasena")
         return;
-    }  
+    }
     if (identificacion == "") {
         alert("Ingrese una identificacion")
         return;
-    }  
+    }
     if (apellidos == "") {
         alert("Ingrese apellidos")
         return;
     }
     if (nombre == "") {
-            alert("Ingrese el nombre")
-            return;
-    } 
+        alert("Ingrese el nombre")
+        return;
+    }
 
     if (email == "") {
         alert("Ingrese un email valido")
         return;
-    } 
-    
+    }
+
     if (!validateEmail(email)) {
         alert("Correo Invalido")
         return;
@@ -63,14 +63,14 @@ $("#ConfirmarCrearChofer").click(function () {
     if (!validateLetras(apellidos)) {
         alert("El apellido debe contener solo letras")
         return;
-    } 
+    }
     if (!validatePassword(contrasena)) {
         alert("La contrasena debe contener al menos: Una mayuscula," +
-            "una minuscula, un numero, un caracter especial y " + 
+            "una minuscula, un numero, un caracter especial y " +
             "ser mayor o igual a 8 digitos.")
         return;
     }
-    
+
     jQuery.ajax({
         type: 'post',
         url: "https://localhost:7088/api/choferesControllers?identificacion=" + identificacion + " &nombre=" + nombre + "&apellidos=" + apellidos + "&email=" + email + "&contrasena=" + contrasena + "&estado=" + estado + "",
@@ -86,8 +86,14 @@ $("#ConfirmarCrearChofer").click(function () {
                     location.reload();
                 }, 3000);
         },
-        failure: function (response) {
-            alert("Error: Chofer No Agregado")
+        error: function (xhr, status, error) {
+            responseData = xhr.responseJSON;
+            if (responseData) {
+                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
+            } else {
+                alert("Error desconocido: " + error);
+            }
+        
         }
     });
 
@@ -131,7 +137,7 @@ $("#ConfirmarBuscarChofer").click(function () {
 $("#ConfirmarBuscarChofer").click(function () {
 
     var identificacion = $('#form-identificacion').val();
-  
+
 
     jQuery.ajax({
         type: 'get',
@@ -146,41 +152,46 @@ $("#ConfirmarBuscarChofer").click(function () {
             $('#form-apellidos').val(response[1]);
             $('#form-email').val(response[2]);
             $('#form-estado').val(0).change();
-            //$('#modalMensaje').text("El chofer con identificacion " + identificacion + ", nombre " + nombre + ", apellidos  " + apellidos + ", email " + email + " en estado " + estado + " fue agregado.");
-           // $('#modalup').trigger('click');
+            
         },
-        failure: function (response) {
-            alert("Error: Chofer no encontrado")
+        error: function (xhr, status, error) {
+            responseData = xhr.responseJSON;
+            if (responseData) {
+                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
+            } else {
+                alert("Error desconocido: " + error);
+            }
+        
         }
     });
 
 });
 
-$("#editarChofer").click(function(){
+$("#editarChofer").click(function () {
 
-      var identificacion = $('#form-identificacion').val();
-      var nombre = $('#form-nombre ').val();
-      var apellidos = $('#form-apellidos ').val();
-      var email = $('#form-email ').val();
-      var contrasena = $('#form-contrasena ').val();
-      var estado = $("#form-estado").val();
+    var identificacion = $('#form-identificacion').val();
+    var nombre = $('#form-nombre ').val();
+    var apellidos = $('#form-apellidos ').val();
+    var email = $('#form-email ').val();
+    var contrasena = $('#form-contrasena ').val();
+    var estado = $("#form-estado").val();
 
     if (!validateEmail(email)) {
         alert("Correo Invalido")
         return;
-    }  
+    }
     if (!validateId(identificacion)) {
         alert("El numero de identificacion debe tener al menos 9 digitos")
         return;
-    }  
+    }
     if (!validateLetras(nombre)) {
         alert("Por favor ingrese un nombre valido")
         return;
-    }  
+    }
     if (!validateLetras(apellidos)) {
         alert("Por favor ingrese un apellido valido")
         return;
-    } 
+    }
     if (apellidos == "") {
         alert("Ingrese apellidos")
         return;
@@ -193,39 +204,45 @@ $("#editarChofer").click(function(){
     if (email == "") {
         alert("Ingrese un email valido")
         return;
-    } 
-    if((!contrasena == "") && (!validatePassword(contrasena))){
+    }
+    if ((!contrasena == "") && (!validatePassword(contrasena))) {
         alert("La contrasena debe contener al menos: Una mayuscula," +
-            "una minuscula, un numero, un caracter especial y " + 
+            "una minuscula, un numero, un caracter especial y " +
             "ser mayor o igual a 8 digitos.")
         return;
     }
     if (contrasena == "") {
         contrasena = "NoCambiarContrasena";
-    } 
-    
-       jQuery.ajax({
-                  type: 'put',
-           url: "https://localhost:7088/api/choferesControllers/" + identificacion + "?identificacion=" + identificacion + "&nombre=" + nombre + "&apellidos=" + apellidos +"&email=" +email +"&contrasena=" +contrasena+ "&estado=" + estado + "",
-                  contentType: "application/json; charset=utf-8",
-                  cache: false, 
-                  datatype: 'jsonp',
-                  traditional: true,
-                  success: function (response) {
-                        $('#modalMensaje').text("El chofer con identificacion " + identificacion + ", nombre " + nombre + ", apellidos  " + apellidos +", email " +email  + " en estado " + estado + " fue actualizado.");
-                         $('#modalup').trigger('click');
+    }
 
-                      setTimeout(
-                          function () {
-                              location.reload();
-                          }, 3000);
-                  },
-                  failure: function (response) {
-                        alert("Error: Chofer No Actualizado")
-                  }
-              });
-      
-      });
+    jQuery.ajax({
+        type: 'put',
+        url: "https://localhost:7088/api/choferesControllers/" + identificacion + "?identificacion=" + identificacion + "&nombre=" + nombre + "&apellidos=" + apellidos + "&email=" + email + "&contrasena=" + contrasena + "&estado=" + estado + "",
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        datatype: 'jsonp',
+        traditional: true,
+        success: function (response) {
+            $('#modalMensaje').text("El chofer con identificacion " + identificacion + ", nombre " + nombre + ", apellidos  " + apellidos + ", email " + email + " en estado " + estado + " fue actualizado.");
+            $('#modalup').trigger('click');
+
+            setTimeout(
+                function () {
+                    location.reload();
+                }, 3000);
+        },
+        error: function (xhr, status, error) {
+            responseData = xhr.responseJSON;
+            if (responseData) {
+                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
+            } else {
+                alert("Error desconocido: " + error);
+            }
+
+        }
+    });
+
+});
 
 function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
