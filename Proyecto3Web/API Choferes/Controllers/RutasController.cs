@@ -24,25 +24,27 @@ namespace API_Choferes.Controllers
             this.conexion = new SqlConnection(this.dataBase.StringConexion());
         }
 
-        // GET: api/<RutasController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
         // Get rutas por cliente
         // GET api/<RutasController>/5
         [HttpGet("{id}")]
         public string[] Get(int id)
         {
-
             try
             {
-
                 this.conexion.Open();
-
-                string querySQL = "SELECT ruta.Nombre as NombreRuta,pais.Nombre as NombrePais,ciudad.nombre as NombreCiudad, ruta.Descripcion, chofer.IdentificadorChofer, Chofer.Nombre as NombreChofer,chofer.Apellido, Camiones.numeroPlaca, ruta.Estado\r\nFROM [dbo].[Ruta]\r\nINNER JOIN DireccionRuta ON [dbo].[Ruta].IdDireccionRuta = DireccionRuta.IdDireccionRuta\r\nINNER JOIN Chofer ON [dbo].[Ruta].IdentificadorChofer = Chofer.IdentificadorChofer\r\nINNER JOIN Camiones ON [dbo].[Ruta].numeroPlaca = Camiones.numeroPlaca\r\nINNER JOIN PaisCiudad ON DireccionRuta.idPaisCiudad = PaisCiudad.idPaisCiudad\r\nINNER JOIN Ciudad ON  Ciudad.IdentificadorCiudad = PaisCiudad.IdCiudad \r\nINNER JOIN Pais ON Pais.IdentificadorPais = PaisCiudad.IdPais\r\nWHERE IdentificadorRuta = @id";
+                string querySQL = "SELECT ruta.Nombre as NombreRuta," +
+                    "pais.Nombre as NombrePais,ciudad.nombre as NombreCiudad, " +
+                    "ruta.Descripcion, chofer.IdentificadorChofer, Chofer.Nombre as NombreChofer," +
+                    "chofer.Apellido, Camiones.numeroPlaca, ruta.Estado" +
+                    "FROM [dbo].[Ruta] INNER JOIN DireccionRuta ON " +
+                    "[dbo].[Ruta].IdDireccionRuta = DireccionRuta.IdDireccionRuta" +
+                    "INNER JOIN Chofer ON [dbo].[Ruta].IdentificadorChofer = Chofer.IdentificadorChofer" +
+                    "INNER JOIN Camiones ON [dbo].[Ruta].numeroPlaca = Camiones.numeroPlaca" +
+                    "INNER JOIN PaisCiudad ON DireccionRuta.idPaisCiudad = PaisCiudad.idPaisCiudad" +
+                    "INNER JOIN Ciudad ON  Ciudad.IdentificadorCiudad = PaisCiudad.IdCiudad" +
+                    "INNER JOIN Pais ON Pais.IdentificadorPais = PaisCiudad.IdPais" +
+                    "WHERE IdentificadorRuta = @id";
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
 
@@ -52,7 +54,17 @@ namespace API_Choferes.Controllers
                         while (lector.Read())
                         {
                            
-                            return new string[] { (string)lector["NombreRuta"], (string)lector["NombrePais"], (string)lector["NombreCiudad"], (string)lector["Descripcion"], (string)lector["IdentificadorChofer"].ToString(), (string)lector["NombreChofer"], (string)lector["Apellido"], (string)lector["numeroPlaca"].ToString(), (string)lector["Estado"].ToString() };
+                            return new string[] { 
+                                (string)lector["NombreRuta"], 
+                                (string)lector["NombrePais"], 
+                                (string)lector["NombreCiudad"], 
+                                (string)lector["Descripcion"], 
+                                (string)lector["IdentificadorChofer"].ToString(), 
+                                (string)lector["NombreChofer"], 
+                                (string)lector["Apellido"], 
+                                (string)lector["numeroPlaca"].ToString(), 
+                                (string)lector["Estado"].ToString() 
+                            };
 
                         }
 
@@ -72,11 +84,7 @@ namespace API_Choferes.Controllers
             return new string[] { "error", "error" };
         }
 
-        // POST api/<RutasController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+      
 
         // PUT api/<RutasController>/5
         [HttpPut("{id}")]
@@ -86,13 +94,19 @@ namespace API_Choferes.Controllers
             {
                 this.conexion.Open();
                 string querySQL =
-                    "UPDATE [dbo].[Ruta]\r\nSET Ruta.Descripcion = @descripcion , " +
+                    "UPDATE [dbo].[Ruta] SET Ruta.Descripcion = @descripcion , " +
                     "Ruta.IdentificadorChofer = @idChofer, " +
                     "Ruta.numeroPlaca = @placa, " +
                     "Ruta.Estado = @estado, " +
                     "Ruta.FechaHoraInicio = @inicio, " +
                     "Ruta.FechaHoraFinal = @final" +
-                    "\r\nFROM [dbo].[Ruta]\r\nINNER JOIN DireccionRuta ON [dbo].[Ruta].IdDireccionRuta = DireccionRuta.IdDireccionRuta\r\nINNER JOIN Chofer ON [dbo].[Ruta].IdentificadorChofer = Chofer.IdentificadorChofer\r\nINNER JOIN Camiones ON [dbo].[Ruta].numeroPlaca = Camiones.numeroPlaca\r\nINNER JOIN PaisCiudad ON DireccionRuta.idPaisCiudad = PaisCiudad.idPaisCiudad\r\nINNER JOIN Ciudad ON  Ciudad.IdentificadorCiudad = PaisCiudad.IdCiudad \r\nINNER JOIN Pais ON Pais.IdentificadorPais = PaisCiudad.IdPais\r\n" +
+                    "FROM [dbo].[Ruta]" +
+                    "INNER JOIN DireccionRuta ON [dbo].[Ruta].IdDireccionRuta = DireccionRuta.IdDireccionRuta" +
+                    "INNER JOIN Chofer ON [dbo].[Ruta].IdentificadorChofer = Chofer.IdentificadorChofer" +
+                    "INNER JOIN Camiones ON [dbo].[Ruta].numeroPlaca = Camiones.numeroPlaca" +
+                    "INNER JOIN PaisCiudad ON DireccionRuta.idPaisCiudad = PaisCiudad.idPaisCiudad" +
+                    "INNER JOIN Ciudad ON  Ciudad.IdentificadorCiudad = PaisCiudad.IdCiudad " +
+                    "INNER JOIN Pais ON Pais.IdentificadorPais = PaisCiudad.IdPais" +
                     "WHERE IdentificadorRuta = @id";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
@@ -116,12 +130,6 @@ namespace API_Choferes.Controllers
                 throw;
             }
             return;
-        }
-
-        // DELETE api/<RutasController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

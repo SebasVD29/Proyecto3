@@ -14,13 +14,12 @@ namespace API_Choferes.Controllers
     [ApiController]
     public class RutasPorCliente : ControllerBase
     {
-        private securityController securityController;
+      
         private DataBaseController dataBase;
         private SqlConnection conexion;
         public RutasPorCliente()
         {
             this.dataBase = new DataBaseController();
-            this.securityController = new securityController();
             this.conexion = new SqlConnection(this.dataBase.StringConexion());
         }
 
@@ -41,9 +40,22 @@ namespace API_Choferes.Controllers
             try
             {
                 this.conexion.Open();
+                /*
+                 
+
+                SELECT  *\r\nFROM [dbo].[Ruta]" +
+                    "\r\nINNER JOIN Clientes\r\nON " +
+                    "Ruta.IdentificadorCliente = Clientes.IdentificadorCliente" +
+                    "\r\nWHERE Ruta.IdentificadorCliente = @id AND Clientes.Estado = 1";
+                 */
 
                 // Cantidad de rutas 
-                string querySQL = "SELECT  *\r\nFROM [dbo].[Ruta]\r\nINNER JOIN Clientes\r\nON Ruta.IdentificadorCliente = Clientes.IdentificadorCliente\r\nWHERE Ruta.IdentificadorCliente = @id AND Clientes.Estado = 1";
+                string querySQL = "SELECT DireccionRuta.NombreDireccionRuta FROM [dbo].Clientes, [dbo].DireccionRuta " +
+                    "INNER JOIN [dbo].ClientePais ON " +
+                    "DireccionRuta.IdClientePais = ClientePais.IdClientePais " +
+                    "WHERE ClientePais.IdCliente = @id " +
+                    "AND Clientes.IdentificadorCliente = ClientePais.IdCliente " +
+                    "AND Clientes.Estado = 1";
                 int cantidadRutas = 0;
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
@@ -61,7 +73,45 @@ namespace API_Choferes.Controllers
                 }
                 string[][] returnValues = new string[cantidadRutas][];
                 int contador = 0;
-                querySQL = "SELECT  *\r\nFROM [dbo].[Ruta]\r\nINNER JOIN Clientes\r\nON Ruta.IdentificadorCliente = Clientes.IdentificadorCliente\r\nWHERE Ruta.IdentificadorCliente = @id AND Clientes.Estado = 1";
+                /*
+                 SELECT  *\r\nFROM [dbo].[Ruta]" +
+                    "\r\nINNER JOIN Clientes\r\nON " +
+                    "Ruta.IdentificadorCliente = Clientes.IdentificadorCliente" +
+                    "\r\nWHERE Ruta.IdentificadorCliente = @id AND Clientes.Estado = 1"
+              
+                 SELECT DireccionRuta.NombreDireccionRuta, Pais.Nombre, Ciudad.Nombre  
+                FROM dbo.Clientes,dbo.Pais, dbo.Ciudad, [dbo].DireccionRuta 
+                INNER JOIN dbo.ClientePais ON 
+                DireccionRuta.IdClientePais = ClientePais.IdClientePais 
+                INNER JOIN dbo.PaisCiudad ON 
+                DireccionRuta.IdPaisCiudad = PaisCiudad.IdPaisCiudad
+                WHERE ClientePais.IdCliente = @id 
+                AND Clientes.IdentificadorCliente = ClientePais.IdCliente
+                AND dbo.PaisCiudad.IdPais = dbo.Pais.IdentificadorPais
+                AND dbo.PaisCiudad.IdCiudad = dbo.Ciudad.IdentificadorCiudad
+                AND Clientes.Estado = 1;
+
+                ---------------------------------------------------------------------
+
+                
+
+                 */
+
+                querySQL = "SELECT DireccionRuta.idDireccionRuta, DireccionRuta.NombreDireccionRuta, " +
+                    "Pais.Nombre as NombrePais, Ciudad.Nombre as NombreCiudad " +
+                    "FROM  [dbo].DireccionRuta " +
+                    "INNER JOIN [dbo].ClientePais ON " +
+                    "DireccionRuta.IdClientePais = ClientePais.IdClientePais " +
+                    "INNER JOIN [dbo].PaisCiudad ON " +
+                    "DireccionRuta.IdPaisCiudad = PaisCiudad.IdPaisCiudad " +
+                    "INNER JOIN [dbo].Pais ON " +
+                    "Pais.IdentificadorPais = PaisCiudad.IdPais " +
+                    "INNER JOIN [dbo].Ciudad ON " +
+                    "Ciudad.IdentificadorCiudad = PaisCiudad.IdCiudad " +
+                    "INNER JOIN [dbo].Clientes ON " +
+                    "Clientes.IdentificadorCliente = ClientePais.IdCliente " +
+                    "WHERE Clientes.IdentificadorCliente =  @id " +
+                    "AND Clientes.Estado = 1";
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
 
@@ -71,7 +121,11 @@ namespace API_Choferes.Controllers
                         while (lector.Read())
                         {
                             // Devolver array en lugar de primer elemento 
-                            returnValues[contador] = new string[] { ((int)lector["idDireccionRuta"]).ToString(), (string)lector["Nombre"] };
+                            returnValues[contador] = new string[] { 
+                                ((int)lector["idDireccionRuta"]).ToString(), 
+                                (string)lector["NombreDireccionRuta"],
+                                (string)lector["NombrePais"],
+                                (string)lector["NombreCiudad"] };
                             contador++;
                         }
                         return returnValues;
@@ -90,7 +144,7 @@ namespace API_Choferes.Controllers
             }
         }
 
-        // POST api/<RutasPorCliente>
+        /*// POST api/<RutasPorCliente>
         [HttpPost]
         public void Post([FromBody] string value)
         {
@@ -106,6 +160,6 @@ namespace API_Choferes.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-        }
+        }*/
     }
 }
