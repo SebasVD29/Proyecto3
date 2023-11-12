@@ -68,16 +68,10 @@
                     <div class="row" style="width: 250%;">
                         <div class="col-lg-4 col-md-5 offset-md-1">
                             <div class="form_container">
-                                <form action="">
-                                    <div>
-                                        <input type="search" placeholder="Cliente"
-                                            style="background-color: #ffffff52; margin-top: 25px  ">
-                                    </div>
 
                                 <div>
                                     <input id="form-identificacion" type="search" placeholder="Cliente"
                                         style="background-color: #ffffff52; margin-top: 25px  ">
-                                        
                                     <button id="buscarRuta" style="background-color: #ADD8E6; /* Green */
                                                 border: none;
                                                 color: black;
@@ -131,23 +125,30 @@
                                      font-size: small;
                                      color: black;
                                      text-align: left;">
+                                </h4>
+                                <h4 style="
+       font-size: small;
+         text-align: left;">
+                                    Chofer
+                                </h4>
+                                <div style="background-color: #ffffff52;text-align: center;">
+                                    <select id="DropDownChofer" style="background-color: #ffffff52;">
+                                    </select>
+                                </div>
 
-                                        Buscar Chofer
-                                    </h4>
-                                    <div class="DropDown2" style="background-color: #ffffff52;text-align: center;">
-                                        <select style="background-color: #ffffff52;">
-                                            <option value=""> Chofer 1</option>
-                                            <option value=""> Chofer 2</option>
-                                        </select>
-                                    </div>
+                                <h4 style="
+       font-size: small;
+         text-align: left;">
+                                    Camion
+                                </h4>
+                                <div style="background-color: #ffffff52;text-align: center;">
+                                    <select id="DropDownCamion" style="background-color: #ffffff52;">
+                                    </select>
+                                </div>
 
-                                    <div>
-                                        <input type="search" placeholder="Camión"
-                                            style="background-color: #ffffff52;" />
-                                    </div>
-                                    <h4 style="
+
+                                <h4 style="
                                       font-size: small;
-                                        color: white;
                                         text-align: left;">
                                     Estado
                                 </h4>
@@ -161,7 +162,7 @@
                                 </div>
                                 <h4 style="
                                         font-size: small;
-                                        color: #ffffff52;
+
                                         text-align: left;">
 
                                     Fecha de Inicio
@@ -172,7 +173,7 @@
                                 </div>
                                 <h4 style="
                                          font-size: small;
-                                            color: #ffffff52;
+
                                             text-align: left;">
 
                                     Fecha de Final
@@ -197,6 +198,29 @@
                                 </button>
 
                             </div>
+                            <button id="back" type="submit" onclick="location.reload()" style="background-color: #ADD8E6; /* Green */
+border: none;
+color: black;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+margin-left: 5%;
+font-size: 16px;">
+                                Atrás
+                            </button>
+
+                            <button id="menuprincipal" type="submit" onclick="window.location='MenuAdmin.html'" style="background-color: #ADD8E6; /* Green */
+border: none;
+color: black;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+margin-left: 5%;
+font-size: 16px;">
+                                Menú Principal
+                            </button>
                         </div>
                         <div class="col-lg-7 col-md-6 px-0">
                         </div>
@@ -209,26 +233,6 @@
         </div>
         <div style="margin: auto;" class="column">
 
-            <button type="submit" style="background-color: #ADD8E6; /* Green */
-  border: none;
-  color: Black;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;">
-                Editar
-            </button>
-            <button type="submit" style="background-color: #ADD8E6; /* Green */
-  border: none;
-  color: black;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;">
-                Agregar
-            </button>
         </div>
 
         <!-- Button trigger modal -->
@@ -261,6 +265,7 @@
 
     </div>
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/logicaRutas.js"></script>
     <!-- popper js -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
