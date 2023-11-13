@@ -37,7 +37,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <!-- owl slider stylesheet -->
     <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <!-- font awesome style -->
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
@@ -47,8 +47,8 @@
 
 </head>
 <!--background-image: url('images/truck5.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;-->
-<body class="sub_page"
-      style=" background-color:rgb(232, 247, 254); ">
+
+<body class="sub_page" style=" background-color:rgb(232, 247, 254); ">
     <!-- end header section -->
     <!-- contact section -->
 
@@ -71,21 +71,25 @@
                                 <form action="">
                                     <div>
                                         <input id="form-identificacion" type="text" placeholder="Identificación"
-                                               style="background-color: #f0f0f0; " disabled />
+                                            style="background-color: #f0f0f0; " disabled />
                                     </div>
                                     <div>
-                                        <input id="form-nombreCompleto" type="text" placeholder="Nombre Completo" style="background-color: #f0f0f0;" disabled />
-                                    </div>
-
-                                    <div>
-                                        <input id="form-direccion" type="text" placeholder="Direccion" style=" background-color: #f0f0f0;" disabled />
+                                        <input id="form-nombreCompleto" type="text" placeholder="Nombre Completo"
+                                            style="background-color: #f0f0f0;" disabled />
                                     </div>
 
                                     <div>
-                                        <input id="form-telefono" type="number" placeholder="telefono" style=" background-color: #f0f0f0;" disabled />
+                                        <input id="form-direccion" type="text" placeholder="Direccion"
+                                            style=" background-color: #f0f0f0;" disabled />
+                                    </div>
+
+                                    <div>
+                                        <input id="form-telefono" type="number" placeholder="telefono"
+                                            style=" background-color: #f0f0f0;" disabled />
                                     </div>
                                     <div>
-                                        <input id="form-email" type="email" placeholder="Correo electronico" style=" background-color: #f0f0f0;" disabled />
+                                        <input id="form-email" type="email" placeholder="Correo electronico"
+                                            style=" background-color: #f0f0f0;" disabled />
                                     </div>
                                     <h4 style="
                                         font-size: small;
@@ -112,49 +116,52 @@
         <div style="margin: auto;" class="column">
 
             <button id="crearCliente" type="submit" style="background-color: #ADD8E6; /* Green */
-  border: none;
-  color: black;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;">
+                    border: none;
+                    color: black;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;">
                 Crear cliente
             </button>
 
             <button id="buscarCliente" type="submit" style="background-color: #ADD8E6; /* Green */
-border: none;
-color: black;
-padding: 15px 32px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 16px;">
+                    border: none;
+                    color: black;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;">
                 Buscar
             </button>
-            <button id="editarCliente" type="submit" style="background-color: #ADD8E6;visibility : hidden; /* Green */ border: none; color: black; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;">
+            <button id="editarCliente" type="submit"
+                style="background-color: #ADD8E6;visibility : hidden; /* Green */ border: none; color: black; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;">
                 Editar
             </button>
 
             <button id="ConfirmarCrearCliente" type="submit" style="background-color: #ADD8E6; visibility: hidden;
-        border: none;
-        color: black;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;">
+                    border: none;
+                    color: black;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline;
+                    margin-right: 30%;
+                    font-size: 16px;">
                 Agregar cliente
             </button>
 
             <button id="ConfirmarBuscarCliente" type="submit" style="background-color: #ADD8E6; visibility: hidden; /* Green */
-     border: none;
-     color: black;
-     padding: 15px 32px;
-     text-align: center;
-     text-decoration: none;
-     display: inline-block;
-     font-size: 16px;">
+                    border: none;
+                    color: black;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline;
+                    margin-right: 30%;
+                    font-size: 16px;">
                 Buscar cliente
             </button>
 
@@ -188,12 +195,14 @@ font-size: 16px;">
     </div>
 
     <!-- Button trigger modal -->
-    <button style="visibility: hidden;" id="modalup" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    <button style="visibility: hidden;" id="modalup" type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#exampleModal">
         Launch demo modal
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -217,8 +226,8 @@ font-size: 16px;">
     <script type="text/javascript" src="js/logicaClientes.js"></script>
     <!-- popper js -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
     <!-- bootstrap js -->
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <!-- owl slider -->
@@ -226,7 +235,7 @@ font-size: 16px;">
     </script>
     <!-- custom js -->
     <script type="text/javascript" src="js/custom.js"></script>
-   
+
 </body>
 
 </html>
