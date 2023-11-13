@@ -13,15 +13,11 @@ $("#ConfirmarBuscarIncidencia").click(function () {
     var ruta = $('#form-Ruta').val();
     var fechaInicio = $('#form-fechaInicio').val();
     var fechaFinal = $('#form-fechaFinal').val();
-
+    console.log(fechaInicio, fechaFinal);
     $.ajax({
         type: 'get',
-        url: "https://localhost:7088/api/incidentesControllers/",
-        data: {
-            ruta: ruta,
-            fechaInicio: fechaInicio,
-            fechaFinal: fechaFinal
-        },
+        url: "https://localhost:7088/api/incidentesControllers/" + ruta + "?fechaInicio=" + fechaInicio + "&fechaFinal=" + fechaFinal +"",
+        
         contentType: "application/json; charset=utf-8",
         cache: false,
         dataType: 'json', // Corregido: 'jsonp' por 'json'
