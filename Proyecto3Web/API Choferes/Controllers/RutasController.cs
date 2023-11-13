@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Server;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Http.Cors;
 
@@ -28,108 +29,100 @@ namespace API_Choferes.Controllers
         // Get rutas por cliente
         // GET api/<RutasController>/5
         [HttpGet("{id}")]
-        public string[] Get(int id)
+        public IActionResult ObtenerDireccionRuta(int id)
         {
             try
             {
                 this.conexion.Open();
-                string querySQL = "SELECT ruta.Nombre as NombreRuta," +
-                    "pais.Nombre as NombrePais,ciudad.nombre as NombreCiudad, " +
-                    "ruta.Descripcion, chofer.IdentificadorChofer, Chofer.Nombre as NombreChofer," +
-                    "chofer.Apellido, Camiones.numeroPlaca, ruta.Estado" +
-                    "FROM [dbo].[Ruta] INNER JOIN DireccionRuta ON " +
-                    "[dbo].[Ruta].IdDireccionRuta = DireccionRuta.IdDireccionRuta" +
-                    "INNER JOIN Chofer ON [dbo].[Ruta].IdentificadorChofer = Chofer.IdentificadorChofer" +
-                    "INNER JOIN Camiones ON [dbo].[Ruta].numeroPlaca = Camiones.numeroPlaca" +
-                    "INNER JOIN PaisCiudad ON DireccionRuta.idPaisCiudad = PaisCiudad.idPaisCiudad" +
-                    "INNER JOIN Ciudad ON  Ciudad.IdentificadorCiudad = PaisCiudad.IdCiudad" +
-                    "INNER JOIN Pais ON Pais.IdentificadorPais = PaisCiudad.IdPais" +
-                    "WHERE IdentificadorRuta = @id";
+                string querySQL = "SELECT DireccionRuta.idDireccionRuta, DireccionRuta.NombreDireccionRuta, " +
+                    "Pais.Nombre as NombrePais, Ciudad.Nombre as NombreCiudad " +
+                    "FROM[dbo].DireccionRuta " +
+                    "INNER JOIN[dbo].ClientePais ON DireccionRuta.IdClientePais = ClientePais.IdClientePais " +
+                    "INNER JOIN[dbo].PaisCiudad ON DireccionRuta.IdPaisCiudad = PaisCiudad.IdPaisCiudad " +
+                    "INNER JOIN[dbo].Pais ON Pais.IdentificadorPais = PaisCiudad.IdPais " +
+                    "INNER JOIN[dbo].Ciudad ON Ciudad.IdentificadorCiudad = PaisCiudad.IdCiudad " +
+                    "INNER JOIN[dbo].Clientes ON Clientes.IdentificadorCliente = ClientePais.IdCliente " +
+                    "WHERE DireccionRuta.IdDireccionRuta = @id";
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
-
                     comando.Parameters.AddWithValue("@id", id);
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
                         while (lector.Read())
                         {
                            
-                            return new string[] { 
-                                (string)lector["NombreRuta"], 
+                            return Ok(new string[]
+                            {
+                                ((int)lector["idDireccionRuta"]).ToString(),
+                                (string)lector["NombreDireccionRuta"],
                                 (string)lector["NombrePais"], 
-                                (string)lector["NombreCiudad"], 
-                                (string)lector["Descripcion"], 
-                                (string)lector["IdentificadorChofer"].ToString(), 
-                                (string)lector["NombreChofer"], 
-                                (string)lector["Apellido"], 
-                                (string)lector["numeroPlaca"].ToString(), 
-                                (string)lector["Estado"].ToString() 
-                            };
+                                (string)lector["NombreCiudad"]
+                            });
 
                         }
-
                         lector.Close();
                     }
-
                 }
-
+                return null; 
                 this.conexion.Close();
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en la BD del select. {sqlEx.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = sqlEx.Message });
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                Console.WriteLine($"Error general del select. {ex.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = ex.Message });
             }
-            return new string[] { "error", "error" };
         }
 
       
 
         // PUT api/<RutasController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, string descripcion, int idChofer, string placa, int estado, string inicio, string final)
+        [HttpPost]
+        public IActionResult InsertarRutas(string nombre, int idDireccionRuta, int idChofer, string placa, int idCliente, string descripcion, string inicio, string final, string estadoEntrega)
         {
             try
             {
-                this.conexion.Open();
-                string querySQL =
-                    "UPDATE [dbo].[Ruta] SET Ruta.Descripcion = @descripcion , " +
-                    "Ruta.IdentificadorChofer = @idChofer, " +
-                    "Ruta.numeroPlaca = @placa, " +
-                    "Ruta.Estado = @estado, " +
-                    "Ruta.FechaHoraInicio = @inicio, " +
-                    "Ruta.FechaHoraFinal = @final" +
-                    "FROM [dbo].[Ruta]" +
-                    "INNER JOIN DireccionRuta ON [dbo].[Ruta].IdDireccionRuta = DireccionRuta.IdDireccionRuta" +
-                    "INNER JOIN Chofer ON [dbo].[Ruta].IdentificadorChofer = Chofer.IdentificadorChofer" +
-                    "INNER JOIN Camiones ON [dbo].[Ruta].numeroPlaca = Camiones.numeroPlaca" +
-                    "INNER JOIN PaisCiudad ON DireccionRuta.idPaisCiudad = PaisCiudad.idPaisCiudad" +
-                    "INNER JOIN Ciudad ON  Ciudad.IdentificadorCiudad = PaisCiudad.IdCiudad " +
-                    "INNER JOIN Pais ON Pais.IdentificadorPais = PaisCiudad.IdPais" +
-                    "WHERE IdentificadorRuta = @id";
+                DateOnly fechaInicio = DateOnly.Parse(inicio);
+                DateOnly fechaFinal = DateOnly.Parse(final);
 
+
+                this.conexion.Open();
+                string querySQL = "INSERT INTO[dbo].Ruta(Nombre, IdDireccionRuta, IdChofer, NumeroPlaca, IdCliente, Descripcion, FechaInicio, FechaFinal, EstadoEntrega)"+
+                                "VALUES(@nombre, @idDireccionRuta, @idChofer, @numeroPlaca, @idCliente, @descripcion, @fechaInicio, @fechaFinal, @estadoEntrega)";
+     
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
-                    comando.Parameters.AddWithValue("@id", id);
-                    comando.Parameters.AddWithValue("idChofer", idChofer);
-                    comando.Parameters.AddWithValue("descripcion", descripcion);
-                    comando.Parameters.AddWithValue("placa", placa);
-                    comando.Parameters.AddWithValue("estado", estado);
-                    comando.Parameters.AddWithValue("inicio", inicio);
-                    comando.Parameters.AddWithValue("final", final);
+                    comando.Parameters.AddWithValue("@nombre", nombre);
+                    comando.Parameters.AddWithValue("@idDireccionRuta", idDireccionRuta);
+                    comando.Parameters.AddWithValue("@idChofer", idChofer);
+                    comando.Parameters.AddWithValue("@numeroPlaca", placa);
+                    comando.Parameters.AddWithValue("@idCliente", idCliente);
+                    comando.Parameters.AddWithValue("@descripcion", descripcion);
+                    comando.Parameters.AddWithValue("@fechaInicio", fechaInicio);
+                    comando.Parameters.AddWithValue("@fechaFinal", fechaFinal);
+                    comando.Parameters.AddWithValue("@estadoEntrega", estadoEntrega);
                     comando.ExecuteNonQuery();
 
                 }
                 this.conexion.Close();
+                return Ok(new { Message = "Operación exitosa" });
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"Error en la BD del insert. {sqlEx.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = sqlEx.Message });
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                Console.WriteLine($"Error general del insert. {ex.Message}");
+                return StatusCode(500, new { Error = "Error inesperado", Message = ex.Message });
             }
-            return;
         }
     }
 }
