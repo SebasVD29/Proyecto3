@@ -37,7 +37,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <!-- owl slider stylesheet -->
     <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <!-- font awesome style -->
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
@@ -48,7 +48,7 @@
 </head>
 <!--background-image: url('images\celeste.png'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;-->
 <body class="sub_page"
-    style=" background-color:rgb(232, 247, 254); ">
+      style=" background-color:rgb(232, 247, 254); ">
     <!-- end header section -->
     <!-- contact section -->
 
@@ -65,52 +65,35 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="width: 250%;">
-                        <div class="col-lg-4 col-md-5 offset-md-1">
+                    <div class="" style="width: 100%;">
+                        <div class="offset-md-1">
                             <div class="form_container">
-                                
-                                <div>
                                 <form action="">
-                                    <h4 style="
-                                    font-size: x-large;
-                                     color: black;
-                                      text-align: left;">
-                                     
-                                        Ruta
-                                            <div class="DropDown7"
-                                                 style="background-color: #ffffff52;text-align: left; margin-top: 25px ">
-                                                <select style=" background-color: #ffffff52  ">
-                                                    <option value=""> 1</option>
-                                                    <option value=""> 2</option>
-                                                    <option value=""> 3</option>
-                                                </select>
-                                            </div>
-                                    </h4>
-                                    </div>
                                     <div>
-                                        <input type="date" placeholder="fecha" style="background-color: #ffffff52;" />
+                                        <input id="form-Ruta" type="text" placeholder=" Ruta" style="background-color: #f0f0f0;" />
                                     </div>
-                                    <div>
-                                        <input type="text" placeholder="Descripcion " style="background-color: #ffffff52;" />
+                                    <div style="margin-top: 20px;">
+                                        Fecha Inicio
+                                        <input type="date" id="form-fechaInicio" placeholder="Fecha Inicio" style="background-color: #ffffff52;" />
                                     </div>
 
                                     <div>
-                                        <input type="text" placeholder="Solucion"
-                                               style="background-color: #ffffff52;" />
+                                        Fecha Final
+                                        <div>
+                                            <input type="date" id="form-fechaFinal" placeholder="Fecha Final" style="background-color: #ffffff52;" />
+                                        </div>
                                     </div>
-
                                 </form>
-                              </div>
-                          </div>
-                          <div class="col-lg-7 col-md-6 px-0">
-                          </div>
-                      </div>
-                  </div>
-              </section>
-          </div>
-          <div style="margin: auto;" class="column">
+                            </div>
+                        <div class="col-lg-7 col-md-6 px-0">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div style="margin: auto;" class="column">
 
-              <button type="submit" style="background-color: #ADD8E6; /* Green */
+            <button type="submit" id="ConfirmarBuscarIncidencia" style="background-color: #ADD8E6; /* Green */
     border: none;
     color: black;
     padding: 15px 32px;
@@ -118,26 +101,51 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;">
-                  Buscar
-              </button>
-          </div>
-      </div>
-      <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-      <!-- popper js -->
-                                    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-                                            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-                                    </script>
-                                    <!-- bootstrap js -->
-                                    <script type="text/javascript" src="js/bootstrap.js"></script>
-                                    <!-- owl slider -->
-                                    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-                                    </script>
-                                    <!-- custom js -->
-                                    <script type="text/javascript" src="js/custom.js"></script>
-                                    <!-- Google Map -->
-                                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
-                                    </script>
-                                    <!-- End Google Map -->
+                Buscar
+            </button>
+        </div>
+    </div>
+        <td>
+            <!-- Tabla para mostrar los datos del cliente ingresados -->
+            <table class="list" id="incidenciasList">
+                <thead>
+                    <tr>
+                        <th>Identificador Incidente</th>
+                        <th>Ruta</th>
+                        <th>Descripcion</th>
+                        <th>Fecha/hora</th>
+                        <th>Solucion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los datos ingresados se mostrarán aquí -->
+                </tbody>
+            </table>
+        </td>
+        </tr>
+        </table>
+
+</body>
+
+
+     
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="js\logicaIncidencias.js"></script>
+<!-- popper js -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+</script>
+<!-- bootstrap js -->
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<!-- owl slider -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+</script>
+<!-- custom js -->
+<script type="text/javascript" src="js/custom.js"></script>
+<!-- Google Map -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+</script>
+<!-- End Google Map -->
 </body>
 
 </html>
