@@ -23,7 +23,7 @@ $("#ConfirmarBuscarIncidencia").click(function () {
         dataType: 'json', // Corregido: 'jsonp' por 'json'
         traditional: true,
         success: function (response) {
-            var table = $('#incidenciasList');
+            var table = $('#incidenciasList tbody');
             table.empty(); // Limpiar el contenido actual de la tabla
            
             // Iterar sobre la lista de respuestas
