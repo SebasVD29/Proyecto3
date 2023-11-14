@@ -71,7 +71,7 @@
 
                                 <div>
                                     <input id="form-identificacion" type="search" placeholder="Cliente"
-                                        style="background-color: #ffffff52; margin-top: 25px  ">
+                                           style="background-color: #ffffff52; margin-top: 25px  ">
                                     <button id="buscarRuta" style="background-color: #ADD8E6; /* Green */
                                                 border: none;
                                                 color: black;
@@ -87,9 +87,7 @@
                                 </div>
 
                                 <div class="DropDown" style="background-color: #ffffff52; text-align: center;">
-                                    <select id="rutaSelect" class="form-select"
-                                        style="background-color: #ffffff52; width: 100%;">
-                                        <option value="" selected disabled>Selecciona una Ruta</option>
+                                    <select id="rutaSelect" class="form-select" style="background-color: #ffffff52; width: 100%;">
                                     </select>
                                 </div>
                                 <button id="cargarRuta" style="background-color: #ADD8E6; /* Green */
@@ -106,26 +104,20 @@
                                     Cargar Ruta
                                 </button>
                                 <div>
-                                    <input id="nombreDireccionRuta" type="text"
-                                        placeholder="Nombre de la Dirección Ruta" style="background-color: #ffffff52;"
-                                        disabled />
-                                </div>
-                                <div>
-                                    <input id="finalPaisDireccionRuta" type="text" placeholder="País Final"
-                                        style="background-color: #ffffff52;" disabled />
-                                </div>
-                                <div>
-                                    <input id="finalCiudadDireccionRuta" type="text" placeholder="Ciudad Final"
-                                        style="background-color: #ffffff52;" disabled />
-                                </div>
-                                <div>
                                     <input id="nombreRuta" type="text" placeholder="Nombre de la Ruta"
-                                        style="background-color: #ffffff52;" />
+                                           style="background-color: #ffffff52;" disabled />
                                 </div>
                                 <div>
-                                    <input id="descripcion" type="text" class="message-box"
-                                        placeholder="Dirección Exacta"
-                                        style="background-color: #ffffff52 ;text-align: left; ">
+                                    <input id="finalPaisRuta" type="text" placeholder="País Final"
+                                           style="background-color: #ffffff52;" disabled />
+                                </div>
+                                <div>
+                                    <input id="finalCiudadRuta" type="text" placeholder="Ciudad Final"
+                                           style="background-color: #ffffff52;" />
+                                </div>
+                                <div>
+                                    <input id="direccionRuta" type="text" class="message-box" placeholder="Dirección Exacta"
+                                           style="background-color: #ffffff52 ;text-align: left; ">
                                 </div>
                                 <h4 style="
                                      font-size: small;
@@ -139,7 +131,6 @@
                                 </h4>
                                 <div style="background-color: #ffffff52;text-align: center;">
                                     <select id="DropDownChofer" style="background-color: #ffffff52;">
-                                        <option value="" selected disabled>Selecciona un Chofer</option>
                                     </select>
                                 </div>
 
@@ -150,7 +141,6 @@
                                 </h4>
                                 <div style="background-color: #ffffff52;text-align: center;">
                                     <select id="DropDownCamion" style="background-color: #ffffff52;">
-                                        <option value="" selected disabled>Selecciona un Camion</option>
                                     </select>
                                 </div>
 
@@ -161,11 +151,11 @@
                                     Estado
                                 </h4>
                                 <div class="DropDown5"
-                                    style="background-color: #ffffff52;text-align: center; margin-bottom: 15px ">
+                                     style="background-color: #ffffff52;text-align: center; margin-bottom: 15px ">
                                     <select id="estado" style=" background-color: #ffffff52  ">
-                                        <option value="Pendiente"> Pendiente</option>
-                                        <option value="En Progreso"> En progreso</option>
-                                        <option value="Finalizada"> Finalizada</option>
+                                        <option value="0"> Pendiente</option>
+                                        <option value="1"> En progreso</option>
+                                        <option value="2"> Finalizada</option>
                                     </select>
                                 </div>
                                 <h4 style="
@@ -177,7 +167,7 @@
                                 </h4>
                                 <div>
                                     <input id="fechaInicioRuta" type="date" placeholder="Fecha de Registro"
-                                        style=" background-color: #ffffff52;" />
+                                           style=" background-color: #ffffff52;" />
                                 </div>
                                 <h4 style="
                                          font-size: small;
@@ -188,10 +178,10 @@
                                 </h4>
                                 <div>
                                     <input id="fechaFinalRuta" type="date" placeholder="Fecha de Registro"
-                                        style=" background-color: #ffffff52;" />
+                                           style=" background-color: #ffffff52;" />
                                 </div>
 
-                                <button id="guardarRuta" style="background-color: #ADD8E6; /* Green */
+                                <button id="editarRuta" style="background-color: #ADD8E6; /* Green */
                                     border: none;
                                     color: black;
                                     margin-left: 32%;
@@ -207,26 +197,26 @@
 
                             </div>
                             <button id="back" type="submit" onclick="location.reload()" style="background-color: #ADD8E6; /* Green */
-                                border: none;
-                                color: black;
-                                padding: 15px 32px;
-                                text-align: center;
-                                text-decoration: none;
-                                display: inline-block;
-                                margin-left: 8%;
-                                font-size: 16px;">
+border: none;
+color: black;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+margin-left: 5%;
+font-size: 16px;">
                                 Atrás
                             </button>
 
                             <button id="menuprincipal" type="submit" onclick="window.location='MenuAdmin.html'" style="background-color: #ADD8E6; /* Green */
-                                border: none;
-                                color: black;
-                                padding: 15px 32px;
-                                text-align: center;
-                                text-decoration: none;
-                                display: inline-block;
-                                margin-left: 5%;
-                                font-size: 16px;">
+border: none;
+color: black;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+margin-left: 5%;
+font-size: 16px;">
                                 Menú Principal
                             </button>
                         </div>
@@ -235,7 +225,7 @@
                     </div>
 
 
-
+                    
                 </div>
             </section>
         </div>
@@ -244,14 +234,12 @@
         </div>
 
         <!-- Button trigger modal -->
-        <button style="visibility: hidden;" id="modalup" type="button" class="btn btn-primary" data-toggle="modal"
-            data-target="#exampleModal">
+        <button style="visibility: hidden;" id="modalup" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Launch demo modal
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -276,8 +264,8 @@
     <script type="text/javascript" src="js/logicaRutas.js"></script>
     <!-- popper js -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-        </script>
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
     <!-- bootstrap js -->
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <!-- owl slider -->

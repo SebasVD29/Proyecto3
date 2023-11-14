@@ -25,14 +25,8 @@ $("#buscarRuta").click(function () {
             }
             if (!array.length) alert("Rutas no Encontradas o Cliente no existe")
         },
-        error: function (xhr, status, error) {
-            responseData = xhr.responseJSON;
-            if (responseData) {
-                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
-            } else {
-                alert("Error desconocido: " + error);
-            }
-        
+        failure: function (response) {
+            alert("Error")
         }
     });
 
@@ -62,14 +56,8 @@ $("#cargarRuta").click(function () {
             }
             if (!array.length) alert("Choferes no Encontradas o Cliente no existe")
         },
-        error: function (xhr, status, error) {
-            responseData = xhr.responseJSON;
-            if (responseData) {
-                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
-            } else {
-                alert("Error desconocido: " + error);
-            }
-        
+        failure: function (response) {
+            alert("Error")
         }
     });
 
@@ -90,14 +78,8 @@ $("#cargarRuta").click(function () {
             }
             if (!array.length) alert("Camiones no Encontradas o Cliente no existe")
         },
-        error: function (xhr, status, error) {
-            responseData = xhr.responseJSON;
-            if (responseData) {
-                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
-            } else {
-                alert("Error desconocido: " + error);
-            }
-        
+        failure: function (response) {
+            alert("Error")
         }
     });
 
@@ -112,40 +94,31 @@ $("#cargarRuta").click(function () {
         datatype: 'jsonp',
         traditional: true,
         success: function (response) {
-            $('#nombreDireccionRuta').val(response[1]);
-            $('#finalPaisDireccionRuta').val(response[2]);
-            $('#finalCiudadDireccionRuta').val(response[3]);
+            $('#nombreRuta').val(response[0]);
+            $('#finalPaisRuta').val(response[1]);
+            $('#finalCiudadRuta').val(response[2]);
         },
-        error: function (xhr, status, error) {
-            responseData = xhr.responseJSON;
-            if (responseData) {
-                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
-            } else {
-                alert("Error desconocido: " + error);
-            }
-        
+        failure: function (response) {
+            alert("Error")
         }
     });
 
 });
 
 
-$("#guardarRuta").click(function () {
-    var nombreRuta = $('#nombreRuta').val();
-    var idDireccionRuta = $('#rutaSelect').val();
+$("#editarRuta").click(function () {
+
+    var identificacion = $('#rutaSelect').val();
+    var direccion = $('#direccionRuta').val();
     var chofer = $('#DropDownChofer').val();  //Chofer
     var camion = $('#DropDownCamion').val();    //Camion
-    var idCliente = $('#form-identificacion').val();
-    var descripcion = $('#descripcion').val();
+    var estado = $('#estado').val();  // Estado
     var inicio = $("#fechaInicioRuta").val();  // Fecha inicio
     var final = $("#fechaFinalRuta").val();  // Fecha final
-    var estado = $('#estado').val();  // Estado
-    
+
     jQuery.ajax({
-        type: 'post',
-        url: "https://localhost:7088/api/Rutas?nombre="+nombreRuta+"&idDireccionRuta="+idDireccionRuta+
-        "&idChofer="+chofer+"&placa="+camion+"&idCliente="+idCliente+"&descripcion="+descripcion+"&inicio="+inicio+
-        "&final="+final+"&estadoEntrega="+estado+"",
+        type: 'put',
+        url: "https://localhost:7088/api/Rutas/" + identificacion + "?descripcion=" + direccion + "&idChofer=" + chofer + "&placa=" + camion + "&estado=" + estado + "&inicio=" + inicio + "&final=" + final + "",
         contentType: "application/json; charset=utf-8",
         cache: false,
         datatype: 'jsonp',
@@ -159,14 +132,8 @@ $("#guardarRuta").click(function () {
                     location.reload();
                 }, 3000);
         },
-        error: function (xhr, status, error) {
-            responseData = xhr.responseJSON;
-            if (responseData) {
-                alert("Error: " + responseData.error + ". Detalles del error: " + responseData.message);
-            } else {
-                alert("Error desconocido: " + error);
-            }
-        
+        failure: function (response) {
+            alert("Error: datos no guardados")
         }
     });
 
