@@ -1,14 +1,25 @@
-/*function insertNewRecord(data) {
-    var table = document.getElementById("clientList").getElementsByTagName('tbody')[0];
-    var newRow = table.insertRow(table.length);
-    newRow.insertCell(0).innerHTML = data.fullName;
-    newRow.insertCell(1).innerHTML = data.docType;
-    newRow.insertCell(2).innerHTML = data.docNumber;
-    newRow.insertCell(3).innerHTML = data.address;
-    newRow.insertCell(4).innerHTML = data.email;
-    newRow.insertCell(5).innerHTML = `<button onClick="onEdit(this)">Edit</button> <button onClick="onDelete(this)">Delete</button>`;
-}
-*/
+
+        $("#ConfirmarBuscarIncidencia2").click(function () {
+            // Asegúrate de que 'table' esté definida antes de usarla
+            var table = $("#incidenciasList tbody");
+
+            var item = [];
+            item[0] = 1;
+            item[1] = 1;
+            item[2] = "ss";
+            item[3] = "2022-12-14"
+            item[4] = "nin";
+
+            var newRow = $("<tr>");
+            newRow.append("<td>" + item[0] + "</td>");
+            newRow.append("<td>" + item[1] + "</td>");
+            newRow.append("<td>" + item[2] + "</td>");
+            newRow.append("<td>" + item[3] + "</td>");
+            newRow.append("<td>" + item[4] + "</td>");
+            table.append(newRow);
+        });
+   
+
 $("#ConfirmarBuscarIncidencia").click(function () {
     var ruta = $('#form-Ruta').val();
     var fechaInicio = $('#form-fechaInicio').val();
@@ -27,13 +38,15 @@ $("#ConfirmarBuscarIncidencia").click(function () {
             table.empty(); // Limpiar el contenido actual de la tabla
            
             // Iterar sobre la lista de respuestas
-            $.each(response) {
+            $.each(response, function (index, item) {
+                console.log(item); // Puedes imprimir cada elemento del array si es necesario
+
                 var newRow = $("<tr>");
-                newRow.append("<td>" + response[0] + "</td>");
-                newRow.append("<td>" + response[1] + "</td>");
-                newRow.append("<td>" + response[2] + "</td>");
-                newRow.append("<td>" + response[3] + "</td>");
-                newRow.append("<td>" + response[4] + "</td>");
+                newRow.append("<td>" + item[0] + "</td>");
+                newRow.append("<td>" + item[1] + "</td>");
+                newRow.append("<td>" + item[2] + "</td>");
+                newRow.append("<td>" + item[3] + "</td>");
+                newRow.append("<td>" + item[4] + "</td>");
                 table.append(newRow);
             });
            

@@ -37,7 +37,7 @@ namespace API_Incidentes.Controllers
                     {
                 this.conexion.Open();
 
-                string querySQL = "SELECT * FROM dbo.Incidente WHERE IdentificadorRuta = @id AND FechaHora BETWEEN @fechaInicio AND @fechaFinal";
+                string querySQL = "SELECT * FROM dbo.Incidente WHERE IdRuta = @id AND FechaHora BETWEEN @fechaInicio AND @fechaFinal";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
@@ -50,10 +50,12 @@ namespace API_Incidentes.Controllers
                         while (lector.Read())
                         {
                             string identificadorIncidente = Convert.ToString(lector["IdentificadorIncidente"]);
+                            string ruta = Convert.ToString(lector["IdRuta"]);
+                            string descripcion= Convert.ToString(lector["Descripcion"]);
                             string fecha = Convert.ToString(lector["FechaHora"]);
                             string solucion = Convert.ToString(lector["Solucion"]);
 
-                            incidencias.Add(new string[] { identificadorIncidente, fecha, solucion });
+                            incidencias.Add(new string[] { identificadorIncidente,ruta,descripcion, fecha, solucion });
                         }
 
                         lector.Close();
