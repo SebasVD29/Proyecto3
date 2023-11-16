@@ -21,32 +21,41 @@ namespace API_Incidentes.Controllers
         private DataBaseController dataBase;
         private SqlConnection conexion;
 
+        public incidentesControllers(){
+            this.dataBase = new DataBaseController();
+            this.conexion = new SqlConnection(this.dataBase.StringConexion());
+        }
+
 
         // GET api/<choferesControllers>/5
         [HttpGet("{id}")]
-        public List<string[]> Get(int id)
+        public List<string[]> Get(int id, string fechaInicio, string fechaFinal)
         {
             List<string[]> incidencias = new List<string[]>();
 
             try
-            {
+                    {
                 this.conexion.Open();
 
-                string querySQL = "Select * from dbo.Incidentes where IdentificadorRuta = @id";
+                string querySQL = "SELECT * FROM dbo.Incidente WHERE IdRuta = @id AND FechaHora BETWEEN @fechaInicio AND @fechaFinal";
 
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
                     comando.Parameters.AddWithValue("@id", id);
+                    comando.Parameters.AddWithValue("@fechaInicio", fechaInicio);
+                    comando.Parameters.AddWithValue("@fechaFinal", fechaFinal);
 
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
                         while (lector.Read())
                         {
                             string identificadorIncidente = Convert.ToString(lector["IdentificadorIncidente"]);
-                            string fecha = Convert.ToString(lector["Fecha"]);
+                            string ruta = Convert.ToString(lector["IdRuta"]);
+                            string descripcion= Convert.ToString(lector["Descripcion"]);
+                            string fecha = Convert.ToString(lector["FechaHora"]);
                             string solucion = Convert.ToString(lector["Solucion"]);
 
-                            incidencias.Add(new string[] { identificadorIncidente, fecha, solucion });
+                            incidencias.Add(new string[] { identificadorIncidente,ruta,descripcion, fecha, solucion });
                         }
 
                         lector.Close();
@@ -59,9 +68,14 @@ namespace API_Incidentes.Controllers
                 incidencias.Clear();
                 incidencias.Add(new string[] { "error", "error" });
             }
+            finally
+            {
+                this.conexion.Close();
+            }
 
             return incidencias;
         }
+
 
 
 
