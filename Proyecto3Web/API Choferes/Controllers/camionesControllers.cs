@@ -34,7 +34,7 @@ namespace API_Choferes.Controllers
                 this.conexion.Open();
 
                 // Cantidad de rutas 
-                string querySQL = "Select * from dbo.Camiones";
+                string querySQL = "Select * from dbo.Camiones where Camiones.Estado = 1";
                 int cantidadChoferes = 0;
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
@@ -51,7 +51,7 @@ namespace API_Choferes.Controllers
                 }
                 string[][] returnValues = new string[cantidadChoferes][];
                 int contador = 0;
-                querySQL = "Select * from dbo.Camiones";
+                querySQL = "Select * from dbo.Camiones where Camiones.Estado = 1";
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
 
