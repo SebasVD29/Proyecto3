@@ -142,7 +142,6 @@ namespace API_Choferes.Controllers
         {
             try
             {
-
                _camionesService.UpdateCamion(numeroPlaca,
                                              camion.Marca,
                                              camion.Modelo,
