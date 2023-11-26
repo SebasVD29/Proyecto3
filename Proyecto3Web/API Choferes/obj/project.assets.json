@@ -7777,23 +7777,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\sebas\\.nuget\\packages\\": {},
+    "D:\\Apps\\apps\\Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj",
+      "projectUniqueName": "C:\\Users\\sebas\\Documents\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj",
       "projectName": "API Choferes",
-      "projectPath": "C:\\Users\\Admin\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\obj\\",
+      "projectPath": "C:\\Users\\sebas\\Documents\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\API Choferes.csproj",
+      "packagesPath": "C:\\Users\\sebas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sebas\\Documents\\GitHub\\Proyecto3\\Proyecto3Web\\API Choferes\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "D:\\Apps\\apps\\Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sebas\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -7861,7 +7861,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   },
