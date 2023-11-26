@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\APIRutas_Movil"
   ],
-  "SelectedNode": "\\APIRutas_Movil.sln",
+  "SelectedNode": "\\APIRutas_Movil\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
