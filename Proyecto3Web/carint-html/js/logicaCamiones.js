@@ -12,7 +12,7 @@ $("#crearCamion").click(function () {
     $("#form-Marca").prop('disabled', false);
     $("#form-Modelo").prop('disabled', false);
     $("#form-Fabricacion").prop('disabled', false);
-    $("#form-estado").prop('disabled', false);
+    $("#form-Estado").prop('disabled', false);
 
 });
 
@@ -22,7 +22,7 @@ $("#ConfirmarCrearCamion").click(function () {
     var Marca = $('#form-Marca').val();
     var Modelo = $('#form-Modelo').val();
     var Fabricacion = parseInt($('#form-Fabricacion').val());
-    var estado = $("#form-estado").children(":selected").val(); // Cambiado a obtener el texto del option
+    var Estado = $("#form-Estado").children(":selected").val(); // Cambiado a obtener el texto del option
     if (numeroPlaca == "") {
         alert("Ingrese un número de placa")
         return;
@@ -62,14 +62,14 @@ $("#ConfirmarCrearCamion").click(function () {
             Marca: Marca,
             Modelo: Modelo,
             Fabricacion: Fabricacion,
-            Estado: estado
+            Estado: Estado
         }),
         contentType: "application/json; charset=utf-8",
         cache: false,
         dataType: 'json', // Cambiado de 'jsonp' a 'json'
         success: function (response) {
             console.log(response); // Imprime la respuesta del servidor en la consola del navegador
-            $('#modalMensaje').text("El Camion con el numero de placa " + numeroPlaca + ", Marca " + Marca + ", Modelo  " + Modelo + ", fabricado en " + Fabricacion + " en estado " + estado + " fue agregado.");
+            $('#modalMensaje').text("El Camion con el numero de placa " + numeroPlaca + ", Marca " + Marca + ", Modelo  " + Modelo + ", fabricado en " + Fabricacion + " en Estado " + Estado + " fue agregado.");
             $('#modalup').trigger('click');
         },
 
@@ -122,7 +122,7 @@ $("#ConfirmarBuscarCamion").click(function () {
                 $('#form-Marca').val(camion.marca);
                 $('#form-Modelo').val(camion.modelo);
                 $('#form-Fabricacion').val(camion.fabricacion);
-                $('#form-estado').val(camion.estado).change(); // Cambiado a .change() para seleccionar el estado
+                $('#form-Estado').val(camion.Estado).change(); // Cambiado a .change() para seleccionar el Estado
                 $("#editarCamion").css("visibility", "visible");
                 $("#ConfirmarBuscarCamion").css("visibility", "hidden");
                 $("#form-numeroPlaca").css('background-color', "#ffffff52");
@@ -133,7 +133,7 @@ $("#ConfirmarBuscarCamion").click(function () {
                 $("#form-Marca").prop('disabled', false);
                 $("#form-Modelo").prop('disabled', false);
                 $("#form-Fabricacion").prop('disabled', false);
-                $("#form-estado").prop('disabled', false);
+                $("#form-Estado").prop('disabled', false);
             } else {
                 alert("Error: Datos de camión no encontrados en la respuesta");
             }
@@ -167,24 +167,24 @@ $("#editarCamion").click(function(){
       var Marca = $('#form-Marca ').val();
       var Modelo = $('#form-Modelo ').val();
       var Fabricacion = $('#form-Fabricacion ').val();
-      var estado = $("#form-estado").children(":selected")[0].label;
+      var Estado = $("#form-Estado").val();
       
       jQuery.ajax({
-        type: 'post',
-        url: "https://localhost:7088/api/Camiones",
+        type: 'put',
+        url: "https://localhost:7088/api/Camiones/" + numeroPlaca,
         data: JSON.stringify({
             numeroPlaca: numeroPlaca,
             Marca: Marca,
             Modelo: Modelo,
             Fabricacion: Fabricacion,
-            Estado: estado
+            Estado: Estado
         }),
         contentType: "application/json; charset=utf-8",
         cache: false,
         dataType: 'json', // Cambiado de 'jsonp' a 'json'
         success: function (response) {
-            console.log(response); // Imprime la respuesta del servidor en la consola del navegador
-            $('#modalMensaje').text("El Camion con el numero de placa " + numeroPlaca + ", Marca " + Marca + ", Modelo  " + Modelo + ", fabricado en " + Fabricacion + " en estado " + estado + " fue agregado.");
+         
+            $('#modalMensaje').text("El Camion con el numero de placa " + numeroPlaca + ", Marca " + Marca + ", Modelo  " + Modelo + ", fabricado en " + Fabricacion + " en Estado " + Estado + " fue agregado.");
             $('#modalup').trigger('click');
         },
         

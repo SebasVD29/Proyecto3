@@ -33,9 +33,9 @@ namespace API_Choferes.Controllers
             {
                 this.conexion.Open();
 
-                // Cantidad de rutas 
-                string querySQL = "Select * from dbo.Camiones";
-                int cantidadChoferes = 0;
+               
+                string querySQL = "Select * from dbo.Camiones where Camiones.Estado = 1";
+                int cantidadCamiones = 0;
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
 
@@ -43,15 +43,15 @@ namespace API_Choferes.Controllers
                     {
                         while (lector.Read())
                         {
-                            cantidadChoferes++;
+                            cantidadCamiones++;
                         }
                         lector.Close();
                     }
 
                 }
-                string[][] returnValues = new string[cantidadChoferes][];
+                string[][] returnValues = new string[cantidadCamiones][];
                 int contador = 0;
-                querySQL = "Select * from dbo.Camiones";
+                querySQL = "Select * from dbo.Camiones where Camiones.Estado = 1";
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
 
@@ -142,7 +142,6 @@ namespace API_Choferes.Controllers
         {
             try
             {
-
                _camionesService.UpdateCamion(numeroPlaca,
                                              camion.Marca,
                                              camion.Modelo,

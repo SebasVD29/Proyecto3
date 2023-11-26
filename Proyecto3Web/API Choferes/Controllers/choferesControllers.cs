@@ -39,7 +39,7 @@ namespace API_Choferes.Controllers
                 this.conexion.Open();
 
                 // Cantidad de rutas 
-                string querySQL = "Select * from dbo.Chofer";
+                string querySQL = "Select * from dbo.Chofer where Chofer.Estado = 1";
                 int cantidadChoferes = 0;
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
@@ -56,7 +56,7 @@ namespace API_Choferes.Controllers
                 }
                 string[][] returnValues = new string[cantidadChoferes][];
                 int contador = 0;
-                querySQL = "Select * from dbo.Chofer";
+                querySQL = "Select * from dbo.Chofer where Chofer.Estado = 1";
                 using (SqlCommand comando = new SqlCommand(querySQL, this.conexion))
                 {
 
@@ -105,7 +105,7 @@ namespace API_Choferes.Controllers
                     comando.Parameters.AddWithValue("@id", id);
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
-                        while (lector.Read())
+                        if (lector.Read())
                         {
 
                             if ((int)lector["Estado"] == 1)

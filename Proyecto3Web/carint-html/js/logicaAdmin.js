@@ -79,7 +79,7 @@ $("#ConfirmarCrearAdmin").click(function () {
         datatype: 'jsonp',
         traditional: true,
         success: function (response) {
-            $('#modalMensaje').text("El chofer con identificacion " + identificacion + ", nombre " + nombre + ", apellidos  " + apellidos + ", email " + email + " en estado " + estado + " fue agregado.");
+            $('#modalMensaje').text("El administrador con identificacion " + identificacion + ", nombre " + nombre + ", apellidos  " + apellidos + ", email " + email + " en estado " + estado + " fue agregado.");
             $('#modalup').trigger('click');
             setTimeout(
                 function () {
@@ -222,7 +222,7 @@ $("#editarAdmin").click(function () {
         datatype: 'jsonp',
         traditional: true,
         success: function (response) {
-            $('#modalMensaje').text("El chofer con identificacion " + identificacion + ", nombre " + nombre + ", apellidos  " + apellidos + ", email " + email + " en estado " + estado + " fue actualizado.");
+            $('#modalMensaje').text("El administrador con identificacion " + identificacion + ", nombre " + nombre + ", apellidos  " + apellidos + ", email " + email + " en estado " + estado + " fue actualizado.");
             $('#modalup').trigger('click');
 
             setTimeout(

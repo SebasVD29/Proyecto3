@@ -27,6 +27,7 @@ namespace API_Clientes.Controllers
 
         public IActionResult Get(int id)
         {
+            Console.WriteLine(id);
             string telefono = "";
             string estado = "";
             try
@@ -38,7 +39,7 @@ namespace API_Clientes.Controllers
                     command.Parameters.AddWithValue("@id", id);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        while (reader.Read())
+                        if (reader.Read())
                         {                 
                             if ((int)reader["Estado"] == 1)
                             {
