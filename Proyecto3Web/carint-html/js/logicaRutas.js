@@ -112,9 +112,9 @@ $("#cargarRuta").click(function () {
         datatype: 'jsonp',
         traditional: true,
         success: function (response) {
-            $('#nombreRuta').val(response[1]);
-            $('#finalPaisRuta').val(response[2]);
-            $('#finalCiudadRuta').val(response[3]);
+            $('#nombreDireccionRuta').val(response[1]);
+            $('#finalPaisDireccionRuta').val(response[2]);
+            $('#finalCiudadDireccionRuta').val(response[3]);
         },
         error: function (xhr, status, error) {
             responseData = xhr.responseJSON;

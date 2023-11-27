@@ -29,11 +29,11 @@ $("#IngresarSistema").click(function () {
             console.log("respuesta", response)
 
         },
-        failure: function (xhr, status, error) {
-            var message = document.querySelector(".message");
-            message.textContent = "Invalid username or password!";
-            message.style.color = "red";
-            alert("Error: Administrador no encontrado", error)
+        error: function (xhr, status, error){
+            responseData = xhr.responseJSON;
+            if (responseData) {
+                alert("Error: Administrador no encontrado", + responseData.message);
+            }
         }
     });
 
