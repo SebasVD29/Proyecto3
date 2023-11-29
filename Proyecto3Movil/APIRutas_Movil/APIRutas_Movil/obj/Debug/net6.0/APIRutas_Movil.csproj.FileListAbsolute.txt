@@ -1,0 +1,7 @@
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\APIRutas_Movil\APIRutas_Movil\obj\Debug\net6.0\APIRutas_Movil.csproj.AssemblyReference.cache
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\APIRutas_Movil\APIRutas_Movil\obj\Debug\net6.0\APIRutas_Movil.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\APIRutas_Movil\APIRutas_Movil\obj\Debug\net6.0\APIRutas_Movil.AssemblyInfoInputs.cache
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\APIRutas_Movil\APIRutas_Movil\obj\Debug\net6.0\APIRutas_Movil.AssemblyInfo.cs
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\APIRutas_Movil\APIRutas_Movil\obj\Debug\net6.0\APIRutas_Movil.csproj.CoreCompileInputs.cache
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\APIRutas_Movil\APIRutas_Movil\obj\Debug\net6.0\APIRutas_Movil.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\APIRutas_Movil\APIRutas_Movil\obj\Debug\net6.0\APIRutas_Movil.MvcApplicationPartsAssemblyInfo.cache

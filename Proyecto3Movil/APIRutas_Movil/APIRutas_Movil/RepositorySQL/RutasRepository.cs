@@ -22,9 +22,9 @@ namespace APIRutas_Movil.RepositorySQL
 
         }
 
-        public async Task<Rutas> SP_ActualizarEstadoRuta(Rutas idRuta, string estadoEntrega)
+        public async Task<Rutas> SP_ActualizarEstadoRuta(Rutas rutasId_EstadoEntrega)
         {
-
+            
         }
     }
 }

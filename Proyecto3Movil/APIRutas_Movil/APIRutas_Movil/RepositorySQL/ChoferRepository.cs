@@ -19,6 +19,23 @@ namespace APIRutas_Movil.RepositorySQL
 
         public async Task<Chofer> SP_LoginChofer(string password, string email)
         {
+            try
+            {
+                DynamicParameters param = new DynamicParameters();
+
+                param.Add("@Password", password, DbType.String, ParameterDirection.Input);
+                param.Add("@Email", email, DbType.String, ParameterDirection.Input);
+                using (var conn = _context.CrearConexion())
+                {
+                    return await conn.QuerySingleOrDefaultAsync<Chofer>("SP_LoginChofer", param, commandType: CommandType.StoredProcedure);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
         }
     }
