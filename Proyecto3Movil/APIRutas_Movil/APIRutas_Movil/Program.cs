@@ -1,3 +1,5 @@
+using APIRutas_Movil.BLL;
+using APIRutas_Movil.IBLL;
 using APIRutas_Movil.Dapper;
 using APIRutas_Movil.IDapper;
 using APIRutas_Movil.IRepositorySQL;
@@ -12,10 +14,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 builder.Services.AddSingleton<IDapperContext, DapperContext>();
+
+//Repositorios
 builder.Services.AddSingleton<IChoferRepository, ChoferRepository>();
-builder.Services.AddSingleton<IRutasRepository, RutasRepository>();
-builder.Services.AddSingleton<IIncidenteRepository, IncidenteRepository>();
+//builder.Services.AddSingleton<IRutasRepository, RutasRepository>();
+//builder.Services.AddSingleton<IIncidenteRepository, IncidenteRepository>();
+
+//BLL
+builder.Services.AddSingleton<IChoferBLL, ChoferBLL>();
+
 
 
 var app = builder.Build();
@@ -27,7 +36,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

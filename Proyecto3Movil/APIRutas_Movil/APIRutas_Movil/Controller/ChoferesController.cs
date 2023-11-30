@@ -16,8 +16,8 @@ namespace APIRutas_Movil.Controller
         }
 
         [HttpGet]
-        [Route("Obtener")]
-        public async Task<ActionResult<ResponseChofer>> ObtenerCliente(string password, string email)
+        [Route("Login")]
+        public async Task<ActionResult<ResponseChofer>> LoginChofer(string password, string email)
         {
             try
             {
@@ -28,7 +28,6 @@ namespace APIRutas_Movil.Controller
             {
 
                 ResponseChofer responseChofer = new ResponseChofer();
-
                 ResponseModel responseModel = new ResponseModel();
                 responseModel.errorcode = -1;
                 responseModel.errormsg = "Error al buscar el chofer";

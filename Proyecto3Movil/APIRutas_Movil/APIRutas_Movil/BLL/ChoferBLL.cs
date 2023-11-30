@@ -3,6 +3,7 @@ using APIRutas_Movil.IRepositorySQL;
 using APIRutas_Movil.Modelo;
 using System.Security.Cryptography;
 using System.Text;
+using System.Diagnostics;
 
 namespace APIRutas_Movil.BLL
 {
@@ -19,7 +20,8 @@ namespace APIRutas_Movil.BLL
         {
             try
             {
-                var chofer = await _choferRepository.SP_LoginChofer(await Encriptacion(password), email);
+                
+                Chofer chofer = await _choferRepository.LoginChofer(await Encriptacion(password), email);
 
                 ResponseChofer responseChofer = new ResponseChofer();
                 ResponseModel responseModel = new ResponseModel();
