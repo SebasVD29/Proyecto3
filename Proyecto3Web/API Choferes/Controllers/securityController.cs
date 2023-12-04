@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using Azure;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace API_Choferes.Controllers
@@ -9,38 +10,29 @@ namespace API_Choferes.Controllers
 
         public string Encriptar(string clave)
         {
-            using (Aes aes = Aes.Create())
+            MemoryStream memStream = null;
+            try
             {
-                byte[] key =
-                {
-                    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
-                    0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16
-                };
-                aes.Key = key;
+                byte[] key = { };
+                byte[] IV = { 12, 21, 43, 17, 57, 35, 67, 27 };
+                string encryptKey = "aXb2uy4z";
+                key = Encoding.UTF8.GetBytes(encryptKey);
+                byte[] byteInput = Encoding.UTF8.GetBytes(clave);
+                DESCryptoServiceProvider provider = new DESCryptoServiceProvider();
+                memStream = new MemoryStream();
+                ICryptoTransform transform = provider.CreateEncryptor(key, IV);
+                CryptoStream cryptoStream = new CryptoStream(memStream, transform, CryptoStreamMode.Write);
+                cryptoStream.Write(byteInput, 0, byteInput.Length);
+                cryptoStream.FlushFinalBlock();
 
-                byte[] iv = aes.IV;
-
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    ms.Write(iv, 0, iv.Length);
-
-                    using (CryptoStream cryptoStream = new CryptoStream(
-                        ms,
-                        aes.CreateEncryptor(),
-                        CryptoStreamMode.Write))
-                    {
-                        using (StreamWriter encryptWriter = new StreamWriter(cryptoStream))
-                        {
-                            encryptWriter.WriteLine(clave);
-                        }
-                    }
-
-                    // Devuelve la clave cifrada como una cadena Base64
-                    return Convert.ToBase64String(ms.ToArray());
-                }
             }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+            return Convert.ToBase64String(memStream.ToArray());
         }
-        public string Desencriptar(string claveEncriptada)
+        /*public string Desencriptar(string claveEncriptada)
         {
             try
             {
@@ -82,6 +74,6 @@ namespace API_Choferes.Controllers
                 Console.WriteLine($"La desencriptación falló. {ex}");
                 throw;
             }
-        }
+        }*/
     }
 }

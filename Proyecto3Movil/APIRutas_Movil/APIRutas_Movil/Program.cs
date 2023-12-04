@@ -1,3 +1,10 @@
+using APIRutas_Movil.BLL;
+using APIRutas_Movil.IBLL;
+using APIRutas_Movil.Dapper;
+using APIRutas_Movil.IDapper;
+using APIRutas_Movil.IRepositorySQL;
+using APIRutas_Movil.RepositorySQL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +13,19 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddSingleton<IDapperContext, DapperContext>();
+
+//Repositorios
+builder.Services.AddSingleton<IChoferRepository, ChoferRepository>();
+//builder.Services.AddSingleton<IRutasRepository, RutasRepository>();
+//builder.Services.AddSingleton<IIncidenteRepository, IncidenteRepository>();
+
+//BLL
+builder.Services.AddSingleton<IChoferBLL, ChoferBLL>();
+
+
 
 var app = builder.Build();
 
@@ -16,7 +36,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

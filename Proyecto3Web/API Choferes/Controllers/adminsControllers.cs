@@ -192,12 +192,13 @@ namespace API_Choferes.Controllers
                     {
                         while(lector.Read())
                         {
-                            var email = (string)lector["Email"];
-                            string pass = this.securityController.Desencriptar((string)lector["Contraseña"]);
+                            string contra = this.securityController.Encriptar(password);
+                            string email = (string)lector["Email"];
+                            string pass = (string)lector["Contraseña"];
                           
-                            if (email.Equals(correo) && pass.Equals(password)) 
+                            if (email.Equals(correo) && pass.Equals(contra)) 
                             { 
-                                Console.WriteLine("Hizo el if");
+                       
                                 var data = new { success = true, message = "Autenticación exitosa" };
                                 return Ok(data);
                 

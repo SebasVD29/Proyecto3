@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\APIRutas_Movil.props" />
+</Project>

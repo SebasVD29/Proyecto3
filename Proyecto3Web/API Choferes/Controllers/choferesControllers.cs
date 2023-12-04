@@ -105,7 +105,7 @@ namespace API_Choferes.Controllers
                     comando.Parameters.AddWithValue("@id", id);
                     using (SqlDataReader lector = comando.ExecuteReader())
                     {
-                        while (lector.Read())
+                        if (lector.Read())
                         {
 
                             if ((int)lector["Estado"] == 1)
