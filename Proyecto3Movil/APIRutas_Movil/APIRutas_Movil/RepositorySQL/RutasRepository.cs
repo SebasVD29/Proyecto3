@@ -23,7 +23,8 @@ namespace APIRutas_Movil.RepositorySQL
             {
                 using (var conn = _context.CrearConexion())
                 {
-                    return await conn.QueryAsync<Rutas>("lista_clientes");
+                    return await conn.QueryAsync<Rutas>("SP_ListarRutasPorChofer", param, commandType: CommandType.StoredProcedure);
+                    
                 }
             }
             catch (Exception)
@@ -33,21 +34,17 @@ namespace APIRutas_Movil.RepositorySQL
             }
         }
 
-        public async Task<Rutas> SP_ActualizarEstadoRuta(int idRuta, string estadoEntrega)
+        public async Task<Boolean> CambioEstado(string estadoEntrega, int identificadorRuta)
         {
             try
             {
 
-                var param = new DynamicParameters();
-                param.Add("@id", idRuta, DbType.String, ParameterDirection.Input);
-                param.Add("@nombre", estadoEntrega, DbType.String, ParameterDirection.Input);
-      
-
+                param.Add("@EstadoEntrega", estadoEntrega, DbType.String, ParameterDirection.Input);
+                param.Add("@IdRuta", identificadorRuta, DbType.Int64, ParameterDirection.Input);
                 using (var conn = _context.CrearConexion())
                 {
-                    Rutas rutas;
-                    await conn.ExecuteAsync("actualizar_cliente", param, commandType: CommandType.StoredProcedure);
-                    return rutas;
+                    await conn.QueryAsync("SP_ActualizarEstadoRuta", param, commandType: CommandType.StoredProcedure);
+                    return true;
                 }
 
             }
@@ -58,5 +55,7 @@ namespace APIRutas_Movil.RepositorySQL
             }
 
         }
+
+       
     }
 }

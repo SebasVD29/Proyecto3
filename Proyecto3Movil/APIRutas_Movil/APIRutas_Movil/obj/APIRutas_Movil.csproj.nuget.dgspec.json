@@ -51,7 +51,7 @@
             },
             "Dapper.Extensions.NetCore": {
               "target": "Package",
-              "version": "[4.2.5, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
