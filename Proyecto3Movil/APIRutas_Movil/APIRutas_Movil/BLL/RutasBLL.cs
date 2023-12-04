@@ -56,7 +56,7 @@ namespace APIRutas_Movil.BLL
                 }
                 else
                 {
-                    responseModel.errorcode = 0;
+                    responseModel.errorcode = 1;
                     responseModel.errormsg = "No se ha podido encontrar las rutas";
                 }
 
