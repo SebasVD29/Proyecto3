@@ -19,12 +19,11 @@ builder.Services.AddSingleton<IDapperContext, DapperContext>();
 
 //Repositorios
 builder.Services.AddSingleton<IChoferRepository, ChoferRepository>();
-builder.Services.AddSingleton<IRutasRepository, RutasRepository>();
+//builder.Services.AddSingleton<IRutasRepository, RutasRepository>();
 //builder.Services.AddSingleton<IIncidenteRepository, IncidenteRepository>();
 
 //BLL
 builder.Services.AddSingleton<IChoferBLL, ChoferBLL>();
-builder.Services.AddSingleton<IRutasBLL, RutasBLL>();
 
 
 

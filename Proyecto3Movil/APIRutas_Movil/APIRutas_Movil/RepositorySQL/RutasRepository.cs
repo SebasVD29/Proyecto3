@@ -2,7 +2,6 @@
 using APIRutas_Movil.IRepositorySQL;
 using APIRutas_Movil.Modelo;
 using Dapper;
-using System.Collections.Generic;
 using System.Data;
 
 namespace APIRutas_Movil.RepositorySQL
@@ -18,49 +17,20 @@ namespace APIRutas_Movil.RepositorySQL
             _context = context;
         }
 
-        public async Task<IEnumerable<Rutas>> ListarRutasPorChofer(int idChofer)
+        public async Task<IEnumerable<Rutas>> SP_ListarRutasPorChofer(Chofer idChofer)
         {
             try
             {
-                DynamicParameters param = new DynamicParameters();
-
-                param.Add("@idChofer", idChofer, DbType.Int64, ParameterDirection.Input);
                 using (var conn = _context.CrearConexion())
                 {
-                    IEnumerable<Rutas> test = await conn.QueryAsync<Rutas>("SP_ListarRutasPorChofer", param, commandType: CommandType.StoredProcedure);
-                    return test;
+                    return await conn.QueryAsync<Rutas>("lista_clientes");
                 }
-
             }
             catch (Exception)
             {
 
                 throw;
             }
-
-        }
-
-        public async Task<Boolean> CambioEstado(string EstadoEntrega, int IdentificadorRuta)
-        {
-            try
-            {
-                DynamicParameters param = new DynamicParameters();
-
-                param.Add("@EstadoEntrega", EstadoEntrega , DbType.String, ParameterDirection.Input);
-                param.Add("@IdRuta", IdentificadorRuta, DbType.Int64, ParameterDirection.Input);
-                using (var conn = _context.CrearConexion())
-                {
-                    await conn.QueryAsync("SP_ActualizarEstadoRuta", param, commandType: CommandType.StoredProcedure);
-                    return true;
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
         }
 
         public async Task<Rutas> SP_ActualizarEstadoRuta(Rutas rutasId_EstadoEntrega)
