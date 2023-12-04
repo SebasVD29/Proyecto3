@@ -2,12 +2,14 @@
 using APIRutas_Movil.IRepositorySQL;
 using APIRutas_Movil.Modelo;
 using Dapper;
+using System;
 using System.Data;
+using System.Threading.Tasks;
+
 namespace APIRutas_Movil.RepositorySQL
 {
     public class IncidenteRepository : IIncidenteRepository
     {
-
         private readonly IDapperContext _context;
 
         // inyectamos la interfaz de IDapperContext para poder obtener cadena de conexion en cada método
