@@ -16,20 +16,22 @@ namespace APIRutas_Movil.RepositorySQL
             _context = context;
         }
 
-        public async Task<Incidente> SP_CrearIncidencia(Incidente incidente)
+        public async Task<Incidente> CrearIncidencia(Incidente incidente)
         {
             try
             {
                 var param = new DynamicParameters();
 
-                param.Add("@nombre", incidente.IdRuta, DbType.String, ParameterDirection.Input);
-                param.Add("@telefono", incidente.Solucion, DbType.String, ParameterDirection.Input);
-                param.Add("@contacto", incidente.Descripcion, DbType.String, ParameterDirection.Input);
+                param.Add("@idRuta", incidente.IdRuta, DbType.Int64, ParameterDirection.Input);
+                param.Add("@descripcion", incidente.Descripcion, DbType.String, ParameterDirection.Input);
+                param.Add("@fecha", incidente.FechaHora, DbType.Date, ParameterDirection.Input);
+                param.Add("@solucion", incidente.Solucion, DbType.String, ParameterDirection.Input);
 
                 using (var conn = _context.CrearConexion())
                 {
-                    Incidente _incidente = await conn.QuerySingleAsync<Incidente>("crear_cliente", param, commandType: CommandType.StoredProcedure);
-                    return _incidente;
+                    var incidenteCreado =  await conn.QuerySingleAsync<Incidente>("SP_CrearIncidencia", param, commandType: CommandType.StoredProcedure);
+                    Console.WriteLine("Repositorio" +incidenteCreado);
+                    return incidenteCreado;
                 }
             }
             catch (Exception)

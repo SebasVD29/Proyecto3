@@ -3,6 +3,7 @@ namespace APIRutas_Movil.IRepositorySQL
 {
     public interface IIncidenteRepository
     {
-        public Task<Incidente> SP_CrearIncidencia(Incidente incidente);
+        public Task<Incidente> CrearIncidencia(Incidente incidente);
+       // Task<IEnumerable<Incidente>> ObtenerIncidentesSimilares(Incidente incidente);
     }
 }
