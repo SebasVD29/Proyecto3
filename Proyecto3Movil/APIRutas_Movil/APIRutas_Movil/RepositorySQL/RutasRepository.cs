@@ -44,13 +44,16 @@ namespace APIRutas_Movil.RepositorySQL
         {
             try
             {
-
-                param.Add("@EstadoEntrega", estadoEntrega, DbType.String, ParameterDirection.Input);
-                param.Add("@IdRuta", identificadorRuta, DbType.Int64, ParameterDirection.Input);
+                DynamicParameters param = new DynamicParameters();
+                param.Add("@estadoEntrega", estadoEntrega, DbType.String, ParameterDirection.Input);
+                param.Add("@idRuta", identificadorRuta, DbType.Int64, ParameterDirection.Input);
                 using (var conn = _context.CrearConexion())
                 {
-                    await conn.QueryAsync("SP_ActualizarEstadoRuta", param, commandType: CommandType.StoredProcedure);
-                    return true;
+                    
+                    var actualizada = await conn.QuerySingleOrDefaultAsync<Boolean>("SP_ActualizarEstadoRuta", param, commandType: CommandType.StoredProcedure);
+                    return actualizada;
+
+
                 }
 
             }

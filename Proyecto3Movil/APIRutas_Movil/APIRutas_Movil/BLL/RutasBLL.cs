@@ -1,11 +1,7 @@
 ﻿using APIRutas_Movil.IBLL;
 using APIRutas_Movil.IRepositorySQL;
 using APIRutas_Movil.Modelo;
-using System.Security.Cryptography;
-using System.Text;
 using System.Diagnostics;
-using System.Linq;
-using Newtonsoft.Json.Linq;
 
 namespace APIRutas_Movil.BLL
 {
@@ -75,8 +71,16 @@ namespace APIRutas_Movil.BLL
         {
             try
             {
-                await _rutasRepository.CambioEstado(EstadoEntrega, IdentificadorRuta);
-                return true;
+                var rutaActualizado = await _rutasRepository.CambioEstado(EstadoEntrega, IdentificadorRuta);
+                ResponseRutas responseRuta = new ResponseRutas();
+                ResponseModel responseModel = new ResponseModel();
+                responseModel.errorcode = 0;
+                responseModel.errormsg = "Estado de la Ruta Actualizado con éxito";
+
+               
+                //responseRuta.ruta = rutaActualizado;
+                responseRuta.errores = responseModel;
+                return rutaActualizado;
             }
             catch (Exception)
             {

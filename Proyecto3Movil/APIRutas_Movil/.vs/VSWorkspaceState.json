@@ -2,10 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\APIRutas_Movil",
-    "\\APIRutas_Movil\\IRepositorySQL",
-    "\\APIRutas_Movil\\Modelo",
-    "\\APIRutas_Movil\\RepositorySQL"
+    "\\APIRutas_Movil\\BLL",
+    "\\APIRutas_Movil\\Controller",
+    "\\APIRutas_Movil\\Modelo"
   ],
-  "SelectedNode": "\\APIRutas_Movil\\Program.cs",
+  "SelectedNode": "\\APIRutas_Movil.sln",
   "PreviewInSolutionExplorer": false
 }

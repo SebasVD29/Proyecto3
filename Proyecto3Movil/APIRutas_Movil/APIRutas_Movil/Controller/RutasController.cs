@@ -19,7 +19,7 @@ namespace APIRutas_Movil.Controller
         }
 
         [HttpGet]
-        [Route("RutasPorChofer")]
+        [Route("ListaRutasPorChofer")]
         public async Task<List<ResponseRutas>> ListarRutasPorChofer(int IdChofer)
         {
             try
@@ -30,33 +30,35 @@ namespace APIRutas_Movil.Controller
             catch (Exception)
             {
 
-                ResponseChofer responseChofer = new ResponseChofer();
+                ResponseRutas responseRutas = new ResponseRutas();
+                //ResponseListaRutas responseRutas = new ResponseListaRutas();
                 ResponseModel responseModel = new ResponseModel();
                 responseModel.errorcode = -1;
-                responseModel.errormsg = "Error al buscar las rutas";
-                responseChofer.errores = responseModel;
+                responseModel.errormsg = "Error al listar las rutas por chofer";
+                responseRutas.errores = responseModel;
                 return null;
             }
         }
 
-        [HttpPut]
-        [Route("CambioEstado")]
-        public async Task<ActionResult<Boolean>> CambioEstado(string EstadoEntrega, int IdentificadorRuta)
+        [AcceptVerbs("POST", "PUT")]
+        [Route("ActualizarEstado")]
+        public async Task<ActionResult<Boolean>> CambioEstado(string estadoEntrega, int identificadorRuta)
         {
             try
             {
-                return await _rutasBILL.CambioEstado(EstadoEntrega, IdentificadorRuta);
 
+                var response = await _rutasBILL.CambioEstado(estadoEntrega, identificadorRuta);
+                return new JsonResult(response);
             }
             catch (Exception)
             {
 
-                ResponseChofer responseChofer = new ResponseChofer();
+                ResponseRutas responseRutas = new ResponseRutas();
                 ResponseModel responseModel = new ResponseModel();
                 responseModel.errorcode = -1;
-                responseModel.errormsg = "Error al buscar el chofer";
-                responseChofer.errores = responseModel;
-                return new JsonResult(responseChofer);
+                responseModel.errormsg = "Error al actulizar el estado de entrega de la Ruta";
+                responseRutas.errores = responseModel;
+                return new JsonResult(responseRutas);
             }
         }
     }

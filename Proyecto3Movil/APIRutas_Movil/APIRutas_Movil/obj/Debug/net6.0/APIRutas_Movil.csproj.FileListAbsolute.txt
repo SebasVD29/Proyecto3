@@ -166,3 +166,5 @@ C:\Users\julih\OneDrive\Documents\GitHub\Proyecto3\Proyecto3Movil\APIRutas_Movil
 C:\Users\julih\OneDrive\Documents\GitHub\Proyecto3\Proyecto3Movil\APIRutas_Movil\APIRutas_Movil\obj\Debug\net6.0\APIRutas_Movil.pdb
 C:\Users\julih\OneDrive\Documents\GitHub\Proyecto3\Proyecto3Movil\APIRutas_Movil\APIRutas_Movil\obj\Debug\net6.0\APIRutas_Movil.genruntimeconfig.cache
 C:\Users\julih\OneDrive\Documents\GitHub\Proyecto3\Proyecto3Movil\APIRutas_Movil\APIRutas_Movil\obj\Debug\net6.0\ref\APIRutas_Movil.dll
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\APIRutas_Movil\APIRutas_Movil\bin\Debug\net6.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\APIRutas_Movil\APIRutas_Movil\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll

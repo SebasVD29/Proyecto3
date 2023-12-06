@@ -4,8 +4,8 @@ namespace APIRutas_Movil.IRepositorySQL
 {
     public interface IRutasRepository
     {
-        public Task<IEnumerable<Rutas>> SP_ListarRutasPorChofer(Chofer idChofer);
+        public Task<IEnumerable<Rutas>> ListarRutasPorChofer(int idChofer);
 
-        public Task<Rutas> SP_ActualizarEstadoRuta(int idRuta, string estadoEntrega);
+        public Task<Boolean> CambioEstado( string estadoEntrega, int idRuta);
     }
 }
