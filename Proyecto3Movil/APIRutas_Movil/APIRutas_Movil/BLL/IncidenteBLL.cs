@@ -16,18 +16,39 @@ namespace APIRutas_Movil.BLL
             _incidenteRepository = incidenteRepository;
         }
 
-        public async Task<ResponseIncidente> CrearIncidente(Incidente incidenteNuevo)
+        public async Task<ResponseIncidente> SP_CrearIncidencia(Incidente incidente)
         {
             try
             {
-                var incidenteCreado = await _incidenteRepository.CrearIncidencia(incidenteNuevo);
+
+                // Validación de campos (por si se ocupa)
+                /*  if (string.IsNullOrEmpty(incidente.Descripcion) || incidente.FechaHora == null)
+                  {
+                      var responseModel = new ResponseModel
+                      {
+                          ErrorCode = -1,
+                          ErrorMsg = "La descripción y la fecha son campos obligatorios."
+                      };
+
+                      return new ResponseIncidente
+                      {
+                          Incidente = null,
+                          Errores = responseModel
+                      };
+                  }*/
+
+
+                // Llamada al repositorio para crear el incidente
+                var resultado = await _incidenteRepository.SP_CrearIncidencia(incidente);
+
+
 
                 ResponseIncidente responseIncidente = new ResponseIncidente();
                 ResponseModel responseModel = new ResponseModel();
-                responseModel.errorcode = 0;
-                responseModel.errormsg = "Incidente creado con éxito";
+                responseModel.ErrorCode = 0;
+                responseModel.ErrorMsg = "Incidente creado con éxito";
 
-                responseIncidente.Incidente = incidenteCreado;
+                responseIncidente.Incidente = resultado;
                 responseIncidente.Errores = responseModel;
                 return responseIncidente;
             }
@@ -36,111 +57,6 @@ namespace APIRutas_Movil.BLL
 
                 throw;
             }
-
-        }
-
-
-
-
-
-        /*public async Task<ResponseIncidente> CrearIncidente(Incidente incidente)
-        {
-            try
-            {
-                // Lógica de negocio antes de crear el incidente (si es necesario)
-               // if (IncidenteYaExiste(incidente))
-               /* {
-                    var responseModel = new ResponseModel
-                    {
-                        ErrorCode = -1,
-                        ErrorMsg = "Ya existe un incidente similar en la base de datos."
-                    };
-
-                    return new ResponseIncidente
-                    {
-                        Incidente = null,
-                        Errores = responseModel
-                    };
-                }
-
-                // Validación de campos (puedes agregar más validaciones según tus requisitos)
-                if (string.IsNullOrEmpty(incidente.Descripcion) || incidente.FechaHora == null)
-                {
-                    var responseModel = new ResponseModel
-                    {
-                        ErrorCode = -1,
-                        ErrorMsg = "La descripción y la fecha son campos obligatorios."
-                    };
-
-                    return new ResponseIncidente
-                    {
-                        Incidente = null,
-                        Errores = responseModel
-                    };
-                }
-
-                // Llamada al repositorio para crear el incidente
-                var resultado = await _incidenteRepository.SP_CrearIncidencia(incidente);
-
-                // Lógica de negocio después de crear el incidente (si es necesario)
-                RealizarAccionesDespuesDeCrearIncidente(resultado);
-
-                // Configurar la respuesta exitosa
-                return new ResponseIncidente
-                {
-                    Incidente = resultado,
-                    Errores = null
-                };
-            }
-            catch (Exception ex)
-            {
-                // Puedes realizar un manejo más específico de la excepción si es necesario
-                // Configurar la respuesta de error
-                var responseModel = new ResponseModel
-                {
-                    ErrorCode = -1,
-                    ErrorMsg = "Error al procesar la solicitud: " + ex.Message
-                };
-
-                return new ResponseIncidente
-                {
-                    Incidente = null,
-                    Errores = responseModel
-                };
-            }
-        }*/
-
-        /*private bool IncidenteYaExiste(Incidente incidente)
-        {
-            // Lógica para verificar si un incidente similar ya existe en la base de datos (ejemplo)
-            var incidentesSimilares = _incidenteRepository.ObtenerIncidentesSimilares(incidente);
-            return incidentesSimilares.Any();
-        }*/
-
-        private void RealizarAccionesDespuesDeCrearIncidente(Incidente incidenteCreado)
-        {
-            // Ejemplo de lógica de negocio después de crear el incidente
-            // Puedes realizar acciones adicionales, como enviar notificaciones, actualizar otras entidades, etc.
-
-            // Guardar registro en un log (ejemplo)
-            RegistrarLog($"Incidente creado. ID: {incidenteCreado.IdentificadorIncidente}, Descripción: {incidenteCreado.Descripcion}");
-
-            // Enviar notificación (ejemplo)
-            EnviarNotificacion(incidenteCreado);
-
-            // Puedes agregar más acciones según tus necesidades específicas
-        }
-
-        private void RegistrarLog(string mensaje)
-        {
-            // Lógica para registrar información de registro (ejemplo)
-            Console.WriteLine($"Registro: {mensaje}");
-        }
-
-        private void EnviarNotificacion(Incidente incidente)
-        {
-            // Lógica para enviar notificación (ejemplo)
-            Console.WriteLine($"Notificación enviada para el incidente {incidente.IdentificadorIncidente}: Nuevo incidente creado");
         }
     }
 }

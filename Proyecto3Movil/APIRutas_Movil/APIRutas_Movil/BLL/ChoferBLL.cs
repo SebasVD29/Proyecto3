@@ -30,14 +30,14 @@ namespace APIRutas_Movil.BLL
                 if (chofer != null)
                 {
                     responseChofer.chofer = chofer;
-                    responseModel.errorcode = 0;
-                    responseModel.errormsg = "Chofer encontrado con éxito";
+                    responseModel.ErrorCode = 0;
+                    responseModel.ErrorMsg = "Chofer encontrado con éxito";
 
                 }
                 else
                 {
-                    responseModel.errorcode = 1;
-                    responseModel.errormsg = "No se ha podido encontrar el chofer: " + email;
+                    responseModel.ErrorCode = 1;
+                    responseModel.ErrorMsg = "No se ha podido encontrar el chofer: " + email;
                 }
 
                 responseChofer.errores = responseModel;

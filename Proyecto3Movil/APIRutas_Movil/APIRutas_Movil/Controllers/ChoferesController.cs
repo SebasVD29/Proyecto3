@@ -29,8 +29,8 @@ namespace APIRutas_Movil.Controller
 
                 ResponseChofer responseChofer = new ResponseChofer();
                 ResponseModel responseModel = new ResponseModel();
-                responseModel.errorcode = -1;
-                responseModel.errormsg = "Error al buscar el chofer";
+                responseModel.ErrorCode = -1;
+                responseModel.ErrorMsg = "Error al buscar el chofer";
                 responseChofer.errores = responseModel;
                 return new JsonResult(responseChofer);
             }
