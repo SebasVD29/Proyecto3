@@ -24,13 +24,14 @@ namespace APIRutas_Movil.RepositorySQL
             {
                 var param = new DynamicParameters();
 
-                param.Add("@nombre", incidente.IdRuta, DbType.String, ParameterDirection.Input);
-                param.Add("@telefono", incidente.Solucion, DbType.String, ParameterDirection.Input);
-                param.Add("@contacto", incidente.Descripcion, DbType.String, ParameterDirection.Input);
+                param.Add("@IdRuta", incidente.IdRuta, DbType.String, ParameterDirection.Input);
+                param.Add("@descripcion", incidente.Descripcion, DbType.String, ParameterDirection.Input);
+                param.Add("@fecha", incidente.FechaHora, DbType.Date, ParameterDirection.Input);
+                param.Add("@solucion", incidente.Solucion, DbType.String, ParameterDirection.Input);
 
                 using (var conn = _context.CrearConexion())
                 {
-                    Incidente _incidente = await conn.QuerySingleAsync<Incidente>("crear_cliente", param, commandType: CommandType.StoredProcedure);
+                    Incidente _incidente = await conn.QuerySingleAsync<Incidente>("SP_CrearIncidencia", param, commandType: CommandType.StoredProcedure);
                     return _incidente;
                 }
             }
