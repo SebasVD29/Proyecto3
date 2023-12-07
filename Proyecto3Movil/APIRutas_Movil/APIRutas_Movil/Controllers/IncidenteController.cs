@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using APIRutas_Movil.IBLL;
+using APIRutas_Movil.Modelo;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIRutas_Movil.Controller
@@ -26,8 +28,8 @@ namespace APIRutas_Movil.Controller
                 ResponseIncidente responseIncidente = new ResponseIncidente();
 
                 ResponseModel responseModel = new ResponseModel();
-                responseModel.ErrorCode = -1;
-                responseModel.ErrorMsg = "Error al insertar una Incidencia";
+                responseModel.errorcode = -1;
+                responseModel.errormsg = "Error al insertar una Incidencia";
                 responseIncidente.Errores = responseModel;
                 return new JsonResult(responseIncidente);
             }

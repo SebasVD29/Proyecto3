@@ -4,7 +4,10 @@
     "\\APIRutas_Movil",
     "\\APIRutas_Movil\\BLL",
     "\\APIRutas_Movil\\Controller",
-    "\\APIRutas_Movil\\Modelo"
+    "\\APIRutas_Movil\\IBLL",
+    "\\APIRutas_Movil\\IRepositorySQL",
+    "\\APIRutas_Movil\\Modelo",
+    "\\APIRutas_Movil\\RepositorySQL"
   ],
   "SelectedNode": "\\APIRutas_Movil.sln",
   "PreviewInSolutionExplorer": false
