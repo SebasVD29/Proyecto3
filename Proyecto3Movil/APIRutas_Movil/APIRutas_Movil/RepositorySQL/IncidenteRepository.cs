@@ -18,7 +18,7 @@ namespace APIRutas_Movil.RepositorySQL
             _context = context;
         }
 
-        public async Task<Incidente> CrearIncidencia(Incidente incidente)
+        public async Task<Incidente> SP_CrearIncidencia(Incidente incidente)
         {
             try
             {

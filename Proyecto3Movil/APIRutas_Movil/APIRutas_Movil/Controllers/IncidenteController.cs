@@ -20,7 +20,7 @@ namespace APIRutas_Movil.Controller
         {
             try
             {
-                var response = await _incidenteBLL.CrearIncidente(incidente);
+                var response = await _incidenteBLL.SP_CrearIncidencia(incidente);
                 return new JsonResult(response);
             }
             catch (Exception)
