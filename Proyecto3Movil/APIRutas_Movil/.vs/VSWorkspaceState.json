@@ -3,12 +3,11 @@
     "",
     "\\APIRutas_Movil",
     "\\APIRutas_Movil\\BLL",
-    "\\APIRutas_Movil\\Controller",
     "\\APIRutas_Movil\\IBLL",
     "\\APIRutas_Movil\\IRepositorySQL",
     "\\APIRutas_Movil\\Modelo",
     "\\APIRutas_Movil\\RepositorySQL"
   ],
-  "SelectedNode": "\\APIRutas_Movil.sln",
+  "SelectedNode": "\\APIRutas_Movil\\BLL\\IncidenteBLL.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -45,8 +45,8 @@ namespace APIRutas_Movil.BLL
 
                 ResponseIncidente responseIncidente = new ResponseIncidente();
                 ResponseModel responseModel = new ResponseModel();
-                responseModel.ErrorCode = 0;
-                responseModel.ErrorMsg = "Incidente creado con éxito";
+                responseModel.errorcode = 0;
+                responseModel.errormsg = "Incidente creado con éxito";
 
                 responseIncidente.Incidente = resultado;
                 responseIncidente.Errores = responseModel;

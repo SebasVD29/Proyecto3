@@ -2,7 +2,7 @@
 {
     public class ResponseModel
     {
-        public int ErrorCode { get; set; }
-        public string? ErrorMsg { get; set; }
+        public int errorcode { get; set; }
+        public string? errormsg { get; set; }
     }
 }

@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace APIRutas_Movil.IBLL
 {
-    public interface IincidenteBLL
+    public interface IIncidenteBLL
     {
-        Task<ResponseIncidente> SP_CrearIncidencia(Incidente nuevoIncidente);
+        public Task<ResponseIncidente> CrearIncidente(Incidente nuevoIncidente);
     }
 }
