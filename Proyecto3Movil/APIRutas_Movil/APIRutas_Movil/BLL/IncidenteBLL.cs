@@ -16,7 +16,7 @@ namespace APIRutas_Movil.BLL
             _incidenteRepository = incidenteRepository;
         }
 
-        public async Task<ResponseIncidente> SP_CrearIncidencia(Incidente incidente)
+        public async Task<ResponseIncidente>SP_CrearIncidencia(Incidente incidente)
         {
             try
             {

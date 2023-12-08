@@ -5,6 +5,6 @@ namespace APIRutas_Movil.IBLL
 {
     public interface IIncidenteBLL
     {
-        public Task<ResponseIncidente> CrearIncidente(Incidente nuevoIncidente);
+        public Task<ResponseIncidente> SP_CrearIncidencia(Incidente nuevoIncidente);
     }
 }

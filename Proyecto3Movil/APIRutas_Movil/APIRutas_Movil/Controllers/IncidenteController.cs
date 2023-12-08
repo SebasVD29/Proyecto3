@@ -15,12 +15,12 @@ namespace APIRutas_Movil.Controller
         }
 
         [HttpPost]
-        [Route("CrearIncidente")]
-        public async Task<ActionResult<ResponseIncidente>> Crear(Incidente incidente)
+        [Route("SP_CrearIncidencia")]
+        public async Task<ActionResult<ResponseIncidente>> SP_CrearIncidencia(Incidente incidente)
         {
             try
             {
-                var response = await _incidenteBLL.CrearIncidente(incidente);
+                var response = await _incidenteBLL.SP_CrearIncidencia(incidente);
                 return new JsonResult(response);
             }
             catch (Exception)
