@@ -3,6 +3,7 @@
     "",
     "\\APIRutas_Movil",
     "\\APIRutas_Movil\\BLL",
+    "\\APIRutas_Movil\\Controllers",
     "\\APIRutas_Movil\\IBLL",
     "\\APIRutas_Movil\\IRepositorySQL",
     "\\APIRutas_Movil\\Modelo",

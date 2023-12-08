@@ -5,7 +5,7 @@ namespace APIRutas_Movil.IBLL
     public interface IRutasBLL
     {
         public Task<List<ResponseRutas>> ListarRutasPorChofer(int idChofer);
-        public Task<Boolean> CambioEstado(string estadoEntrega, int identificadorRuta);
+        public Task<Boolean> CambioEstado(Rutas rutas);
 
 
     }

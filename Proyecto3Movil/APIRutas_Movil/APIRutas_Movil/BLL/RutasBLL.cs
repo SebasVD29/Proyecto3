@@ -67,11 +67,11 @@ namespace APIRutas_Movil.BLL
         }
 
 
-        public async Task<Boolean> CambioEstado(string EstadoEntrega, int IdentificadorRuta)
+        public async Task<Boolean> CambioEstado(Rutas rutas)
         {
             try
             {
-                var rutaActualizado = await _rutasRepository.CambioEstado(EstadoEntrega, IdentificadorRuta);
+                var rutaActualizado = await _rutasRepository.CambioEstado(rutas);
                 ResponseRutas responseRuta = new ResponseRutas();
                 ResponseModel responseModel = new ResponseModel();
                 responseModel.errorcode = 0;

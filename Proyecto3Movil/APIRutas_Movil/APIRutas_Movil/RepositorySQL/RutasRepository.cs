@@ -40,13 +40,13 @@ namespace APIRutas_Movil.RepositorySQL
 
         }
 
-        public async Task<Boolean> CambioEstado(string estadoEntrega, int identificadorRuta)
+        public async Task<Boolean> CambioEstado(Rutas rutas)
         {
             try
             {
                 DynamicParameters param = new DynamicParameters();
-                param.Add("@estadoEntrega", estadoEntrega, DbType.String, ParameterDirection.Input);
-                param.Add("@idRuta", identificadorRuta, DbType.Int64, ParameterDirection.Input);
+                param.Add("@estadoEntrega", rutas.EstadoEntrega, DbType.String, ParameterDirection.Input);
+                param.Add("@idRuta", rutas.IdentificadorRuta, DbType.Int64, ParameterDirection.Input);
                 using (var conn = _context.CrearConexion())
                 {
                     
