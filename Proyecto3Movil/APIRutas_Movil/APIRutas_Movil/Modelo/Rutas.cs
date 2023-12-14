@@ -17,8 +17,8 @@
         public string? TelefonoCliente { get; set; }
 
         public string? Descripcion { get; set; }
-        public DateOnly? FechaInicio { get; set; }
-        public DateOnly? FechaFinal { get; set; }
+        public string? FechaInicio { get; set; }
+        public string? FechaFinal { get; set; }
         public string? EstadoEntrega { get; set; }
     }
 }

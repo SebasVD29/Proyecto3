@@ -62,6 +62,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Vistas\CargaPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Vistas\DetallesRutaPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

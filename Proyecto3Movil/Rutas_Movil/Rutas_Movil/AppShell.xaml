@@ -7,10 +7,13 @@
     xmlns:vistas="clr-namespace:Rutas_Movil.Vistas"
     Shell.FlyoutBehavior="Disabled">
 
+    
+    
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    Icon="house_door_fill.svg"
+    Title="Rutas"
+    ContentTemplate="{DataTemplate vistas:ListaRutasPage}"
+    Route="rutas" />
 
     <TabBar>
         <Tab Title="Rutas" Icon="gear_fill.svg">

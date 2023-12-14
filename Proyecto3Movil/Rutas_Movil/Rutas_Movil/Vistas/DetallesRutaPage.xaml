@@ -4,11 +4,30 @@
              x:Class="Rutas_Movil.Vistas.DetallesRutaPage"
              Title="DetallesRutaPage">
     <VerticalStackLayout>
-        <Label Text="Nombre:"></Label>
-        <Entry x:Name="nombre" Margin="0,0,0,10"></Entry>
+
+        <Label Text="Nombre de Ruta:"></Label>
+        <Entry x:Name="nombreRuta" Margin="0,0,0,10"></Entry>
+        
+        <Label Text="Nombre de la Direccion:"></Label>
+        <Entry x:Name="nombreDireccionRuta" Margin="0,0,0,10"></Entry>
+
+        <Label Text="Pais Final:"></Label>
+        <Entry x:Name="paisFinal" Margin="0,0,0,10"></Entry>
+
+        <Label Text="Ciudad Final:"></Label>
+        <Entry x:Name="ciudadFinal" Margin="0,0,0,10"></Entry>
 
         <Label Text="NumeroPlaca:"></Label>
         <Entry x:Name="numeroPlaca" Margin="0,0,0,10"></Entry>
+
+        <Label Text="Identificador del Cliente:"></Label>
+        <Entry x:Name="idCliente" Margin="0,0,0,10"></Entry>
+
+        <Label Text="Nombre del Cliente:"></Label>
+        <Entry x:Name="nombreCliente" Margin="0,0,0,10"></Entry>
+        
+        <Label Text="Telefono del Cliente:"></Label>
+        <Entry x:Name="telefonoCliente" Margin="0,0,0,10"></Entry>
 
         <Label Text="Descripcion:"></Label>
         <Entry x:Name="descripcion" Margin="0,0,0,10"></Entry>

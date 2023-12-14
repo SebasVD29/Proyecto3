@@ -37,6 +37,7 @@ namespace Rutas_Movil.Servicios
 
         public async Task<List<Rutas>> ListaRutas(int IdChofer)
         {
+            IdChofer = 258741369;
             var rutas = _generalAPI.GetHttpClient();
 
             string result = await rutas.GetStringAsync(_generalAPI.URL("Rutas") + "ListaRutasPorChofer?IdChofer=" + IdChofer);
