@@ -36,17 +36,25 @@ namespace APIRutas_Movil.BLL
                 if (rutas != null)
                 {
                     for (int i = 0; i < rutas.Count(); i++)
-                        {
+                    {
                         d.ElementAt(i).Value.ruta.IdentificadorRuta = rutas.ElementAt(i).IdentificadorRuta;
-                        d.ElementAt(i).Value.ruta.Nombre = rutas.ElementAt(i).Nombre;
-                        d.ElementAt(i).Value.ruta.IdDireccionRuta = rutas.ElementAt(i).IdDireccionRuta;
+                        d.ElementAt(i).Value.ruta.NombreRuta = rutas.ElementAt(i).NombreRuta;
+
+                        d.ElementAt(i).Value.ruta.NombreDireccionRuta = rutas.ElementAt(i).NombreDireccionRuta;
+                        d.ElementAt(i).Value.ruta.PaisFinal = rutas.ElementAt(i).PaisFinal;
+                        d.ElementAt(i).Value.ruta.CiudadFinal = rutas.ElementAt(i).CiudadFinal;
+
                         d.ElementAt(i).Value.ruta.IdChofer = rutas.ElementAt(i).IdChofer;
                         d.ElementAt(i).Value.ruta.NumeroPlaca = rutas.ElementAt(i).NumeroPlaca;
                         d.ElementAt(i).Value.ruta.IdCliente = rutas.ElementAt(i).IdCliente;
+
+                        d.ElementAt(i).Value.ruta.NombreCliente = rutas.ElementAt(i).NombreCliente;
+                        d.ElementAt(i).Value.ruta.TelefonoCliente = rutas.ElementAt(i).TelefonoCliente;
+
+                        d.ElementAt(i).Value.ruta.Descripcion = rutas.ElementAt(i).Descripcion;
                         d.ElementAt(i).Value.ruta.FechaInicio = rutas.ElementAt(i).FechaInicio;
                         d.ElementAt(i).Value.ruta.FechaFinal = rutas.ElementAt(i).FechaFinal;
                         d.ElementAt(i).Value.ruta.EstadoEntrega = rutas.ElementAt(i).EstadoEntrega;
-                        d.ElementAt(i).Value.ruta.Descripcion = rutas.ElementAt(i).Descripcion;
                         listaRutas.Add(d.ElementAt(i).Value);
                     }                                    
                 }
@@ -67,11 +75,11 @@ namespace APIRutas_Movil.BLL
         }
 
 
-        public async Task<Boolean> CambioEstado(string EstadoEntrega, int IdentificadorRuta)
+        public async Task<Boolean> CambioEstado(Rutas rutas)
         {
             try
             {
-                var rutaActualizado = await _rutasRepository.CambioEstado(EstadoEntrega, IdentificadorRuta);
+                var rutaActualizado = await _rutasRepository.CambioEstado(rutas);
                 ResponseRutas responseRuta = new ResponseRutas();
                 ResponseModel responseModel = new ResponseModel();
                 responseModel.errorcode = 0;

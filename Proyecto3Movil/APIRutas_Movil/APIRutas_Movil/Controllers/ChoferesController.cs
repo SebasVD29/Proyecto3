@@ -17,11 +17,11 @@ namespace APIRutas_Movil.Controller
 
         [HttpGet]
         [Route("Login")]
-        public async Task<ActionResult<ResponseChofer>> LoginChofer(string password, string email)
+        public async Task<ActionResult<ResponseChofer>> LoginChofer(Chofer chofer)
         {
             try
             {
-                return await _choferBILL.LoginChofer(password, email);
+                return await _choferBILL.LoginChofer(chofer.Contraseña, chofer.Email);
 
             }
             catch (Exception)

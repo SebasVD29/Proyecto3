@@ -4,6 +4,7 @@ using APIRutas_Movil.IBLL;
 using APIRutas_Movil.Modelo;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 
 namespace APIRutas_Movil.Controller
@@ -31,7 +32,6 @@ namespace APIRutas_Movil.Controller
             {
 
                 ResponseRutas responseRutas = new ResponseRutas();
-                //ResponseListaRutas responseRutas = new ResponseListaRutas();
                 ResponseModel responseModel = new ResponseModel();
                 responseModel.errorcode = -1;
                 responseModel.errormsg = "Error al listar las rutas por chofer";
@@ -42,12 +42,12 @@ namespace APIRutas_Movil.Controller
 
         [AcceptVerbs("POST", "PUT")]
         [Route("ActualizarEstado")]
-        public async Task<ActionResult<Boolean>> CambioEstado(string estadoEntrega, int identificadorRuta)
+        public async Task<ActionResult<Boolean>> CambioEstado(Rutas rutas)
         {
             try
             {
 
-                var response = await _rutasBILL.CambioEstado(estadoEntrega, identificadorRuta);
+                var response = await _rutasBILL.CambioEstado(rutas);
                 return new JsonResult(response);
             }
             catch (Exception)
