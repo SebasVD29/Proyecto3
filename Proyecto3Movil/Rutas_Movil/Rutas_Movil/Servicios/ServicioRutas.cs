@@ -37,16 +37,27 @@ namespace Rutas_Movil.Servicios
 
         public async Task<List<Rutas>> ListaRutas(int IdChofer)
         {
-            IdChofer = 258741369;
-            var rutas = _generalAPI.GetHttpClient();
+            try
+            {
 
-            string result = await rutas.GetStringAsync(_generalAPI.URL("Rutas") + "ListaRutasPorChofer?IdChofer=" + IdChofer);
+            var rutas = _generalAPI.GetHttpClient();
+               // Uri uri = new Uri(string.Format(_generalAPI.URL("Rutas") + "ListaRutasPorChofer/", IdChofer));
+
+                // param = string.Format("ListaRutasPorChofer/IdChofer={0}", IdChofer);
+
+            string result = await rutas.GetStringAsync(_generalAPI.URL("Rutas") + "ListaRutasPorChofer/"+ IdChofer);
 
             var resultado = JsonConvert.DeserializeObject<ResponseListaRutas>(result);
 
-            var lista = resultado.rutas.ToList();
+            var lista = resultado.ruta.ToList();
 
             return lista;
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
         }
     }
 }

@@ -19,13 +19,13 @@ namespace APIRutas_Movil.Controller
             _rutasBILL = rutasBLL;
         }
 
-        [HttpGet]
-        [Route("ListaRutasPorChofer")]
-        public async Task<List<ResponseRutas>> ListarRutasPorChofer(int IdChofer)
+        [HttpGet("ListaRutasPorChofer/{IdChofer}")]
+        //[Route("ListaRutasPorChofer")]
+        public async Task<ResponseRutas> ListarRutasPorChofer(int IdChofer)
         {
             try
             {
-                List<ResponseRutas> test = await _rutasBILL.ListarRutasPorChofer(IdChofer);
+                var test =  await _rutasBILL.ListarRutasPorChofer(IdChofer);
                 return test;
             }
             catch (Exception)
@@ -36,7 +36,7 @@ namespace APIRutas_Movil.Controller
                 responseModel.errorcode = -1;
                 responseModel.errormsg = "Error al listar las rutas por chofer";
                 responseRutas.errores = responseModel;
-                return null;
+                return responseRutas;
             }
         }
 

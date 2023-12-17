@@ -941,13 +941,6 @@ C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil
 C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\stamp\_ResolveLibraryProjectImports.stamp
 C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\assets\Newtonsoft.Json.dll
-C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\typemaps.x86_64.s
-C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\environment.x86_64.s
-C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\compressed_assemblies.x86_64.s
-C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\typemaps.x86_64.o
-C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\environment.x86_64.o
-C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\compressed_assemblies.x86_64.o
-C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\app_shared_libraries\x86_64\libxamarin-app.so
 C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\assets\mscorlib.dll
 C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\assets\System.Collections.Concurrent.dll
 C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\assets\System.Data.dll
@@ -955,3 +948,10 @@ C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil
 C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\assets\System.Private.CoreLib.dll
 C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\assets\System.Private.Uri.dll
 C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\assets\System.Xml.dll
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\typemaps.arm64-v8a.s
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\environment.arm64-v8a.s
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\compressed_assemblies.arm64-v8a.s
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\typemaps.arm64-v8a.o
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\environment.arm64-v8a.o
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\android\compressed_assemblies.arm64-v8a.o
+C:\Users\sebas\Documents\GitHub\Proyecto3\Proyecto3Movil\Rutas_Movil\Rutas_Movil\obj\Debug\net6.0-android\app_shared_libraries\arm64-v8a\libxamarin-app.so

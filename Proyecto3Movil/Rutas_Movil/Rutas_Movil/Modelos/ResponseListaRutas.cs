@@ -8,7 +8,7 @@ namespace Rutas_Movil.Modelos
 {
     public class ResponseListaRutas
     {
-        public List<Rutas> rutas { get; set; } = new List<Rutas>();
+        public List<Rutas> ruta { get; set; } = new List<Rutas>();
         public ResponseModel errores { get; set; } = new ResponseModel();
     }
 }
