@@ -6,7 +6,7 @@ namespace Rutas_Movil.Vistas;
 public partial class ListaRutasPage : ContentPage
 {
     private readonly IServicioRutas _servicioRutas;
-    int idChofer = 258741369;
+    public int idChofer = 258741369;
     public ListaRutasPage(IServicioRutas servicioRutas)
 	{
 		InitializeComponent();
