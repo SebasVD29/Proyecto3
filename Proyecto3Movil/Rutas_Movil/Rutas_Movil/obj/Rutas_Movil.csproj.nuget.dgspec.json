@@ -217,11 +217,11 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.iOS.Ref",
-              "version": "[16.4.60, 16.4.60]"
+              "version": "[16.4.7127, 16.4.7127]"
             },
             {
               "name": "Microsoft.iOS.Runtime.ios-arm64",
-              "version": "[16.4.60, 16.4.60]"
+              "version": "[16.4.7127, 16.4.7127]"
             },
             {
               "name": "Microsoft.Maui.Controls.Ref.ios",
@@ -248,7 +248,7 @@
               "version": "[6.0.553, 6.0.553]"
             },
             {
-              "name": "Microsoft.NETCore.App.Runtime.Mono.iossimulator-x64",
+              "name": "Microsoft.NETCore.App.Runtime.Mono.ios-arm64",
               "version": "[6.0.25, 6.0.25]"
             }
           ],
@@ -309,11 +309,11 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.MacCatalyst.Ref",
-              "version": "[16.4.60, 16.4.60]"
+              "version": "[16.4.7127, 16.4.7127]"
             },
             {
               "name": "Microsoft.MacCatalyst.Runtime.maccatalyst-x64",
-              "version": "[16.4.60, 16.4.60]"
+              "version": "[16.4.7127, 16.4.7127]"
             },
             {
               "name": "Microsoft.Maui.Controls.Ref.maccatalyst",

@@ -23,6 +23,13 @@
                 ContentTemplate="{DataTemplate vistas:ListaRutasPage}"
                 Route="rutas" />  
         </Tab>
+        <Tab Title="Incidentes" Icon="gear_fill.svg">
+            <ShellContent
+          Icon="house_door_fill.svg"
+          Title="Incidentes"
+          ContentTemplate="{DataTemplate vistas:IncidentesPage}"
+          Route="" />
+        </Tab>
 
     </TabBar>
 

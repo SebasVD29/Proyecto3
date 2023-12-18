@@ -20,7 +20,6 @@ public static class MauiProgram
         builder.Services.AddSingleton<DetallesRutaPage>();
         builder.Services.AddSingleton<IGeneralAPI, GeneralAPI>();
         builder.Services.AddSingleton<IServicioRutas, ServicioRutas>();
-
         return builder.Build();
 	}
 }
