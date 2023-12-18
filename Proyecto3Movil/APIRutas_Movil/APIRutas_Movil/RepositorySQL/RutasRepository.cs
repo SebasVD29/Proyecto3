@@ -40,7 +40,7 @@ namespace APIRutas_Movil.RepositorySQL
 
         }
 
-        public async Task<Boolean> CambioEstado(Rutas rutas)
+        public async Task<Rutas> CambioEstado(Rutas rutas)
         {
             try
             {
@@ -50,8 +50,8 @@ namespace APIRutas_Movil.RepositorySQL
                 using (var conn = _context.CrearConexion())
                 {
                     
-                    var actualizada = await conn.QuerySingleOrDefaultAsync<Boolean>("SP_ActualizarEstadoRuta", param, commandType: CommandType.StoredProcedure);
-                    return actualizada;
+                    await conn.ExecuteAsync("SP_ActualizarEstadoRuta", param, commandType: CommandType.StoredProcedure);
+                    return rutas;
 
 
                 }

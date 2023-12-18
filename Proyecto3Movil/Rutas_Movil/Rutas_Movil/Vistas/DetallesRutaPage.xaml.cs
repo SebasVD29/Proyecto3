@@ -6,12 +6,14 @@ namespace Rutas_Movil.Vistas;
 public partial class DetallesRutaPage : ContentPage
 {
     private int idRuta = 0;
+    private string estadoActualizado;
     private readonly IServicioRutas _servicioRutas;
     public DetallesRutaPage(Rutas rutas, IServicioRutas servicioRutas)
 	{
 		InitializeComponent();
         _servicioRutas = servicioRutas;
         carga_datos(rutas);
+        
 
     }
 
@@ -29,8 +31,7 @@ public partial class DetallesRutaPage : ContentPage
         descripcion.Text = rutas.Descripcion;
         fechaInicio.Text = rutas.FechaInicio;
         fechaFinal.Text = rutas.FechaFinal;
-        estadoEntrega.Text = rutas.EstadoEntrega;
-
+        
     }
 
     async void ActualizarEstadoRutas()
@@ -38,7 +39,7 @@ public partial class DetallesRutaPage : ContentPage
         Rutas rutas = new Rutas()
         {
             IdentificadorRuta = idRuta,
-            EstadoEntrega = fechaFinal.Text,
+            EstadoEntrega = (string)estadoEntrega.SelectedItem,
         };
 
         var responseRutas = await _servicioRutas.ActualizarEstadoRuta(rutas);
@@ -64,5 +65,10 @@ public partial class DetallesRutaPage : ContentPage
     private void Volver_Clicked(object sender, EventArgs e)
     {
         Regresar();
+    }
+    private void PickerEstadoEntrega_SelectionChanged(object sender, EventArgs e)
+    {
+        // Obtiene el valor seleccionado y guárdalo en la variable
+        estadoActualizado = (string)estadoEntrega.SelectedItem;
     }
 }

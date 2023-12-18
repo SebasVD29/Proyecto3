@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Rutas_Movil.Vistas.ListaRutasPage"
-             Title="ListaRutasPage">
+             Title="Rutas">
     <VerticalStackLayout>
         <ActivityIndicator x:Name="carga" HeightRequest="30" Color="Blue" IsRunning="True" IsVisible="false">
 
@@ -15,9 +15,10 @@
                 <ListView x:Name="lvRutas" SelectionMode="Single" ItemSelected="OnItemSelected"  SeparatorColor="Black" >
                     <ListView.ItemTemplate >
                         <DataTemplate >
-                            <TextCell TextColor="Black" 
+                            <TextCell TextColor="White" 
                                       Text="{Binding IdentificadorRuta}"   
-                                      Detail="{Binding EstadoEntrega}" />
+                                      Detail="{Binding EstadoEntrega}" 
+                                      />
                         </DataTemplate>
                     </ListView.ItemTemplate>
 

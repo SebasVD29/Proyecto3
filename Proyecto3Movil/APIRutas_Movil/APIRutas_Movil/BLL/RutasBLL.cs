@@ -15,7 +15,7 @@ namespace APIRutas_Movil.BLL
             _rutasRepository = rutasRepository;
         }
 
-        public async Task<ResponseRutas> ListarRutasPorChofer(int idChofer)
+        public async Task<ResponseListaRutas> ListarRutasPorChofer(int idChofer)
         {
             try
             {
@@ -23,13 +23,13 @@ namespace APIRutas_Movil.BLL
                  var rutas = await _rutasRepository.ListarRutasPorChofer(idChofer);
             
 
-                ResponseRutas responseRutas = new ResponseRutas();
+                ResponseListaRutas responseListaRutas = new ResponseListaRutas();
                 ResponseModel responseModel = new ResponseModel();
 
-                responseRutas.ruta = rutas.ToList();
-                responseRutas.errores.errorcode = 0;
-                responseRutas.errores.errormsg = "Lista de Rutas encontrada";
-                return responseRutas;
+                responseListaRutas.ruta = rutas.ToList();
+                responseListaRutas.errores.errorcode = 0;
+                responseListaRutas.errores.errormsg = "Lista de Rutas encontrada";
+                return responseListaRutas;
             }
             catch (Exception)
             {
@@ -39,7 +39,7 @@ namespace APIRutas_Movil.BLL
         }
 
 
-        public async Task<Boolean> CambioEstado(Rutas rutas)
+        public async Task<ResponseRutas> CambioEstado(Rutas rutas)
         {
             try
             {
@@ -49,10 +49,9 @@ namespace APIRutas_Movil.BLL
                 responseModel.errorcode = 0;
                 responseModel.errormsg = "Estado de la Ruta Actualizado con éxito";
 
-               
-                //responseRuta.ruta = rutaActualizado;
+                responseRuta.ruta = rutaActualizado;
                 responseRuta.errores = responseModel;
-                return rutaActualizado;
+                return responseRuta;
             }
             catch (Exception)
             {

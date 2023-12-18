@@ -28,9 +28,9 @@ namespace Rutas_Movil.Servicios
             var response = await ruta.SendAsync(mensaje);
             response.EnsureSuccessStatusCode();
 
-            var clienteActualizado = await response.Content.ReadAsStringAsync();
+            var rutaActualizado = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<ResponseRutas>(clienteActualizado);
+            return JsonConvert.DeserializeObject<ResponseRutas>(rutaActualizado);
 
 
         }
@@ -40,18 +40,17 @@ namespace Rutas_Movil.Servicios
             try
             {
 
-            var rutas = _generalAPI.GetHttpClient();
+                var rutas = _generalAPI.GetHttpClient();
                // Uri uri = new Uri(string.Format(_generalAPI.URL("Rutas") + "ListaRutasPorChofer/", IdChofer));
-
                 // param = string.Format("ListaRutasPorChofer/IdChofer={0}", IdChofer);
 
-            string result = await rutas.GetStringAsync(_generalAPI.URL("Rutas") + "ListaRutasPorChofer/"+ IdChofer);
+                string result = await rutas.GetStringAsync(_generalAPI.URL("Rutas") + "ListaRutasPorChofer/"+ IdChofer);
 
-            var resultado = JsonConvert.DeserializeObject<ResponseListaRutas>(result);
+                var resultado = JsonConvert.DeserializeObject<ResponseListaRutas>(result);
 
-            var lista = resultado.ruta.ToList();
+                var lista = resultado.ruta.ToList();
 
-            return lista;
+                return lista;
             }
             catch (Exception ex)
             {

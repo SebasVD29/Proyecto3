@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Rutas_Movil.Servicios
 {
-    //201.203.6.42
+
     public class GeneralAPI : IGeneralAPI
     {
-        
-        //static readonly string direccionbase = "http://10.0.2.2:5000";
-       // static readonly string direccionbase = "http://192.168.100.8:5000"; //Ip de la Casa
-        static readonly string direccionbase = "http://10.18.7.173:5000";  //Ip de la U
+
+        //static readonly string direccionbase = "http://10.0.2.2:5000"; // Ip para el Emulador 
+         static readonly string direccionbase = "http://192.168.100.8:5000"; //Ip de la Casa para el movil
+        //static readonly string direccionbase = "http://10.18.7.173:5000";  //Ip de la U para el movil
 
         static readonly string _url = $"{direccionbase}/api/";
 

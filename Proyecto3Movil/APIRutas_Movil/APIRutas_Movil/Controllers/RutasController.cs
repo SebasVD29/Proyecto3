@@ -21,7 +21,7 @@ namespace APIRutas_Movil.Controller
 
         [HttpGet("ListaRutasPorChofer/{IdChofer}")]
         //[Route("ListaRutasPorChofer")]
-        public async Task<ResponseRutas> ListarRutasPorChofer(int IdChofer)
+        public async Task<ResponseListaRutas> ListarRutasPorChofer(int IdChofer)
         {
             try
             {
@@ -31,18 +31,18 @@ namespace APIRutas_Movil.Controller
             catch (Exception)
             {
 
-                ResponseRutas responseRutas = new ResponseRutas();
+                ResponseListaRutas responseListaRutas = new ResponseListaRutas();
                 ResponseModel responseModel = new ResponseModel();
                 responseModel.errorcode = -1;
                 responseModel.errormsg = "Error al listar las rutas por chofer";
-                responseRutas.errores = responseModel;
-                return responseRutas;
+                responseListaRutas.errores = responseModel;
+                return responseListaRutas;
             }
         }
 
         [AcceptVerbs("POST", "PUT")]
         [Route("ActualizarEstado")]
-        public async Task<ActionResult<Boolean>> CambioEstado(Rutas rutas)
+        public async Task<ActionResult<ResponseRutas>> CambioEstado(Rutas rutas)
         {
             try
             {

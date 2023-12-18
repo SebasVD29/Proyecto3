@@ -2,7 +2,7 @@
 {
     public class ResponseRutas
     {
-        public List<Rutas> ruta { get; set; } = new List<Rutas>();
+        public Rutas ruta { get; set; } = new Rutas();
         public ResponseModel errores { get; set; } = new ResponseModel();
     }
 }
