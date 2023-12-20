@@ -6,14 +6,17 @@ namespace Rutas_Movil.Vistas;
 public partial class ListaRutasPage : ContentPage
 {
     private readonly IServicioRutas _servicioRutas;
-    public int idChofer = 258741369;
-    public ListaRutasPage(IServicioRutas servicioRutas)
+    private readonly IServicioAutenticacion _servicioAutenticacion;
+    private readonly int _idChofer;
+    public ListaRutasPage(int idChofer, IServicioRutas servicioRutas, IServicioAutenticacion servicioAutenticacion)
 	{
 		InitializeComponent();
         _servicioRutas = servicioRutas;
-        cargaRutas();
+        _servicioAutenticacion = servicioAutenticacion; 
+        _idChofer = idChofer;
+        cargaRutas(_idChofer);
     }
-    async void cargaRutas()
+    async void cargaRutas(int idChofer)
     {
         carga.IsVisible = true;
 
@@ -32,6 +35,11 @@ public partial class ListaRutasPage : ContentPage
     {
         Rutas item = args.SelectedItem as Rutas;
 
-        Navigation.PushAsync(new DetallesRutaPage(item, _servicioRutas));
+        Navigation.PushAsync(new DetallesRutaPage(item, _idChofer, _servicioRutas, _servicioAutenticacion));
+    }
+    private async void LogOut_Clicked(object sender, EventArgs e)
+    {
+        
+        await Navigation.PushAsync(new LogoutPage(_servicioRutas, _servicioAutenticacion));
     }
 }

@@ -7,8 +7,8 @@
 
         <VerticalStackLayout Padding="50" VerticalOptions="Center" HorizontalOptions="Center">
             <ActivityIndicator Color="{StaticResource Primary}"
-                    IsRunning="True" HeightRequest="50" WidthRequest="50"
-                    IsVisible="True" />
+                IsRunning="True" HeightRequest="50" WidthRequest="50"
+                IsVisible="True" />
             <Label Text="Bienvenido...." HorizontalOptions="Center" />
         </VerticalStackLayout>
     </VerticalStackLayout>

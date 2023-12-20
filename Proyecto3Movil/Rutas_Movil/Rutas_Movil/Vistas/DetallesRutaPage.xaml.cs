@@ -6,18 +6,21 @@ namespace Rutas_Movil.Vistas;
 public partial class DetallesRutaPage : ContentPage
 {
     private int idRuta = 0;
-    private string estadoActualizado;
+    
     private readonly IServicioRutas _servicioRutas;
-    public DetallesRutaPage(Rutas rutas, IServicioRutas servicioRutas)
+    private readonly IServicioAutenticacion _servicioAutenticacion;
+    private readonly int _idChofer;
+    public DetallesRutaPage(Rutas rutas, int idChofer, IServicioRutas servicioRutas, IServicioAutenticacion servicioAutenticacion)
 	{
 		InitializeComponent();
         _servicioRutas = servicioRutas;
-        carga_datos(rutas);
-        
+        _servicioAutenticacion = servicioAutenticacion;
+        _idChofer = idChofer;
+        Carga_Datos(rutas);
 
     }
 
-    void carga_datos(Rutas rutas)
+    void Carga_Datos(Rutas rutas)
     {
         idRuta = rutas.IdentificadorRuta;
         nombreRuta.Text = rutas.NombreRuta;
@@ -45,7 +48,7 @@ public partial class DetallesRutaPage : ContentPage
         var responseRutas = await _servicioRutas.ActualizarEstadoRuta(rutas);
         if (responseRutas.errores.errorcode == 0)
         {
-            await Navigation.PushAsync(new ListaRutasPage(_servicioRutas));
+            await Navigation.PushAsync(new ListaRutasPage(_idChofer, _servicioRutas, _servicioAutenticacion));
         }
         else
         {
@@ -60,15 +63,11 @@ public partial class DetallesRutaPage : ContentPage
 
     async void Regresar()
     {
-        await Navigation.PushAsync(new ListaRutasPage(_servicioRutas));
+        await Navigation.PushAsync(new ListaRutasPage(_idChofer, _servicioRutas, _servicioAutenticacion));
     }
     private void Volver_Clicked(object sender, EventArgs e)
     {
         Regresar();
     }
-    private void PickerEstadoEntrega_SelectionChanged(object sender, EventArgs e)
-    {
-        // Obtiene el valor seleccionado y guárdalo en la variable
-        estadoActualizado = (string)estadoEntrega.SelectedItem;
-    }
+   
 }

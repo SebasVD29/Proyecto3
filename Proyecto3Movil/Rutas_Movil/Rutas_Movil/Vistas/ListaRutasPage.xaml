@@ -27,5 +27,9 @@
             </ScrollView>
 
         </Grid>
+        <Button x:Name="LogOut" Text="Cerrar Sesion" Clicked="LogOut_Clicked" ></Button>
+        
     </VerticalStackLayout>
+    
+    
 </ContentPage>

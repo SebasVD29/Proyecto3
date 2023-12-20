@@ -15,7 +15,7 @@ namespace APIRutas_Movil.Controller
             _choferBILL = choferBLL;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Login")]
         public async Task<ActionResult<ResponseChofer>> LoginChofer(Chofer chofer)
         {
