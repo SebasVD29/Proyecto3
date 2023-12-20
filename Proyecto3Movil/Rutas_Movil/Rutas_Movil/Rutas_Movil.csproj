@@ -53,6 +53,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Vistas\CargaPage.xaml.cs">
+	    <DependentUpon>CargaPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Vistas\IncidentesPage.xaml.cs">
+	    <DependentUpon>IncidentesPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Vistas\DetallesRutaPage.xaml.cs">
 	    <DependentUpon>DetallesRutaPage.xaml</DependentUpon>
 	  </Compile>
@@ -63,6 +69,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Vistas\CargaPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Vistas\IncidentesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Vistas\DetallesRutaPage.xaml">

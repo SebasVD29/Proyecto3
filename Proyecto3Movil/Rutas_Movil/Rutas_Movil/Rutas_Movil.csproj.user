@@ -15,6 +15,9 @@
     <MauiXaml Update="Vistas\CargaPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Vistas\IncidentesPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Vistas\DetallesRutaPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

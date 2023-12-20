@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Rutas_Movil.Vistas.IncidentesPage"
+             Title="IncidentesPage">
+    <VerticalStackLayout>
+
+        <VerticalStackLayout Padding="50" VerticalOptions="Center" HorizontalOptions="Center">
+            <ActivityIndicator Color="{StaticResource Primary}"
+                    IsRunning="True" HeightRequest="50" WidthRequest="50"
+                    IsVisible="True" />
+            <Label Text="Descripción" />
+            <Entry x:Name="txtDescripcion" />
+
+            <Label Text="Fecha" />
+            <DatePicker x:Name="datePickerFecha" />
+
+            <Label Text="Solución" />
+            <Entry x:Name="txtSolucion" />
+
+            <Button Text="Crear Incidente" Clicked="CrearIncidencia" />
+
+            <ActivityIndicator x:Name="Incidentes" IsVisible="false" />
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

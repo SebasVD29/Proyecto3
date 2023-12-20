@@ -55,6 +55,8 @@
 
                 <Label x:Name="Mensaje" IsVisible="False"></Label>
             
-        </VerticalStackLayout>
-    </ScrollView>
+            </ScrollView>
+            <Button x:Name="CrearIncidencia" Text="Crear Incidencia" Clicked="Crear_Clicked" ></Button>
+        </Grid>
+    </VerticalStackLayout>
 </ContentPage>
