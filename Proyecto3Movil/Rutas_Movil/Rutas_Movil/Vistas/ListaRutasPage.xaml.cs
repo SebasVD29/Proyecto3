@@ -22,12 +22,6 @@ public partial class ListaRutasPage : ContentPage
         carga.IsVisible = false;
     }
 
-    private async void Crear_Clicked(object sender, EventArgs e)
-    {
-
-        //await Navigation.PushAsync(new CrearIncidentePage(_servicioRutas));
-    }
-
     void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
     {
         Rutas item = args.SelectedItem as Rutas;

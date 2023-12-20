@@ -92,7 +92,7 @@
           }
         }
       },
-      "Dapper.Extensions.NetCore/5.0.0": {
+      "Dapper.Extensions.NetCore/5.1.0": {
         "type": "package",
         "dependencies": {
           "Autofac": "7.1.0",
@@ -1257,14 +1257,14 @@
         "readme.md"
       ]
     },
-    "Dapper.Extensions.NetCore/5.0.0": {
-      "sha512": "+1wlzAzQotfERxm5TDcRL998mTEcsDaghqka3sls2XWhvhcJ8O9vdRY6irHdE3sd+9n7WazSmozW+K3mOHXgOw==",
+    "Dapper.Extensions.NetCore/5.1.0": {
+      "sha512": "/yTcf3i1NmDbJfOFOpGnaenq/kvCOMjYqm07cRLPAnh9My5vvFSxW/efmY27+AdjsjxzbiPii4vlAoBYC1Pgcg==",
       "type": "package",
-      "path": "dapper.extensions.netcore/5.0.0",
+      "path": "dapper.extensions.netcore/5.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "dapper.extensions.netcore.5.0.0.nupkg.sha512",
+        "dapper.extensions.netcore.5.1.0.nupkg.sha512",
         "dapper.extensions.netcore.nuspec",
         "lib/net5.0/Dapper.Extensions.dll",
         "lib/net6.0/Dapper.Extensions.dll",
@@ -3388,30 +3388,30 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Dapper >= 2.1.24",
-      "Dapper.Extensions.NetCore >= 5.0.0",
+      "Dapper.Extensions.NetCore >= 5.1.0",
       "Microsoft.Data.SqlClient >= 5.1.2",
       "Newtonsoft.Json >= 13.0.3",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\sebas\\.nuget\\packages\\": {},
+    "D:\\Apps\\apps\\Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\GitHub\\Proyecto3\\Proyecto3Movil\\APIRutas_Movil\\APIRutas_Movil\\APIRutas_Movil.csproj",
+      "projectUniqueName": "C:\\Users\\sebas\\Documents\\GitHub\\Proyecto3\\Proyecto3Movil\\APIRutas_Movil\\APIRutas_Movil\\APIRutas_Movil.csproj",
       "projectName": "APIRutas_Movil",
-      "projectPath": "C:\\Users\\Admin\\GitHub\\Proyecto3\\Proyecto3Movil\\APIRutas_Movil\\APIRutas_Movil\\APIRutas_Movil.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\GitHub\\Proyecto3\\Proyecto3Movil\\APIRutas_Movil\\APIRutas_Movil\\obj\\",
+      "projectPath": "C:\\Users\\sebas\\Documents\\GitHub\\Proyecto3\\Proyecto3Movil\\APIRutas_Movil\\APIRutas_Movil\\APIRutas_Movil.csproj",
+      "packagesPath": "C:\\Users\\sebas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sebas\\Documents\\GitHub\\Proyecto3\\Proyecto3Movil\\APIRutas_Movil\\APIRutas_Movil\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "D:\\Apps\\apps\\Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sebas\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3445,7 +3445,7 @@
           },
           "Dapper.Extensions.NetCore": {
             "target": "Package",
-            "version": "[5.0.0, )"
+            "version": "[5.1.0, )"
           },
           "Microsoft.Data.SqlClient": {
             "target": "Package",
@@ -3479,7 +3479,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

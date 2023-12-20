@@ -56,6 +56,11 @@ public partial class DetallesRutaPage : ContentPage
     {
         ActualizarEstadoRutas();
     }
+    private async void Crear_Clicked(object sender, EventArgs e)
+    {
+
+        await Navigation.PushAsync(new IncidentesPage(_servicioRutas));
+    }
 
     async void Regresar()
     {

@@ -21,23 +21,6 @@ namespace APIRutas_Movil.BLL
             try
             {
 
-                // Validación de campos (por si se ocupa)
-                /*  if (string.IsNullOrEmpty(incidente.Descripcion) || incidente.FechaHora == null)
-                  {
-                      var responseModel = new ResponseModel
-                      {
-                          ErrorCode = -1,
-                          ErrorMsg = "La descripción y la fecha son campos obligatorios."
-                      };
-
-                      return new ResponseIncidente
-                      {
-                          Incidente = null,
-                          Errores = responseModel
-                      };
-                  }*/
-
-
                 // Llamada al repositorio para crear el incidente
                 var resultado = await _incidenteRepository.SP_CrearIncidencia(incidente);
 
@@ -48,8 +31,8 @@ namespace APIRutas_Movil.BLL
                 responseModel.errorcode = 0;
                 responseModel.errormsg = "Incidente creado con éxito";
 
-                responseIncidente.Incidente = resultado;
-                responseIncidente.Errores = responseModel;
+                responseIncidente.incidente = resultado;
+                responseIncidente.errores = responseModel;
                 return responseIncidente;
             }
             catch (Exception)

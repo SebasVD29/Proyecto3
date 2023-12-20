@@ -16,7 +16,7 @@ public partial class IncidentesPage : ContentPage
         {
             Incidentes.IsVisible = true;
 
-            var nuevoIncidente = new Modelos.Incidentes
+            var nuevoIncidente = new Modelos.Incidente
             {
                 Descripcion = txtDescripcion.Text,
                 FechaHora = datePickerFecha.Date.ToString("yyyy-MM-dd HH:mm:ss"),

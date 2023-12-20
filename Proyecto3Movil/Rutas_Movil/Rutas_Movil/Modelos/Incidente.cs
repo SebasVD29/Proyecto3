@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rutas_Movil.Modelos
 {
-    public class Incidentes 
+    public class Incidente 
     {
         public int IdentificadorIncidente { get; set; }
         public int IdRuta { get; set; }

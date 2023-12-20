@@ -20,18 +20,18 @@ namespace Rutas_Movil.Servicios
             _generalAPI = generalAPI;
         }
 
-        public async Task<Incidentes> CrearIncidencia(Incidentes Incidente)
+        public async Task<Incidente> CrearIncidencia(Incidente Incidente)
         {
             var incidente = _generalAPI.GetHttpClient();
 
             var mensaje = new HttpRequestMessage(HttpMethod.Post, _generalAPI.URL("Incidente") + "CrearIncidente");
-            mensaje.Content = JsonContent.Create<Incidentes>(Incidente);
+            mensaje.Content = JsonContent.Create<Incidente>(Incidente);
             var response = await incidente.SendAsync(mensaje);
             response.EnsureSuccessStatusCode();
 
             var incidenteActualizado = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<Incidentes>(incidenteActualizado);
+            return JsonConvert.DeserializeObject<Incidente>(incidenteActualizado);
         }
     }
 }
