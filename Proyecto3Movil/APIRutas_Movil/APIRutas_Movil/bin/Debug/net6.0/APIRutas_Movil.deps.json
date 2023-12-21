@@ -9,7 +9,7 @@
       "APIRutas_Movil/1.0.0": {
         "dependencies": {
           "Dapper": "2.1.24",
-          "Dapper.Extensions.NetCore": "5.0.0",
+          "Dapper.Extensions.NetCore": "5.1.0",
           "Microsoft.Data.SqlClient": "5.1.2",
           "Newtonsoft.Json": "13.0.3",
           "Swashbuckle.AspNetCore": "6.5.0"
@@ -83,7 +83,7 @@
           }
         }
       },
-      "Dapper.Extensions.NetCore/5.0.0": {
+      "Dapper.Extensions.NetCore/5.1.0": {
         "dependencies": {
           "Autofac": "7.1.0",
           "Autofac.Extensions.DependencyInjection": "8.0.0",
@@ -101,8 +101,8 @@
         },
         "runtime": {
           "lib/net6.0/Dapper.Extensions.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "assemblyVersion": "5.1.0.0",
+            "fileVersion": "5.1.0.0"
           }
         }
       },
@@ -726,12 +726,12 @@
       "path": "dapper/2.1.24",
       "hashPath": "dapper.2.1.24.nupkg.sha512"
     },
-    "Dapper.Extensions.NetCore/5.0.0": {
+    "Dapper.Extensions.NetCore/5.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+1wlzAzQotfERxm5TDcRL998mTEcsDaghqka3sls2XWhvhcJ8O9vdRY6irHdE3sd+9n7WazSmozW+K3mOHXgOw==",
-      "path": "dapper.extensions.netcore/5.0.0",
-      "hashPath": "dapper.extensions.netcore.5.0.0.nupkg.sha512"
+      "sha512": "sha512-/yTcf3i1NmDbJfOFOpGnaenq/kvCOMjYqm07cRLPAnh9My5vvFSxW/efmY27+AdjsjxzbiPii4vlAoBYC1Pgcg==",
+      "path": "dapper.extensions.netcore/5.1.0",
+      "hashPath": "dapper.extensions.netcore.5.1.0.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
       "type": "package",

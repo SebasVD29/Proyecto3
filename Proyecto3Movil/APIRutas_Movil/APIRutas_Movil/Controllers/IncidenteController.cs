@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace APIRutas_Movil.Controller
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class IncidenteController : ControllerBase
     {
         private readonly IIncidenteBLL _incidenteBLL;
@@ -20,13 +22,12 @@ namespace APIRutas_Movil.Controller
         {
             try
             {
-                var response = await _incidenteBLL.SP_CrearIncidencia(incidente);
+                var response = await _incidenteBLL.CrearIncidencia(incidente);
                 return new JsonResult(response);
             }
             catch (Exception)
             {
                 ResponseIncidente responseIncidente = new ResponseIncidente();
-
                 ResponseModel responseModel = new ResponseModel();
                 responseModel.errorcode = -1;
                 responseModel.errormsg = "Error al insertar una Incidencia";

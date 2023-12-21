@@ -1,4 +1,5 @@
-﻿using Rutas_Movil.IServicios;
+﻿
+using Rutas_Movil.IServicios;
 using Rutas_Movil.Modelos;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using Newtonsoft.Json;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
-using APIRutas_Movil.Modelo;
+
 
 namespace Rutas_Movil.Servicios
 {
@@ -20,18 +21,18 @@ namespace Rutas_Movil.Servicios
             _generalAPI = generalAPI;
         }
 
-        public async Task<Incidente> CrearIncidencia(Incidente Incidente)
+        public async Task<ResponseIncidente> CrearIncidencia(Incidente incidente)
         {
-            var incidente = _generalAPI.GetHttpClient();
+            var client = _generalAPI.GetHttpClient();
 
-            var mensaje = new HttpRequestMessage(HttpMethod.Post, _generalAPI.URL("Incidente") + "CrearIncidente");
-            mensaje.Content = JsonContent.Create<Incidente>(Incidente);
-            var response = await incidente.SendAsync(mensaje);
+            var mensaje = new HttpRequestMessage(HttpMethod.Post, _generalAPI.URL("Incidente") + "CrearIncidencia");
+            mensaje.Content = JsonContent.Create<Incidente>(incidente);
+
+            var response = await client.SendAsync(mensaje);
             response.EnsureSuccessStatusCode();
 
-            var incidenteActualizado = await response.Content.ReadAsStringAsync();
-
-            return JsonConvert.DeserializeObject<Incidente>(incidenteActualizado);
+            var incidenteCreado = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<ResponseIncidente>(incidenteCreado);
         }
     }
 }

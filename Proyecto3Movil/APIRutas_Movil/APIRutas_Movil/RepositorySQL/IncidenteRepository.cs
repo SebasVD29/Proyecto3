@@ -18,7 +18,7 @@ namespace APIRutas_Movil.RepositorySQL
             _context = context;
         }
 
-        public async Task<Incidente> SP_CrearIncidencia(Incidente incidente)
+        public async Task<Incidente> CrearIncidencia(Incidente incidente)
         {
             try
             {
@@ -26,7 +26,7 @@ namespace APIRutas_Movil.RepositorySQL
 
                 param.Add("@idRuta", incidente.IdRuta, DbType.Int64, ParameterDirection.Input);
                 param.Add("@descripcion", incidente.Descripcion, DbType.String, ParameterDirection.Input);
-                param.Add("@fecha", incidente.FechaHora, DbType.Date, ParameterDirection.Input);
+                param.Add("@fecha", incidente.FechaHora, DbType.String, ParameterDirection.Input);
                 param.Add("@solucion", incidente.Solucion, DbType.String, ParameterDirection.Input);
 
                 using (var conn = _context.CrearConexion())

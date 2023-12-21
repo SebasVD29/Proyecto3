@@ -77,9 +77,6 @@
 	  <MauiXaml Update="Vistas\DetallesRutaPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Vistas\HomePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Vistas\ListaRutasPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

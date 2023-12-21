@@ -9,7 +9,7 @@ namespace Rutas_Movil.IServicios
 {
     public interface IServicioIncidente
     {
-        public Task<Incidente> CrearIncidencia(Incidente incidente);
+        public Task<ResponseIncidente> CrearIncidencia(Incidente incidente);
 
     }
 }

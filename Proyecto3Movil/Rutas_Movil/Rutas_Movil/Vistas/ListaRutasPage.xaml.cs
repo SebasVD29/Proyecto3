@@ -7,12 +7,16 @@ public partial class ListaRutasPage : ContentPage
 {
     private readonly IServicioRutas _servicioRutas;
     private readonly IServicioAutenticacion _servicioAutenticacion;
+    private readonly IServicioIncidente _servicioIncidente;
+    
+
     private readonly int _idChofer;
-    public ListaRutasPage(int idChofer, IServicioRutas servicioRutas, IServicioAutenticacion servicioAutenticacion)
+    public ListaRutasPage(int idChofer, IServicioRutas servicioRutas, IServicioAutenticacion servicioAutenticacion, IServicioIncidente servicioIncidente)
 	{
 		InitializeComponent();
         _servicioRutas = servicioRutas;
-        _servicioAutenticacion = servicioAutenticacion; 
+        _servicioAutenticacion = servicioAutenticacion;
+        _servicioIncidente = servicioIncidente;
         _idChofer = idChofer;
         cargaRutas(_idChofer);
     }
@@ -29,11 +33,11 @@ public partial class ListaRutasPage : ContentPage
     {
         Rutas item = args.SelectedItem as Rutas;
 
-        Navigation.PushAsync(new DetallesRutaPage(item, _idChofer, _servicioRutas, _servicioAutenticacion));
+        Navigation.PushAsync(new DetallesRutaPage(item, _idChofer, _servicioRutas, _servicioAutenticacion, _servicioIncidente));
     }
     private async void LogOut_Clicked(object sender, EventArgs e)
     {
         
-        await Navigation.PushAsync(new LogoutPage(_servicioRutas, _servicioAutenticacion));
+        await Navigation.PushAsync(new LogoutPage(_servicioRutas, _servicioAutenticacion, _servicioIncidente));
     }
 }

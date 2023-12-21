@@ -2,21 +2,22 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Rutas_Movil.Vistas.ListaRutasPage"
+             Shell.NavBarIsVisible="False"
              Title="Rutas">
     <VerticalStackLayout>
         <ActivityIndicator x:Name="carga" HeightRequest="30" Color="Blue" IsRunning="True" IsVisible="false">
 
         </ActivityIndicator>
         <Grid RowDefinitions="Auto,Auto,*" RowSpacing="15" Margin="15">
-            
-            <Label Grid.Row="1" Text="Lista de Rutas" FontSize="Subtitle"></Label>
+
+            <Label Grid.Row="1" Margin="100,0,0,10"  Text="Lista de Rutas" FontSize="Medium"></Label>
 
             <ScrollView Grid.Row="2">
                 <ListView x:Name="lvRutas" SelectionMode="Single" ItemSelected="OnItemSelected"  SeparatorColor="Black" >
                     <ListView.ItemTemplate >
                         <DataTemplate >
                             <TextCell TextColor="White" 
-                                      Text="{Binding IdentificadorRuta}"   
+                                      Text="{Binding NombreRuta}"   
                                       Detail="{Binding EstadoEntrega}" 
                                       />
                         </DataTemplate>
@@ -27,7 +28,7 @@
             </ScrollView>
 
         </Grid>
-        <Button x:Name="LogOut" Text="Cerrar Sesion" Clicked="LogOut_Clicked" ></Button>
+        <Button x:Name="LogOut" Text="Cerrar Sesión" Clicked="LogOut_Clicked" ></Button>
         
     </VerticalStackLayout>
     

@@ -21,9 +21,6 @@
     <MauiXaml Update="Vistas\DetallesRutaPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Vistas\HomePage.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
     <MauiXaml Update="Vistas\ListaRutasPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

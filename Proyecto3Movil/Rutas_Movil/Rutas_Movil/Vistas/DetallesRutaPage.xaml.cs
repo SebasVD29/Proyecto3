@@ -9,13 +9,17 @@ public partial class DetallesRutaPage : ContentPage
     
     private readonly IServicioRutas _servicioRutas;
     private readonly IServicioAutenticacion _servicioAutenticacion;
+    private readonly IServicioIncidente _servicioIncidente;
     private readonly int _idChofer;
-    public DetallesRutaPage(Rutas rutas, int idChofer, IServicioRutas servicioRutas, IServicioAutenticacion servicioAutenticacion)
+    private readonly Rutas _rutas;
+    public DetallesRutaPage(Rutas rutas, int idChofer,IServicioRutas servicioRutas, IServicioAutenticacion servicioAutenticacion, IServicioIncidente servicioIncidente)
 	{
 		InitializeComponent();
         _servicioRutas = servicioRutas;
         _servicioAutenticacion = servicioAutenticacion;
+        _servicioIncidente = servicioIncidente;
         _idChofer = idChofer;
+        _rutas = rutas;
         Carga_Datos(rutas);
 
     }
@@ -48,7 +52,9 @@ public partial class DetallesRutaPage : ContentPage
         var responseRutas = await _servicioRutas.ActualizarEstadoRuta(rutas);
         if (responseRutas.errores.errorcode == 0)
         {
-            await Navigation.PushAsync(new ListaRutasPage(_idChofer, _servicioRutas, _servicioAutenticacion));
+            await DisplayAlert("Actualización Exitosa", "El estado de la Ruta ha sido actualizado", "OK");
+            await Task.Delay(1000);
+            await Navigation.PushAsync(new ListaRutasPage(_idChofer, _servicioRutas, _servicioAutenticacion, _servicioIncidente));
         }
         else
         {
@@ -63,12 +69,12 @@ public partial class DetallesRutaPage : ContentPage
     private async void Crear_Clicked(object sender, EventArgs e)
     {
 
-        await Navigation.PushAsync(new IncidentesPage(_servicioRutas));
+        await Navigation.PushAsync(new IncidentesPage(_rutas, _idChofer, _servicioIncidente, _servicioRutas, _servicioAutenticacion));
     }
 
     async void Regresar()
     {
-        await Navigation.PushAsync(new ListaRutasPage(_idChofer, _servicioRutas, _servicioAutenticacion));
+        await Navigation.PushAsync(new ListaRutasPage(_idChofer, _servicioRutas, _servicioAutenticacion, _servicioIncidente));
     }
     private void Volver_Clicked(object sender, EventArgs e)
     {

@@ -1,7 +1,6 @@
 
-using Rutas_Movil.Modelos;
 
-namespace APIRutas_Movil.Modelo
+namespace Rutas_Movil.Modelos
 {
     public class ResponseIncidente
     {

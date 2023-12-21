@@ -1,4 +1,5 @@
 using Rutas_Movil.IServicios;
+using Rutas_Movil.Modelos;
 
 namespace Rutas_Movil.Vistas;
 
@@ -6,13 +7,16 @@ public partial class CargaPage : ContentPage
 {
     private readonly IServicioRutas _servicioRutas;
     private readonly IServicioAutenticacion _servicioAutenticacion;
-    public CargaPage(IServicioRutas servicioRutas, IServicioAutenticacion servicioAutenticacion)
-	{
+    private readonly IServicioIncidente _servicioIncidente;
+    
+    public CargaPage(IServicioRutas servicioRutas, IServicioAutenticacion servicioAutenticacion, IServicioIncidente servicioIncidente)
+
+    {
 		InitializeComponent();
-        
-        _servicioAutenticacion = servicioAutenticacion;
         _servicioRutas = servicioRutas;
-	}
+        _servicioAutenticacion = servicioAutenticacion;
+        _servicioIncidente = servicioIncidente;
+    }
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
         if (await estaAutenticado() != null)
@@ -20,8 +24,8 @@ public partial class CargaPage : ContentPage
             int idChofer = int.Parse(await estaAutenticado());
 
 
-            await Navigation.PushAsync(new ListaRutasPage(idChofer, _servicioRutas, _servicioAutenticacion));
-            //await Shell.Current.GoToAsync($"///home/rutas?idChofer={idChofer}&servicioRutas={_servicioRutas}");
+            await Navigation.PushAsync(new ListaRutasPage(idChofer, _servicioRutas, _servicioAutenticacion, _servicioIncidente));
+         
 
         }
         else

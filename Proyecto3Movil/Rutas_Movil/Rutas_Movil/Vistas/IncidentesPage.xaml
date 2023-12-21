@@ -2,25 +2,43 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Rutas_Movil.Vistas.IncidentesPage"
-             Title="IncidentesPage">
-    <VerticalStackLayout>
+             Shell.NavBarIsVisible="False"
+             Title="Incidentes">
+    
+    <VerticalStackLayout Padding="15">
 
-        <VerticalStackLayout Padding="50" VerticalOptions="Center" HorizontalOptions="Center">
-            <ActivityIndicator Color="{StaticResource Primary}"
-                    IsRunning="True" HeightRequest="50" WidthRequest="50"
-                    IsVisible="True" />
-            <Label Text="Descripción" />
-            <Entry x:Name="txtDescripcion" />
+        <Frame Grid.Row="1" CornerRadius="31" TranslationY="-12" BorderColor="Transparent" VerticalOptions="FillAndExpand">
 
-            <Label Text="Fecha" />
-            <DatePicker x:Name="datePickerFecha" />
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" Padding="20" RowSpacing="5" >
+                
+                <Label Grid.Row="0" Text="Incidencia" Margin="80,0,0,10" FontSize="Medium" TextColor="Black"></Label>
+                
+                <Label Grid.Row="1" Text="Identificador de Ruta:" TextColor="Black"></Label>
+                <Frame Grid.Row="2" CornerRadius="10" Padding="3" Margin="0,10,0,0" BorderColor="Black">
+                    <Entry Grid.Row="3" x:Name="idRuta" Margin="0,0,0,10" IsEnabled="False" TextColor="Black"></Entry>
+                </Frame>
 
-            <Label Text="Solución" />
-            <Entry x:Name="txtSolucion" />
+                <Label Grid.Row="4" Text="Descripción:" TextColor="Black"></Label>
+                <Frame Grid.Row="5" CornerRadius="10" Padding="3" Margin="0,10,0,0" BorderColor="Black">
+                    <Entry Grid.Row="6" x:Name="descripcion" Margin="0,0,0,10" TextColor="Black"></Entry>
+                </Frame>
 
-            <Button Text="Crear Incidente" Clicked="CrearIncidencia" />
+                <Label Grid.Row="7" Text="Fecha del Incidente:" TextColor="Black"></Label>
+                <Frame Grid.Row="8" CornerRadius="10" Padding="3" Margin="0,10,0,0" BorderColor="Black">
+                    <DatePicker Grid.Row="9" x:Name="fecha" Margin="0,0,0,10" TextColor="Black"></DatePicker>
+                </Frame>
 
-            <ActivityIndicator x:Name="Incidentes" IsVisible="false" />
-        </VerticalStackLayout>
+                <Label Grid.Row="10" Text="Solución:" TextColor="Black"></Label>
+                <Frame Grid.Row="11" CornerRadius="10" Padding="3" Margin="0,10,0,0" BorderColor="Black">
+                    <Entry Grid.Row="12" x:Name="solucion" Margin="0,0,0,10" TextColor="Black"></Entry>
+                </Frame>
+
+                <Label Grid.Row="13" x:Name="Mensaje" IsVisible="False"></Label>
+            </Grid>
+            
+        </Frame>
+        <Button Margin="0,10,0,0"  x:Name="Crear" Text="Crear Incidencia" Clicked="Crear_Clicked" > </Button>
+        <Button Margin="0,10,0,0" x:Name="Volver" Text="Regresar a Detalles" Clicked="Volver_Clicked"></Button>
     </VerticalStackLayout>
+    
 </ContentPage>

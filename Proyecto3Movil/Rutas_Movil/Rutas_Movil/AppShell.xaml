@@ -19,14 +19,7 @@
         Route="LoginPage" />
     
     <TabBar>
-        <Tab Title="Principal" Icon="house_door_fill.svg">
-            <ShellContent
-            Icon="house_door_fill.svg"
-                Title="Principal"
-                ContentTemplate="{DataTemplate vistas:HomePage}"
-                Route="home" />
-
-        </Tab>
+        
 
         <Tab Title="Rutas" Icon="gear_fill.svg">
             <ShellContent
