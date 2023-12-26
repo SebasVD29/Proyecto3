@@ -12,7 +12,7 @@ namespace Rutas_Movil.Servicios
     {
 
         //static readonly string direccionbase = "http://10.0.2.2:5000"; // Ip para el Emulador 
-         static readonly string direccionbase = "http://192.168.100.8:5000"; //Ip de la Casa para el movil
+         static readonly string direccionbase = "http://10.18.9.26:5000"; //Ip de la Casa para el movil
         //static readonly string direccionbase = "http://10.18.7.173:5000";  //Ip de la U para el movil
 
         static readonly string _url = $"{direccionbase}/api/";
