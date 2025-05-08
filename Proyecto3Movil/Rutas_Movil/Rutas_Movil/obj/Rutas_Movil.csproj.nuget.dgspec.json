@@ -70,6 +70,10 @@
               "target": "Package",
               "version": "[6.0.553, )",
               "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             }
           },
           "imports": [
@@ -173,6 +177,10 @@
               "version": "[6.0.553, )",
               "autoReferenced": true
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
             "System.Runtime.InteropServices.NFloat.Internal": {
               "target": "Package",
               "version": "[6.0.1, )",
@@ -196,7 +204,7 @@
               "version": "[16.4.60, 16.4.60]"
             },
             {
-              "name": "Microsoft.iOS.Runtime.iossimulator-x64",
+              "name": "Microsoft.iOS.Runtime.ios-arm64",
               "version": "[16.4.60, 16.4.60]"
             },
             {
@@ -255,6 +263,10 @@
               "target": "Package",
               "version": "[6.0.553, )",
               "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             },
             "System.Runtime.InteropServices.NFloat.Internal": {
               "target": "Package",
@@ -339,6 +351,10 @@
               "target": "Package",
               "version": "[6.0.553, )",
               "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             }
           },
           "imports": [
@@ -427,7 +443,7 @@
         "android-x86": {
           "#import": []
         },
-        "iossimulator-x64": {
+        "ios-arm64": {
           "#import": []
         },
         "maccatalyst-x64": {

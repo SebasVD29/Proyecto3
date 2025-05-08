@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Rutas_Movil.Vistas.DetallesRutaPage"
+             Shell.NavBarIsVisible="False"
+             Title="Detalles">
+
+    <ScrollView HeightRequest="600" >
+        <VerticalStackLayout>
+            <Label Text="Detalles de la Ruta" Margin="100,0,0,10" FontSize="Medium"></Label>
+            
+            <Label Text="Nombre de Ruta:"></Label>
+            <Entry x:Name="nombreRuta" Margin="0,0,0,10" IsEnabled="False" ></Entry>
+
+            <Label Text="Nombre de la Dirección:"></Label>
+            <Entry x:Name="nombreDireccionRuta" Margin="0,0,0,10" IsEnabled="False"></Entry>
+
+            <Label Text="País Final:"></Label>
+            <Entry x:Name="paisFinal" Margin="0,0,0,10" IsEnabled="False"></Entry>
+
+            <Label Text="Ciudad Final:"></Label>
+            <Entry x:Name="ciudadFinal" Margin="0,0,0,10" IsEnabled="False"></Entry>
+
+            <Label Text="Número de Placa:"></Label>
+            <Entry x:Name="numeroPlaca" Margin="0,0,0,10" IsEnabled="False"></Entry>
+
+            <Label Text="Identificador del Cliente:"></Label>
+            <Entry x:Name="idCliente" Margin="0,0,0,10" IsEnabled="False"></Entry>
+
+            <Label Text="Nombre del Cliente:"></Label>
+            <Entry x:Name="nombreCliente" Margin="0,0,0,10" IsEnabled="False"></Entry>
+
+            <Label Text="Telefono del Cliente:"></Label>
+            <Entry x:Name="telefonoCliente" Margin="0,0,0,10" IsEnabled="False"></Entry>
+
+            <Label Text="Descripción:"></Label>
+            <Entry x:Name="descripcion" Margin="0,0,0,10" IsEnabled="False"></Entry>
+
+            <Label Text="Fecha de Inicio:"></Label>
+            <Entry x:Name="fechaInicio" Margin="0,0,0,10" IsEnabled="False"></Entry>
+
+            <Label Text="Fecha Final:"></Label>
+            <Entry x:Name="fechaFinal" Margin="0,0,0,10" IsEnabled="False"></Entry>
+
+            <Label Text="Estado de Entrega:"></Label>
+               
+            <Picker x:Name="estadoEntrega" Title="Seleccione el Estado de Entrega" Margin="0,0,0,10">
+                <Picker.Items>
+                    <x:String>En Proceso</x:String>
+                    <x:String>Entregado</x:String>
+                    <x:String>Incidente</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Button x:Name="Actualizar" Text="Actualizar Ruta" Clicked="Actualizar_Clicked"></Button>
+
+            <Label x:Name="Mensaje" IsVisible="False"></Label>
+
+            <Button x:Name="CrearIncidencia" Margin="0,10,0,0" Text="Crear Incidencia" Clicked="Crear_Clicked" ></Button>
+
+            <Button Margin="0,10,0,0" x:Name="Volver" Text="Regresar al Menú" Clicked="Volver_Clicked"></Button>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

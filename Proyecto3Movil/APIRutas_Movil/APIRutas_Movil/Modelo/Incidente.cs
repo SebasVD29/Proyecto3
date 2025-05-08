@@ -4,7 +4,7 @@
     {
         public int IdentificadorIncidente { get; set; }
         public int IdRuta { get; set; }
-        public string? Descripcion{ get; set; }
+        public string? Descripcion { get; set; }
         public string? FechaHora { get; set; }
         public string? Solucion { get; set; }
    

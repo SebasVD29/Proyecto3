@@ -15,49 +15,21 @@ namespace APIRutas_Movil.BLL
             _rutasRepository = rutasRepository;
         }
 
-        public async Task<List<ResponseRutas>> ListarRutasPorChofer(int idChofer)
+        public async Task<ResponseListaRutas> ListarRutasPorChofer(int idChofer)
         {
             try
             {
 
-                IEnumerable<Rutas> rutas = await _rutasRepository.ListarRutasPorChofer(idChofer);
-                List<ResponseRutas> listaRutas = new List<ResponseRutas>(); ;
+                 var rutas = await _rutasRepository.ListarRutasPorChofer(idChofer);
+            
 
-                ResponseRutas ResponseRutas = new ResponseRutas();
+                ResponseListaRutas responseListaRutas = new ResponseListaRutas();
                 ResponseModel responseModel = new ResponseModel();
 
-                Dictionary<string, ResponseRutas> d = new Dictionary<string, ResponseRutas>();
-                if (rutas != null) { 
-                       for (int i = 0; i < rutas.Count(); i++) {
-                       d.Add("Variable"+i, new ResponseRutas());
-                    }
-                }
-
-                if (rutas != null)
-                {
-                    for (int i = 0; i < rutas.Count(); i++)
-                        {
-                        d.ElementAt(i).Value.ruta.IdentificadorRuta = rutas.ElementAt(i).IdentificadorRuta;
-                        d.ElementAt(i).Value.ruta.Nombre = rutas.ElementAt(i).Nombre;
-                        d.ElementAt(i).Value.ruta.IdDireccionRuta = rutas.ElementAt(i).IdDireccionRuta;
-                        d.ElementAt(i).Value.ruta.IdChofer = rutas.ElementAt(i).IdChofer;
-                        d.ElementAt(i).Value.ruta.NumeroPlaca = rutas.ElementAt(i).NumeroPlaca;
-                        d.ElementAt(i).Value.ruta.IdCliente = rutas.ElementAt(i).IdCliente;
-                        d.ElementAt(i).Value.ruta.FechaInicio = rutas.ElementAt(i).FechaInicio;
-                        d.ElementAt(i).Value.ruta.FechaFinal = rutas.ElementAt(i).FechaFinal;
-                        d.ElementAt(i).Value.ruta.EstadoEntrega = rutas.ElementAt(i).EstadoEntrega;
-                        d.ElementAt(i).Value.ruta.Descripcion = rutas.ElementAt(i).Descripcion;
-                        listaRutas.Add(d.ElementAt(i).Value);
-                    }                                    
-                }
-                else
-                {
-                    responseModel.errorcode = 1;
-                    responseModel.errormsg = "No se ha podido encontrar las rutas";
-                }
-
-                ResponseRutas.errores = responseModel;
-                return listaRutas;
+                responseListaRutas.ruta = rutas.ToList();
+                responseListaRutas.errores.errorcode = 0;
+                responseListaRutas.errores.errormsg = "Lista de Rutas encontrada";
+                return responseListaRutas;
             }
             catch (Exception)
             {
@@ -67,7 +39,7 @@ namespace APIRutas_Movil.BLL
         }
 
 
-        public async Task<Boolean> CambioEstado(Rutas rutas)
+        public async Task<ResponseRutas> CambioEstado(Rutas rutas)
         {
             try
             {
@@ -77,10 +49,9 @@ namespace APIRutas_Movil.BLL
                 responseModel.errorcode = 0;
                 responseModel.errormsg = "Estado de la Ruta Actualizado con éxito";
 
-               
-                //responseRuta.ruta = rutaActualizado;
+                responseRuta.ruta = rutaActualizado;
                 responseRuta.errores = responseModel;
-                return rutaActualizado;
+                return responseRuta;
             }
             catch (Exception)
             {

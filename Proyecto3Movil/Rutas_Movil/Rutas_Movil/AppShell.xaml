@@ -4,11 +4,49 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Rutas_Movil"
+    xmlns:vistas="clr-namespace:Rutas_Movil.Vistas"
     Shell.FlyoutBehavior="Disabled">
+
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        ContentTemplate="{DataTemplate vistas:CargaPage}"
+        Route="carga" />
+
+    <ShellContent
+        Title="Ingreso"
+        ContentTemplate="{DataTemplate vistas:LoginPage}"
+        Route="LoginPage" />
+    
+    <TabBar>
+        
+
+        <Tab Title="Rutas" Icon="gear_fill.svg">
+            <ShellContent
+                Icon="house_door_fill.svg"
+                Title="Rutas"
+                ContentTemplate="{DataTemplate vistas:ListaRutasPage}"
+                Route="rutas" />
+        </Tab>
+        <Tab Title="Incidentes" Icon="gear_fill.svg">
+            <ShellContent
+          Icon="house_door_fill.svg"
+          Title="Incidentes"
+          ContentTemplate="{DataTemplate vistas:IncidentesPage}"
+          Route="" />
+        </Tab>
+
+        <Tab Title="Salir" Icon="gear_fill.svg">
+            <ShellContent
+                Icon="house_door_fill.svg"
+                Title="Salir"
+                ContentTemplate="{DataTemplate vistas:LogoutPage}"
+                Route="salir" />
+        </Tab>
+    </TabBar>
+     
+        
+
+   
 
 </Shell>

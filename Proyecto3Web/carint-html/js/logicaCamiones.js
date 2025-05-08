@@ -50,7 +50,7 @@ $("#ConfirmarCrearCamion").click(function () {
         return;
     }
     if (!validateLetras(Modelo)) {
-        alert("La marca debe contener solo letras")
+        alert("El modelo debe contener solo letras")
         return;
     }
 
@@ -71,6 +71,10 @@ $("#ConfirmarCrearCamion").click(function () {
             console.log(response); // Imprime la respuesta del servidor en la consola del navegador
             $('#modalMensaje').text("El Camion con el numero de placa " + numeroPlaca + ", Marca " + Marca + ", Modelo  " + Modelo + ", fabricado en " + Fabricacion + " en Estado " + Estado + " fue agregado.");
             $('#modalup').trigger('click');
+            setTimeout(
+                function () {
+                    location.reload();
+                }, 3000);
         },
 
         error: function (xhr, status, error) {
@@ -186,6 +190,10 @@ $("#editarCamion").click(function(){
          
             $('#modalMensaje').text("El Camion con el numero de placa " + numeroPlaca + ", Marca " + Marca + ", Modelo  " + Modelo + ", fabricado en " + Fabricacion + " en Estado " + Estado + " fue agregado.");
             $('#modalup').trigger('click');
+            setTimeout(
+                function () {
+                    location.reload();
+                }, 3000);
         },
         
         error: function (xhr, status, error) {
@@ -201,7 +209,7 @@ $("#editarCamion").click(function(){
 
 function validatePlaca(numeroPlaca) {
 
-    var pattern = new RegExp("\\d{6}");
+    var pattern = new RegExp("[0-9a-zA-Z]{6}");
     return pattern.test(numeroPlaca);
 
 }

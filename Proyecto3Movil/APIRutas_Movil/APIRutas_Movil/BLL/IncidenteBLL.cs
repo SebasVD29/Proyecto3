@@ -16,30 +16,13 @@ namespace APIRutas_Movil.BLL
             _incidenteRepository = incidenteRepository;
         }
 
-        public async Task<ResponseIncidente> SP_CrearIncidencia(Incidente incidente)
+        public async Task<ResponseIncidente>CrearIncidencia(Incidente incidente)
         {
             try
             {
 
-                // Validación de campos (por si se ocupa)
-                /*  if (string.IsNullOrEmpty(incidente.Descripcion) || incidente.FechaHora == null)
-                  {
-                      var responseModel = new ResponseModel
-                      {
-                          ErrorCode = -1,
-                          ErrorMsg = "La descripción y la fecha son campos obligatorios."
-                      };
-
-                      return new ResponseIncidente
-                      {
-                          Incidente = null,
-                          Errores = responseModel
-                      };
-                  }*/
-
-
                 // Llamada al repositorio para crear el incidente
-                var resultado = await _incidenteRepository.SP_CrearIncidencia(incidente);
+                var resultado = await _incidenteRepository.CrearIncidencia(incidente);
 
 
 
@@ -48,8 +31,8 @@ namespace APIRutas_Movil.BLL
                 responseModel.errorcode = 0;
                 responseModel.errormsg = "Incidente creado con éxito";
 
-                responseIncidente.Incidente = resultado;
-                responseIncidente.Errores = responseModel;
+                responseIncidente.incidente = resultado;
+                responseIncidente.errores = responseModel;
                 return responseIncidente;
             }
             catch (Exception)
